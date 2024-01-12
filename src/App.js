@@ -33,14 +33,12 @@ function App() {
             <Card.Link href="#cardlink">CCP Website</Card.Link>
           </Card.Body>
         </Card>
-
+        <br></br>
         <Image src="https://www.fanduel.com/fantasy/_next/image?url=https%3A%2F%2Fd17odppiik753x.cloudfront.net%2Fplayerimages%2Fnba%2F9488.png&w=256&q=75" roundedCircle />
         <br></br>
         <p>LeBum James</p>
         <p>May Allah have mercy upon his soul.</p>
         <Button variant="danger">Kill Him</Button>
-        <p>Bronny shall be next. Not the other son tho he's hella chill.</p>
-        <p>TESTING HAHAHAH</p>
       </header>
       
       <p>Kinda like a footer if outside of header</p>
