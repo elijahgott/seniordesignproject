@@ -39,6 +39,7 @@ function App() {
         <p>LeBum James</p>
         <p>May Allah have mercy upon his soul.</p>
         <Button variant="danger">Kill Him</Button>
+        <p>Bronny shall be next.</p>
       </header>
       
       <p>Kinda like a footer if outside of header</p>
