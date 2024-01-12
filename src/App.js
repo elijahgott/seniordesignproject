@@ -40,6 +40,7 @@ function App() {
         <p>May Allah have mercy upon his soul.</p>
         <Button variant="danger">Kill Him</Button>
         <p>Bronny shall be next. Not the other son tho he's hella chill.</p>
+        <p>TESTING HAHAHAH</p>
       </header>
       
       <p>Kinda like a footer if outside of header</p>
