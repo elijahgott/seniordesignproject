@@ -1,0 +1,8 @@
+<Senior Design>
+npx create-react-app name
+
+<Senior Design/name>
+yarn add bootstrap react-bootstrap
+
+<Senior Design/name>
+npm start
