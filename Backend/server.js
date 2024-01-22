@@ -25,5 +25,7 @@ app.get('/user', (req, res)=> {
 })
 
 app.listen(8081, ()=> {
-    console.log("Listening...");
+    console.log("Listening..."); 
 })
+
+{/*  cd seniordesignproject/Backend -> npm start */}
