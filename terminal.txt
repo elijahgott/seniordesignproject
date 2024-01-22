@@ -1,8 +1,11 @@
-<Senior Design>
+Senior Design>
 npx create-react-app name
+//creates react app titled "name"
 
-<Senior Design/name>
+Senior Design/name>
 yarn add bootstrap react-bootstrap
+//adds bootstrap to app
 
-<Senior Design/name>
+Senior Design/name>
 npm start
+//starts the app locally
