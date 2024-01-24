@@ -24,6 +24,14 @@ app.get('/user', (req, res)=> {
     })
 })
 
+app.get('/album', (req, res)=> {
+    const sql = "SELECT * FROM album";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 app.listen(8081, ()=> {
     console.log("Listening..."); 
 })
