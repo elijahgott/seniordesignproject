@@ -28,7 +28,7 @@ function App() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
-                <Nav.Link style={{ color: 'white'}} href="#link1">Link1</Nav.Link>
+                <Nav.Link style={{ color: 'white'}} href="TestLink.js">Test</Nav.Link>
                 <Nav.Link style={{ color: 'yellow'}} href="#link2" className="">Link2</Nav.Link>
               </Nav>
             </Navbar.Collapse>
