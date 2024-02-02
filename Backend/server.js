@@ -32,6 +32,22 @@ app.get('/album', (req, res)=> {
     })
 })
 
+app.get('/artist', (req, res)=> {
+    const sql = "SELECT * FROM artist";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/song', (req, res)=> {
+    const sql = "SELECT * FROM song";
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
 app.listen(8081, ()=> {
     console.log("Listening..."); 
 })
