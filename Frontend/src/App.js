@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Artists from "./Pages/Artists";
+import Albums from "./Pages/Albums";
+
 import MyNav from "./MyComponents/MyNav";
 import {
   BrowserRouter as Router,
@@ -18,6 +21,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      {/*<Route path="/albums" element={<Albums />} />
+      <Route path="/artists" element={<Artists />} /> */}
       <Route path="/about" element={<About />} />
     </Routes>
   );

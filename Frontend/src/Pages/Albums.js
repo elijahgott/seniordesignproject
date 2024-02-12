@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col';
 
 import MyNav from "../MyComponents/MyNav";
 
-function Home(){
+function Albums(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -103,4 +103,4 @@ function Home(){
     )
 }
 
-export default Home;
+export default Albums;

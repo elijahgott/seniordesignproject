@@ -14,6 +14,8 @@ function MyNav(){
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
               <Nav className="me-auto">
+                <Nav.Link style={{ color: 'yellow'}}><Link to="/artists">Artists</Link></Nav.Link>
+                <Nav.Link style={{ color: 'yellow'}}><Link to="/albums">Albums</Link></Nav.Link>
                 <Nav.Link style={{ color: 'yellow'}}><Link to="/about">About</Link></Nav.Link>
               </Nav>
             </Navbar.Collapse>
