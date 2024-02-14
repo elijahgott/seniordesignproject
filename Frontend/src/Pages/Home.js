@@ -74,9 +74,11 @@ function Home(){
                 </Row>
             </Container>
 
+            
+
         </header>
         <div>
-            <Table striped bordered variant="dark">
+            <Table striped bordered variant="dark"> {/* May want to move this inside of header tags*/}
             <thead>
                 <tr>
                 <th>Artist</th>
@@ -97,7 +99,6 @@ function Home(){
             </tbody>
             </Table>
         </div>
-        
         <p>Kinda like a footer if outside of header</p>
     </div>
     )
