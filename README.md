@@ -3,9 +3,9 @@ The SQL database was created using MySQL, and XAMPP (https://www.apachefriends.o
 To run a local server to view/debug the webpages, NPM is used (https://www.npmjs.com/).
 
 To run frontend in local server from terminal:
-.../seniordesignproject> cd Frontend 
-.../seniordesignproject/Frontend> npm start 
+<.../seniordesignproject> cd Frontend 
+<.../seniordesignproject/Frontend> npm start 
 
 To run backend in local server from terminal:
-.../seniordesignproject> cd Backend
-.../seniordesignproject/Backend> npm start
+<.../seniordesignproject> cd Backend
+<.../seniordesignproject/Backend> npm start
