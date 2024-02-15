@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -8,7 +7,6 @@ import About from "./Pages/About";
 import Albums from "./Pages/Albums";
 import Artists from "./Pages/Artists";
 
-import MyNav from "./MyComponents/MyNav";
 import {
   BrowserRouter as Router,
   Routes,

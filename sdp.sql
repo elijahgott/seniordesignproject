@@ -8,8 +8,8 @@ create table Artist(
                     `photo` varchar(50),
                     primary key (`name`));
                     
-insert into Artist values('Taylor Swift', 'big fat bitch', 'tswift.jpg');
-insert into Artist values('Kids See Ghosts', '', 'kidsseeghosts.jpg');
+insert into Artist values('Taylor Swift', 'Big Chiefs fan', 'tswift.jpg');
+insert into Artist values('Kids See Ghosts', 'Kanye and Kid Cudi', 'kidsseeghosts.jpg');
 
 create table Album(
 					`name` varchar(50) NOT NULL,
@@ -20,7 +20,7 @@ create table Album(
                     primary key (`name`),
                     foreign key (`artist`) references Artist(`name`));
                     
-insert into Album values('1989 (Taylor\'s Version)', 'Taylor Swift', 'shits awesome she totally re-released the same songs again', null, '2023-10-27');
+insert into Album values('1989 (Taylor\'s Version)', 'Taylor Swift', 'Its awesome that she totally re-released the same songs again', null, '2023-10-27');
 insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts is a collaborative studio album by American hip hop supergroup Kids See Ghosts, composed of rapper-producers Kanye West and Kid Cudi. (Wikipedia)', 'kidsseeghostsALBUM.jpg', '2018-06-08');                    
                     
 create table Song(
@@ -89,7 +89,7 @@ create Table UserPost(
                     foreign key (`song_name`) references Song(`name`),
                     foreign key (`album_name`) references Album(`name`));
                     
-insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs again.', null, null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', null, null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
                     
 
                         

@@ -8,12 +8,12 @@ app.use(cors())
 const db = mysql.createConnection({
     host: "localhost",
     user: 'root',
-    password: '', //Tree49house!
+    password: '',
     database: 'sdp'
 })
 
 app.get('/', (re, res)=> {
-    return res.json("From Backend");
+    return res.json("Backend");
 })
 
 app.get('/user', (req, res)=> {
@@ -49,7 +49,7 @@ app.get('/song', (req, res)=> {
 })
 
 app.listen(8081, ()=> {
-    console.log("Listening..."); 
+    console.log("Server Started."); 
 })
 
 {/*  cd seniordesignproject/Backend -> npm start */}
