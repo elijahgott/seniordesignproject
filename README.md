@@ -5,9 +5,9 @@ To run a local server to view/debug the webpages, NPM is used (https://www.npmjs
 
 
 To run frontend in local server from terminal:
-<.../seniordesignproject> cd Frontend 
-<.../seniordesignproject/Frontend> npm start 
+(1) <.../seniordesignproject> cd Frontend 
+(2) <.../seniordesignproject/Frontend> npm start 
 
 To run backend in local server from terminal:
-<.../seniordesignproject> cd Backend
-<.../seniordesignproject/Backend> npm start
+(1) <.../seniordesignproject> cd Backend
+(2) <.../seniordesignproject/Backend> npm start
