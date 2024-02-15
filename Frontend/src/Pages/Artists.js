@@ -17,7 +17,7 @@ function Artists(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/album')
+        fetch('http://localhost:8081/artist')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
@@ -26,8 +26,29 @@ function Artists(){
         <div>
             <MyNav />
             <header className="App-header">
-            Artists and stuff.
+            Artists and stuff. <br></br>
+            Planning to display these are cards rather than a table.
             
+            <div className="table">
+                <Table striped bordered variant="dark">
+                <thead>
+                    <tr>
+                    <th>Artist</th>
+                    <th>Bio</th>
+                    <th>Photo (just file name right now)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((d, i) => (
+                    <tr key = {i}>
+                        <td>{d.name}</td>
+                        <td>{d.bio}</td>
+                        <td>{d.photo}</td> {/*Format to just display MM/DD/YYYY*/}
+                    </tr>
+                    ))}
+                </tbody>
+                </Table>
+            </div>
 
             </header>
         

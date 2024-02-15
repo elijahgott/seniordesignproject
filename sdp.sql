@@ -20,8 +20,8 @@ create table Album(
                     primary key (`name`),
                     foreign key (`artist`) references Artist(`name`));
                     
-insert into Album values('1989 (Taylor\'s Version)', 'Taylor Swift', 'Its awesome that she totally re-released the same songs again', null, '2023-10-27');
-insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts is a collaborative studio album by American hip hop supergroup Kids See Ghosts, composed of rapper-producers Kanye West and Kid Cudi. (Wikipedia)', 'kidsseeghostsALBUM.jpg', '2018-06-08');                    
+insert into Album values('1989 (Taylor\'s Version)', 'Taylor Swift', 'Its awesome that she totally re-released the same songs again', 'TaylorSwift_1989(Taylor\'s_Version).jpg', '2023-10-27');
+insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts is a collaborative studio album by American hip hop supergroup Kids See Ghosts, composed of rapper-producers Kanye West and Kid Cudi. (Wikipedia)', 'KidsSeeGhosts_KidsSeeGhosts.jpg', '2018-06-08');                    
                     
 create table Song(
 					`name` varchar(50) NOT NULL,

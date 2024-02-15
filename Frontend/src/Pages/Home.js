@@ -74,31 +74,31 @@ function Home(){
                 </Row>
             </Container>
 
-            
+            <div className="table">
+                <Table striped bordered variant="dark">
+                <thead>
+                    <tr>
+                    <th>Artist</th>
+                    <th>Album Name</th>
+                    <th>Release Date</th>
+                    <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {data.map((d, i) => (
+                    <tr key = {i}>
+                        <td>{d.artist}</td>
+                        <td>{d.name}</td>
+                        <td>{d.releaseDate}</td> {/*Format to just display MM/DD/YYYY*/}
+                        <td>{d.description}</td>
+                    </tr>
+                    ))}
+                </tbody>
+                </Table>
+            </div>
 
         </header>
-        <div>
-            <Table striped bordered variant="dark"> {/* May want to move this inside of header tags*/}
-            <thead>
-                <tr>
-                <th>Artist</th>
-                <th>Album Name</th>
-                <th>Release Date</th>
-                <th>Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                {data.map((d, i) => (
-                <tr key = {i}>
-                    <td>{d.artist}</td>
-                    <td>{d.name}</td>
-                    <td>{d.releaseDate}</td> {/*Format to just display MM/DD/YYYY*/}
-                    <td>{d.description}</td>
-                </tr>
-                ))}
-            </tbody>
-            </Table>
-        </div>
+        
         <p>Kinda like a footer if outside of header</p>
     </div>
     )

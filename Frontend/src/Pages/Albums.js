@@ -26,8 +26,33 @@ function Albums(){
         <div>
             <MyNav />
             <header className="App-header">
-                Albums and stuff.
+                Albums and stuff. <br></br>
+                Planning to display these as cards rather than in a table
             
+                <div className="table">
+                    <Table striped bordered variant="dark">
+                    <thead>
+                        <tr>
+                        <th>Album Name</th>
+                        <th>Artist</th>
+                        <th>Description</th>
+                        <th>Photo (just file name right now)</th>
+                        <th>Release Date</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {data.map((d, i) => (
+                        <tr key = {i}>
+                            <td>{d.name}</td>
+                            <td>{d.artist}</td>
+                            <td>{d.description}</td>
+                            <td>{d.photo}</td> {/*Format to just display MM/DD/YYYY*/}
+                            <td>{d.releaseDate}</td>
+                        </tr>
+                        ))}
+                    </tbody>
+                    </Table>
+                </div>
 
             </header>
         <div>
