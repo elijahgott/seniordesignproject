@@ -25,15 +25,6 @@ function About(){
                             </Card>
                         </Col>
                     </Row>
-                    <Row>
-                        <Col>
-                            <Card>
-                                <Card.Body>
-                                    hehehe I am snacking
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    </Row>
                 </Container>
             </header>
         </div>
