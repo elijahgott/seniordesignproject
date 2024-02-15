@@ -16,7 +16,7 @@ app.get('/', (re, res)=> {
     return res.json("Backend");
 })
 
-app.get('/user', (req, res)=> {
+app.get('/users', (req, res)=> {
     const sql = "SELECT * FROM user";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
@@ -24,7 +24,7 @@ app.get('/user', (req, res)=> {
     })
 })
 
-app.get('/album', (req, res)=> {
+app.get('/albums', (req, res)=> {
     const sql = "SELECT * FROM album";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
@@ -32,7 +32,7 @@ app.get('/album', (req, res)=> {
     })
 })
 
-app.get('/artist', (req, res)=> {
+app.get('/artists', (req, res)=> {
     const sql = "SELECT * FROM artist";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
@@ -40,7 +40,7 @@ app.get('/artist', (req, res)=> {
     })
 })
 
-app.get('/song', (req, res)=> {
+app.get('/songs', (req, res)=> {
     const sql = "SELECT * FROM song";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
@@ -49,7 +49,7 @@ app.get('/song', (req, res)=> {
 })
 
 app.listen(8081, ()=> {
-    console.log("Server Started."); 
+    console.log("Server Running."); 
 })
 
 {/*  cd seniordesignproject/Backend -> npm start */}
