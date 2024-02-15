@@ -17,7 +17,7 @@ function Home(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/album')
+        fetch('http://localhost:8081/users')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
@@ -31,7 +31,7 @@ function Home(){
                 <Row>
                     <Col>
                         <Card style={{maxWidth:"80rem"}}>
-                            <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums This Month</h1>
+                            <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums</h1>
                         </Card>
                     </Col>
                     
@@ -42,9 +42,9 @@ function Home(){
                             <Card.Body>
                                 <Card.Img variant="top" src={require('./../MusicImages/TaylorSwift_1989(Taylor\'s_Version).jpg')}></Card.Img>
                                 <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
-                                {/*<Card.Title>1989 (Taylor's Version)</Card.Title>*/}
-                                <Card.Subtitle>Album good hahaha love it</Card.Subtitle>
-                                <Card.Text>Zǎo shang hǎo zhōng guó!</Card.Text>
+                                <Card.Title>Taylor Swift</Card.Title>
+                                <Card.Subtitle>#1 Album</Card.Subtitle>
+                                <Card.Text>Album Description</Card.Text>
                                 
                             </Card.Body>
                         </Card>
@@ -53,10 +53,10 @@ function Home(){
                         <Card style={{ width: '25rem'}}>
                             <Card.Body>
                                 <Card.Img style={{ justifyContent: "center", display: "flex"}}variant="top" src={require('./../MusicImages/Sampha_Lahai.jpg')}></Card.Img>
-                                <Card.Title>Bing Chilling</Card.Title>
-                                <Card.Subtitle></Card.Subtitle>
-                                <Card.Text>Zǎo shang hǎo zhōng guó!</Card.Text>
-                                <Card.Link href="#cardlink">CCP Website</Card.Link>
+                                <Card.Link href="#cardlink">Lahai</Card.Link>
+                                <Card.Title>Sampha</Card.Title>
+                                <Card.Subtitle>#2 Album</Card.Subtitle>
+                                <Card.Text>Album Description</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -64,10 +64,10 @@ function Home(){
                         <Card style={{ width: '25rem'}}>
                             <Card.Body>
                                 <Card.Img variant="top" src={require('./../MusicImages/KidsSeeGhosts_KidsSeeGhosts.jpg')}></Card.Img>
-                                <Card.Title>Bing Chilling</Card.Title>
-                                <Card.Subtitle></Card.Subtitle>
-                                <Card.Text>Zǎo shang hǎo zhōng guó!</Card.Text>
-                                <Card.Link href="#cardlink">CCP Website</Card.Link>
+                                <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>
+                                <Card.Title>Kids See Ghosts</Card.Title>
+                                <Card.Subtitle>#3 Album</Card.Subtitle>
+                                <Card.Text>Album Description</Card.Text>
                             </Card.Body>
                         </Card>
                     </Col>
@@ -78,19 +78,17 @@ function Home(){
                 <Table striped bordered variant="dark">
                 <thead>
                     <tr>
-                    <th>Artist</th>
-                    <th>Album Name</th>
-                    <th>Release Date</th>
-                    <th>Description</th>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Date Joined</th>
                     </tr>
                 </thead>
                 <tbody>
                     {data.map((d, i) => (
                     <tr key = {i}>
-                        <td>{d.artist}</td>
-                        <td>{d.name}</td>
-                        <td>{d.releaseDate}</td> {/*Format to just display MM/DD/YYYY*/}
-                        <td>{d.description}</td>
+                        <td>{d.username}</td>
+                        <td>{d.uid}</td>
+                        <td>{d.date_joined}</td> {/*Format to just display MM/DD/YYYY*/}
                     </tr>
                     ))}
                 </tbody>

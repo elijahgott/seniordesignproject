@@ -16,7 +16,7 @@ app.get('/', (re, res)=> {
     return res.json("Backend");
 })
 
-app.get('/users', (req, res)=> {
+app.get('/users', (req, res)=> { //SELECT DATE_FORMAT(date_joined, '%d/%m/%Y') FROM user -- to get rid of time part
     const sql = "SELECT * FROM user";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);

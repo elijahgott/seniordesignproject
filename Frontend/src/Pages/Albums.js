@@ -17,7 +17,7 @@ function Albums(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/album')
+        fetch('http://localhost:8081/albums')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
@@ -26,7 +26,7 @@ function Albums(){
         <div>
             <MyNav />
             <header className="App-header">
-                Albums and stuff. <br></br>
+                Albums<br></br>
                 Planning to display these as cards rather than in a table
             
                 <div className="table">
