@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 import MyNav from "../MyComponents/MyNav";
+import HomeCarousel from "../MyComponents/HomeCarousel";
 
 function Home(){
     const [data, setData] = useState([])
@@ -26,53 +27,8 @@ function Home(){
         <div>
             <MyNav />
             <header className="App-header">
-            
-            <Container>
-                <Row>
-                    <Col>
-                        <Card style={{maxWidth:"80rem"}}>
-                            <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums</h1>
-                        </Card>
-                    </Col>
-                    
-                </Row>
-                <Row>
-                    <Col>
-                        <Card style={{ width: '25rem'}}>
-                            <Card.Body>
-                                <Card.Img variant="top" src={require('./../MusicImages/TaylorSwift_1989(Taylor\'s_Version).jpg')}></Card.Img>
-                                <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
-                                <Card.Title>Taylor Swift</Card.Title>
-                                <Card.Subtitle>#1 Album</Card.Subtitle>
-                                <Card.Text>Album Description</Card.Text>
-                                
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card style={{ width: '25rem'}}>
-                            <Card.Body>
-                                <Card.Img style={{ justifyContent: "center", display: "flex"}}variant="top" src={require('./../MusicImages/Sampha_Lahai.jpg')}></Card.Img>
-                                <Card.Link href="#cardlink">Lahai</Card.Link>
-                                <Card.Title>Sampha</Card.Title>
-                                <Card.Subtitle>#2 Album</Card.Subtitle>
-                                <Card.Text>Album Description</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                    <Col>
-                        <Card style={{ width: '25rem'}}>
-                            <Card.Body>
-                                <Card.Img variant="top" src={require('./../MusicImages/KidsSeeGhosts_KidsSeeGhosts.jpg')}></Card.Img>
-                                <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>
-                                <Card.Title>Kids See Ghosts</Card.Title>
-                                <Card.Subtitle>#3 Album</Card.Subtitle>
-                                <Card.Text>Album Description</Card.Text>
-                            </Card.Body>
-                        </Card>
-                    </Col>
-                </Row>
-            </Container>
+
+                <HomeCarousel />
 
             <div className="table">
                 <Table striped bordered variant="dark">

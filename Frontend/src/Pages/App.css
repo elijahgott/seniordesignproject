@@ -40,3 +40,8 @@
 .table{
   max-width: 40vw;
 }
+
+.carouselImg{
+  height: 700px;
+  width: 1200px;
+}
