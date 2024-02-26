@@ -1,0 +1,21 @@
+To-Do List:
+- Finish creating webpages
+	- home, albums, artists, profiles, settings(?), personal lists, admin (add stuff to database), sign in / sign up, friends list, ...
+- Create accounts
+	- friends list for each account
+- Display data from database as a card
+- Add ability to rate albums
+- Add search / advanced search
+- Add feed with posts from friends
+	- posts can consist of text, images, songs, albums, artists, ...
+	- can be commented on, liked, etc
+- Add DMs
+	- can send text, images, songs, albums, artists, ...
+	- group DMs AND individual DMs
+- Add user lists
+	- maybe just top 5 / 10 list?
+		- top 5 songs / top 5 albums / top 5 artists
+		- could maybe show this on profile
+
+- Add more artists, albums, songs to database
+	- probably wait until later to do this
