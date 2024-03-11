@@ -32,7 +32,7 @@ function Albums(){
                 <Container>
                 <Row>
                     <Col>
-                        <Card style={{maxWidth:"80rem"}}>
+                        <Card className="headerCard" style={{maxWidth:"81rem"}}>
                             <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums</h1>
                         </Card>
                     </Col>
@@ -40,7 +40,7 @@ function Albums(){
                 </Row>
                 <Row>
                     <Col>
-                        <Card style={{ width: '25rem'}}>
+                        <Card>
                             <Card.Body>
                                 <Card.Img variant="top" src={require('./../MusicImages/TaylorSwift_1989(Taylor\'s_Version).jpg')}></Card.Img>
                                 <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
@@ -52,7 +52,7 @@ function Albums(){
                         </Card>
                     </Col>
                     <Col>
-                        <Card style={{ width: '25rem'}}>
+                        <Card>
                             <Card.Body>
                                 <Card.Img style={{ justifyContent: "center", display: "flex"}}variant="top" src={require('./../MusicImages/Sampha_Lahai.jpg')}></Card.Img>
                                 <Card.Link href="#cardlink">Lahai</Card.Link>
@@ -63,7 +63,7 @@ function Albums(){
                         </Card>
                     </Col>
                     <Col>
-                        <Card style={{ width: '25rem'}}>
+                        <Card>
                             <Card.Body>
                                 <Card.Img variant="top" src={require('./../MusicImages/KidsSeeGhosts_KidsSeeGhosts.jpg')}></Card.Img>
                                 <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>

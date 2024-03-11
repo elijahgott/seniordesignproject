@@ -45,3 +45,16 @@
   height: 700px;
   width: 1200px;
 }
+
+.nav-link{
+  color: lightgray !important;
+}
+
+.headerCard{
+  max-width: 85rem;
+}
+
+.profile{
+  max-width: 85rem;
+  align-items: center;
+}

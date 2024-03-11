@@ -13,6 +13,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
+import Profile from "./Pages/Profile";
 
 
 function App() {
@@ -22,18 +23,13 @@ function App() {
       <Route path="/albums" element={<Albums />} />
       <Route path="/artists" element={<Artists />} />
       <Route path="/about" element={<About />} />
+      <Route path="/profile" element={<Profile />} />
+      {/*<Route path="/lists" element={<UserLists />} /> */}
     </Routes>
   );
 }
 
 export default App;
 
-      /*
-      <MyNav />
-      <Home />
-      <About />
-      */
-
-
 /* seniordesignproject/Frontend -> npm start */
-
+/* seniordesignproject/Backend-> npm start */
