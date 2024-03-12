@@ -7,8 +7,10 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from "react-bootstrap/Button";
 
 import MyNav from "../MyComponents/MyNav";
+
 
 function UserLists(){
     return(
@@ -19,10 +21,10 @@ function UserLists(){
                     <Row>
                         <Card className="headerCard">
                             <Card.Body>
-                                <h1>LISTS PAGE</h1>
+                                <h1>USER's Lists</h1>
                                 <Row>
                                     <Col>
-                                    <h1>USER's Top 5 Albums</h1>
+                                    <h1>Your Top 5 Albums <Button variant="primary">Edit</Button></h1>
                                     <ListGroup>
                                         <ListGroup.Item variant="secondary">1. More Life - Drake</ListGroup.Item>
                                         <ListGroup.Item variant="secondary">2. Time 'n' Place - Kero Kero Bonito</ListGroup.Item>
@@ -32,7 +34,8 @@ function UserLists(){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h1>USER's Top 5 Artists</h1>
+                                    <h1>Your Top 5 Artists <Button variant="primary">Edit</Button></h1>
+                                    
                                     <ListGroup>
                                         <ListGroup.Item variant="secondary">1. Drake</ListGroup.Item>
                                         <ListGroup.Item variant="secondary">2. Kero Kero Bonito</ListGroup.Item>
@@ -41,7 +44,10 @@ function UserLists(){
                                         <ListGroup.Item variant="secondary">5. Kanye West</ListGroup.Item>
                                     </ListGroup>
                                     </Col>
-                                </Row>                          
+                                </Row>       
+                                <Row>
+                                
+                                </Row>                   
                             </Card.Body>
                         </Card>
                     </Row>

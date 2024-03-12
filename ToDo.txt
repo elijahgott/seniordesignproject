@@ -17,5 +17,7 @@ To-Do List:
 		- top 5 songs / top 5 albums / top 5 artists
 		- could maybe show this on profile
 
+- Could maybe do Bio / Top 5's, Friends, and something else as tabs in profile page
+
 - Add more artists, albums, songs to database
 	- probably wait until later to do this

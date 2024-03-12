@@ -19,7 +19,7 @@ function Profile(){
                     <Row>
                         <Card className="profile">
                             {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
-                            <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200}}roundedCircle/>
+                            <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
                             <h1>USER's Profile</h1>
                         </Card>
                     </Row>
