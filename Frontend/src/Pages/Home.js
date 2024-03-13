@@ -13,6 +13,7 @@ import Col from 'react-bootstrap/Col';
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
+import MyFooter from "../MyComponents/MyFooter";
 
 function Home(){
     const [data, setData] = useState([])
@@ -29,6 +30,12 @@ function Home(){
             <header className="App-header">
 
                 <HomeCarousel />
+
+                <p>Lets get a feed here sometime k</p>
+                <p>Lets get a feed here sometime k</p>
+                <p>Lets get a feed here sometime k</p>
+                <p>Lets get a feed here sometime k</p>
+                <p>Lets get a feed here sometime k</p>
 
             <div className="table">
                 <Table striped bordered variant="dark">
@@ -52,7 +59,7 @@ function Home(){
             </div>
 
         </header>
-        
+        <MyFooter />
         <p>Kinda like a footer if outside of header</p>
     </div>
     )

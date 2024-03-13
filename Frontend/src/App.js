@@ -11,6 +11,8 @@ import UserLists from "./Pages/UserLists";
 import Friends from "./Pages/Friends";
 import New from "./Pages/New";
 import Settings from "./Pages/Settings";
+import SignUp from "./Pages/SignUp";
+import SignIn from "./Pages/SignIn";
 
 import {
   BrowserRouter as Router,
@@ -33,6 +35,8 @@ function App() {
       <Route path="/lists" element={<UserLists />} />
       <Route path="/friends" element={<Friends />} />
       <Route path="/settings" element={<Settings />} />
+      <Route path="/signin" element={<SignIn />} />
+      <Route path="/signup" element={<SignUp />} />
     </Routes>
   );
 }

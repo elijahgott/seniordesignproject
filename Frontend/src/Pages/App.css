@@ -50,11 +50,32 @@
   color: lightgray !important;
 }
 
-.headerCard{
+.mainBody{
   max-width: 85rem;
 }
 
 .profile{
   max-width: 85rem;
   align-items: center;
+}
+
+.searchButton{
+  height: 20px;
+  width: 20px;
+}
+
+.form_container{
+  width: 30%;
+}
+
+@media screen and(max-width: 1000px){
+  .form_container{
+    width: 45%;
+  }
+}
+
+@media screen and(max-width: 700px){
+  .form_container{
+    width: 65%;
+  }
 }

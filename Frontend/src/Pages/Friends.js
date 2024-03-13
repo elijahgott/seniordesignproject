@@ -21,7 +21,7 @@ function Friends(){
             <header className="App-header">
                 <Container>
                     <Row>
-                        <Card className="headerCard">
+                        <Card className="mainBody">
                             <Card.Body>
                                 <h1>Friends List</h1>
                                 <Row>

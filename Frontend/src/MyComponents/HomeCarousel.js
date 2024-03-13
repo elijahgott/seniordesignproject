@@ -19,7 +19,7 @@ function HomeCarousel(){
           <Image className="carouselImg" src ={require("./../MiscImages/stock-beach.jpg")} rounded/>
           <Carousel.Caption>
             <h3>First slide label</h3>
-            <p>Hey guys</p>
+            <p>Updates maybe</p>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -27,7 +27,7 @@ function HomeCarousel(){
           <Image className="carouselImg" src ={require("./../MiscImages/stock-beach.jpg")} rounded/>
           <Carousel.Caption>
             <h3>Second slide label</h3>
-            <p>Slide zwei.</p>
+            <p>Maybe link to new music</p>
           </Carousel.Caption>
         </Carousel.Item>
 
@@ -35,7 +35,7 @@ function HomeCarousel(){
           <Image className="carouselImg" src ={require("./../MiscImages/stock-beach.jpg")} rounded/>
           <Carousel.Caption>
             <h3>third slide label</h3>
-            <p>waddup.</p>
+            <p>something else</p>
           </Carousel.Caption>
         </Carousel.Item>
     </Carousel>

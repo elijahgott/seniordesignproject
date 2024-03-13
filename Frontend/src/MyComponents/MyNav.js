@@ -9,6 +9,7 @@ import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Image from 'react-bootstrap/Image';
 
 
 
@@ -30,18 +31,19 @@ function MyNav(){
                       <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
+                      <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/signout">Sign Out</Link></NavDropdown.Item>
                     </NavDropdown>
                 </Nav>
                 
                 <Form className="d-flex">
-                <Form.Control
-                  type="search"
-                  placeholder="Search"
-                  className="me-2"
-                  aria-label="Search"
-                />
-                <Button variant="primary">Search</Button>
+                  <Form.Control
+                    type="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                  />
+                  <Button variant="primary"><Image src={require('./../MiscImages/search-icon-sm.png')} className="searchButton"></Image></Button>
                 </Form>
               </Navbar.Collapse>
           </Container>
