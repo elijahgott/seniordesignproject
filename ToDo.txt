@@ -6,6 +6,7 @@ To-Do List:
 - Display data from database as a card
 - Add ability to rate albums
 - Add search / advanced search
+	- search artists, albums, songs, users, maybe lists
 - Add feed with posts from friends
 	- posts can consist of text, images, songs, albums, artists, ...
 	- can be commented on, liked, etc

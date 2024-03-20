@@ -21,7 +21,7 @@ function UserLists(){
                     <Row>
                         <Card className="headerCard">
                             <Card.Body>
-                                <h1>USER's Lists</h1>
+                                <h1>USER's Lists <Button variant="primary" className="addButton" ><Image src={require('./../MiscImages/plus-icon-sm.png')} /></Button></h1>
                                 <Row>
                                     <Col>
                                     <h1>Your Top 5 Albums <Button variant="primary">Edit</Button></h1>

@@ -5,7 +5,7 @@ import {Link} from 'react-router-dom';
 
 function SignUp(){
     return(
-        <div className='login template d-flex justify-content-center align-items-center 100-w vh-100 bg-secondary'>
+        <div className='login template d-flex justify-content-center align-items-center 100-w vh-100' style={{backgroundColor: "#bbbbbb"}}>
             <div className='form_container p-5 rounded bg-white'>
                 <form>
                     <h3 className='text-center'>Sign Up</h3>

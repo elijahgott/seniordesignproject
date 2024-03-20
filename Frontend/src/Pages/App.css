@@ -47,7 +47,7 @@
 }
 
 .nav-link{
-  color: lightgray !important;
+  color: lightgray;
 }
 
 .mainBody{
@@ -78,4 +78,8 @@
   .form_container{
     width: 65%;
   }
+}
+
+.settingsTabs{
+  color: black;
 }
