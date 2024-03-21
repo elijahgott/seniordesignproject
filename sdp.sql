@@ -10,6 +10,8 @@ create table Artist(
                     
 insert into Artist values('Taylor Swift', 'Big Chiefs fan', 'tswift.jpg');
 insert into Artist values('Kids See Ghosts', 'Kanye and Kid Cudi', 'kidsseeghosts.jpg');
+insert into Artist values('Sampha', 'Proper Englishman, cheers mate.', 'sampha.jpg');
+insert into Artist values('Kero Kero Bonito', 'Proper Englishwoman, 歓声メイト.', 'kerokerobonito.jpg');
 
 create table Album(
 					`name` varchar(50) NOT NULL,
@@ -21,7 +23,9 @@ create table Album(
                     foreign key (`artist`) references Artist(`name`));
                     
 insert into Album values('1989 (Taylor\'s Version)', 'Taylor Swift', 'Its awesome that she totally re-released the same songs again', 'TaylorSwift_1989(Taylor\'s_Version).jpg', '2023-10-27');
-insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts is a collaborative studio album by American hip hop supergroup Kids See Ghosts, composed of rapper-producers Kanye West and Kid Cudi. (Wikipedia)', 'KidsSeeGhosts_KidsSeeGhosts.jpg', '2018-06-08');                    
+insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts is a collaborative studio album by American hip hop supergroup Kids See Ghosts, composed of rapper-producers Kanye West and Kid Cudi. (Wikipedia)', 'KidsSeeGhosts_KidsSeeGhosts.jpg', '2018-06-08');
+insert into Album values('Lahai', 'Sampha', 'Lahai is the second studio album by English musician Sampha, released on 20 October 2023 through Young, marking his first release in over six years. (Wikipedia)', 'Sampha_Lahai.jpg', '2023-10-20');
+insert into Album values('Time \'n\' Place', 'Kero Kero Bonito', 'Time \'n\' Place is the second studio album by British indie pop band Kero Kero Bonito, released on 1 October 2018 through Polyvinyl Record Co in North America and self-released worldwide. (Wikipedia)', 'KeroKeroBonito_TimenPlace.jpg', '2018-10-1');
                     
 create table Song(
 					`name` varchar(50) NOT NULL,
@@ -42,6 +46,23 @@ insert into Song values('Reborn', 'Kids See Ghosts', 'Kids See Ghosts');
 insert into Song values('Kids See Ghosts (Ft. Yasiin Bey)', 'Kids See Ghosts', 'Kids See Ghosts');
 insert into Song values('Cudi Montage', 'Kids See Ghosts', 'Kids See Ghosts');
 
+insert into Song values('Stereo Color Cloud (Shaman\'s Dream)', 'Sampha', 'Lahai');
+insert into Song values('Spirit 2.0', 'Sampha', 'Lahai');
+insert into Song values('Dancing Circles', 'Sampha', 'Lahai');
+insert into Song values('Suspended', 'Sampha', 'Lahai');
+insert into Song values('Satellite Business', 'Sampha', 'Lahai');
+insert into Song values('Jonathan L. Seagull', 'Sampha', 'Lahai');
+insert into Song values('Inclination Compass (Tenderness)', 'Sampha', 'Lahai');
+insert into Song values('Only', 'Sampha', 'Lahai');
+insert into Song values('Time Piece', 'Sampha', 'Lahai');
+insert into Song values('Can\'t Go Back', 'Sampha', 'Lahai');
+insert into Song values('Evidence', 'Sampha', 'Lahai');
+insert into Song values('Wave Therapy', 'Sampha', 'Lahai');
+insert into Song values('What If You Hypnotise Me? (Ft. Lea Sen)', 'Sampha', 'Lahai');
+insert into Song values('Rose Tint', 'Sampha', 'Lahai');
+
+insert into Song values('Outside', 'Kero Kero Bonito', 'Time \'n\' Place');
+insert into Song values('Time Today', 'Kero Kero Bonito', 'Time \'n\' Place');
 
 create table User(
 					`uid` int NOT NULL AUTO_INCREMENT,
