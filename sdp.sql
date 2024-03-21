@@ -32,6 +32,7 @@ create table Song(
                     foreign key (`album`) references Album(`name`));
                     
 insert into Song values('Blank Space (Taylor\'s Version)', 'Taylor Swift', '1989 (Taylor\'s Version)');
+insert into Song values('Style (Taylor\'s Version)', 'Taylor Swift', '1989 (Taylor\'s Version)');
 
 insert into Song values('Feel the Love (Ft. Pusha T)', 'Kids See Ghosts', 'Kids See Ghosts');
 insert into Song values('Fire', 'Kids See Ghosts', 'Kids See Ghosts');
