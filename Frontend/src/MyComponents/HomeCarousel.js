@@ -13,7 +13,7 @@ function HomeCarousel(){
   };
 
   return (
-    <Container style={{maxWidth: 1025}}>
+    <Container style={{maxWidth: 1025, marginTop: 10}}>
       <Carousel activeIndex={index} onSelect={handleSelect} className="rounded border" >
         <Carousel.Item>
           <Image className="carouselImg" src ={require("./../MiscImages/stock-beach.jpg")} rounded/>

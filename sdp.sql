@@ -15,7 +15,7 @@ create table Album(
 					`name` varchar(50) NOT NULL,
                     `artist` varchar(50) NOT NULL,
                     `description` varchar(250),
-                    `photo` varchar(50),
+                    `photo` varchar(100),
                     `releaseDate` date NOT NULL,
                     primary key (`name`),
                     foreign key (`artist`) references Artist(`name`));

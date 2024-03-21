@@ -74,34 +74,25 @@ function Albums(){
                         </Card>
                     </Col>
                 </Row>
-                </Container>
-
                 All Albums
-                <div className="table">
-                    <Table striped bordered variant="dark">
-                    <thead>
-                        <tr>
-                        <th>Album Name</th>
-                        <th>Artist</th>
-                        <th>Description</th>
-                        <th>Photo (just file name right now)</th>
-                        <th>Release Date</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {data.map((d, i) => (
-                        <tr key = {i}>
-                            <td>{d.name}</td>
-                            <td>{d.artist}</td>
-                            <td>{d.description}</td>
-                            <td>{d.photo}</td> {/*Format to just display MM/DD/YYYY*/}
-                            <td>{d.releaseDate}</td>
-                        </tr>
+                {data.map((d, i) => (
+                        <Row>
+                            <Col>
+                                <Card>
+                                    <Card.Body>
+                                        {/*<Card.Img variant="top" src={require('./../MusicImages/${d.photo}')}></Card.Img>*/}
+                                        <Card.Link>{d.name}</Card.Link>
+                                        <Card.Title>{d.artist}</Card.Title>
+                                        <Card.Text>{d.description}</Card.Text>
+                                        <Card.Subtitle>{d.photo}</Card.Subtitle>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        </Row>
+                        
                         ))}
-                    </tbody>
-                    </Table>
-                </div>
 
+                </Container>
             </header>
         <div>
         
