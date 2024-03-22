@@ -19,7 +19,7 @@ function Home(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/users')
+        fetch('http://localhost:8081/')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
@@ -31,32 +31,20 @@ function Home(){
 
                 <HomeCarousel />
 
-                <p>Lets get a feed here sometime k</p>
-                <p>Lets get a feed here sometime k</p>
-                <p>Lets get a feed here sometime k</p>
-                <p>Lets get a feed here sometime k</p>
-                <p>Lets get a feed here sometime k</p>
-
-            <div className="table">
-                <Table striped bordered variant="dark">
-                <thead>
-                    <tr>
-                    <th>Username</th>
-                    <th>User ID</th>
-                    <th>Date Joined</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((d, i) => (
-                    <tr key = {i}>
-                        <td>{d.username}</td>
-                        <td>{d.uid}</td>
-                        <td>{d.date_joined}</td> {/*Format to just display MM/DD/YYYY*/}
-                    </tr>
+                <Container style={{marginTop: 10}}>
+                    <Row style={{marginLeft:0}}>
+                    {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
+                    {data.map((d, i) => (    
+                                    <Card style={{maxWidth:"81rem"}}>
+                                        <Card.Body>
+                                            <Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                            <Card.Link href="#artist">{d.album_name}{d.song_name}</Card.Link>
+                                            <Card.Text style={{fontSize: 20}}>{d.uid} - {d.content}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
                     ))}
-                </tbody>
-                </Table>
-            </div>
+                    </Row>
+            </Container>
 
         </header>
         <MyFooter />

@@ -23,11 +23,15 @@ function New(){
                     <Row>
                         <Card className="mainBody">
                             <Card.Body>
-                                <h1>Friends List</h1>
                                 <Row>
                                     <Col>
+                                    <h1>New Music</h1>
                                     New Music and Such
                                     </Col>
+                                </Row>
+                                <Row>
+                                <h1>New Features</h1>  
+                                - Display data from database as Cards, rather than in a table.
                                 </Row>                        
                             </Card.Body>
                         </Card>

@@ -31,10 +31,7 @@ function Albums(){
         <div>
             <MyNav />
             <header className="App-header">
-                Albums<br></br>
-                Planning to display these as cards rather than in a table
-            
-                <Container>
+                <Container style={{marginTop:5}}>
                     <Row>
                         <Col>
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
@@ -78,8 +75,8 @@ function Albums(){
                         </Col>
                     </Row>
                 </Container>
-                    <br></br>
-                <Container>
+                    
+                <Container style={{marginTop: 10}}>
                     <Row>
                         <Col>
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
@@ -88,7 +85,7 @@ function Albums(){
                         </Col>
                     </Row>
 
-                    <Row>
+                    <Row style={{marginLeft: 0}}>
                     {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
                     {data.map((d, i) => (    
                                     <Card style={{maxWidth:"27rem"}}>

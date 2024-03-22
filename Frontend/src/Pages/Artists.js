@@ -26,29 +26,29 @@ function Artists(){
         <div>
             <MyNav />
             <header className="App-header">
-            Artists and stuff. <br></br>
-            Planning to display these are cards rather than a table.
             
-            <div className="table">
-                <Table striped bordered variant="dark">
-                <thead>
-                    <tr>
-                    <th>Artist</th>
-                    <th>Bio</th>
-                    <th>Photo (just file name right now)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {data.map((d, i) => (
-                    <tr key = {i}>
-                        <td>{d.name}</td>
-                        <td>{d.bio}</td>
-                        <td>{d.photo}</td> {/*Format to just display MM/DD/YYYY*/}
-                    </tr>
+            <Container style={{marginTop: 10}}>
+                    <Row>
+                        <Col>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists</h1>
+                            </Card>
+                        </Col>
+                    </Row>
+
+                    <Row style={{marginLeft:0}}>
+                    {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
+                    {data.map((d, i) => (    
+                                    <Card style={{maxWidth:"27rem"}}>
+                                        <Card.Body>
+                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                            <Card.Link href="#artist">{d.name}</Card.Link>
+                                            <Card.Text style={{fontSize: 20}}>{d.bio}</Card.Text>
+                                        </Card.Body>
+                                    </Card>
                     ))}
-                </tbody>
-                </Table>
-            </div>
+                    </Row>
+            </Container>
 
             </header>
         
