@@ -72,6 +72,16 @@ create table User(
 					primary key (`uid`));
                     
 insert into User values (1, 'elijah', '0', '2024-01-17');
+insert into User values (2, 'conner', '0', '2024-03-25');
+insert into User values (3, 'finngalvin', '0', '2024-03-25');
+
+create table UserFriend(
+						`uid` int NOT NULL,
+                        `friendID` int NOT NULL);
+                        
+insert into UserFriend values(1, 2);
+insert into UserFriend values(1, 3);
+
                     
 create table UserSong(
 					`uid` int NOT NULL,
@@ -113,11 +123,13 @@ create Table UserPost(
                     
 insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', null, null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
                     
+-- ALBUM QUERIES
+-- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album
+-- select * from album where releaseDate = (select TOP(3) releaseDate from album); --trying to get top 3 most recently released albums
+-- select MIN(releaseDate) from album; -- oldest album DATE
 
-                        
--- select * from Song where artist = "Taylor Swift";
--- select * from Song where artist = "Drake";
--- select * from UserSong where uid = "1";
--- select * from UserSong where rating = "1";
--- select * from Song where album = "Kids See Ghosts";
--- select * from UserPost where date = "2024-02-02";
+-- USER QUERIES
+
+-- FRIEND QUERIES
+-- select friendID from UserFriend where uid = 1; -- all friends for user with uid 1
+-- select ALL username from User where uid IN (select ALL friendID from UserFriend where uid = 1); -- username of all friends of user with uid 1
