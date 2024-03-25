@@ -53,7 +53,7 @@ app.get('/songs', (req, res)=> {
 })
 
 app.get('/new', (req, res)=> {
-    const sql = "SELECT * FROM album ";
+    const sql = "select * from album where releaseDate = (select MAX(releaseDate) from album);";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
