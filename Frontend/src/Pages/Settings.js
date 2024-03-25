@@ -11,7 +11,7 @@ import Button from "react-bootstrap/Button";
 import {Link} from 'react-router-dom';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
+import Form from 'react-bootstrap/Form';
 
 import MyNav from "../MyComponents/MyNav";
 
@@ -33,15 +33,43 @@ function Settings(){
                                     justify
                                 >
                                     <Tab eventKey="profile" title="Profile" className="settingsTabs">
-                                        <p>Username</p>
-                                        <p>Name</p>
-                                        <p>Bio</p>
-                                        <p>Profile Picture</p>
+                                        <Form>
+                                            <Row className="settingsRow">
+                                                <h3>Username</h3>
+                                                    <Form.Control
+                                                        type="username"
+                                                        placeholder="Enter New Username"
+                                                        className="me-2"
+                                                        aria-label="Username"
+                                                    />
+                                            </Row>
+                                            <Row className="settingsRow">
+                                                <h3>Bio</h3>
+                                                    <Form.Control
+                                                        as="textarea"
+                                                        placeholder="Enter New Bio"
+                                                        className="me-2"
+                                                        rows={4}
+                                                    />
+                                            </Row>
+                                            <Row className="settingsRow">
+                                                <h3>Profile Picture</h3>
+                                                    <Form.Control
+                                                        type="file"
+                                                    />
+                                            </Row>
+                                            <Row className="settingsRow">
+                                                <Button>Submit Changes</Button>
+                                            </Row>
+                                        </Form>
                                     </Tab>  
                                     <Tab eventKey="security" title="Security" className="settingsTabs">
-                                        <p>Private Account</p>
-                                        <p>Allow Comments From: Friends Only / Anyone</p>
-
+                                        <Form>
+                                            <Row>
+                                                <h3>Private Account</h3>
+                                                <Button>Toggle</Button>
+                                            </Row>
+                                        </Form>
                                     </Tab>  
                                 </Tabs>             
                             </Card.Body>
