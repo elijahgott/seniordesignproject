@@ -1,9 +1,10 @@
 const express = require('express');
-const mysql = require('mysql')
-const cors = require('cors')
+const mysql = require('mysql');
+const cors = require('cors');
 
-const app = express()
-app.use(cors())
+const app = express();
+app.use(express.json());
+app.use(cors());
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -56,6 +57,16 @@ app.get('/new', (req, res)=> {
     const sql = "select * from album where releaseDate = (select MAX(releaseDate) from album);";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.post('/signin', (req, res) => {
+    const sql = "select * from user where username = ? and password = ?";
+    const values = [req.body.username,
+                    req.body.password]
+    db.query(sql, [values], (err, data) => {
+        if(err) return res.json("Login Failed");
         return res.json(data);
     })
 })

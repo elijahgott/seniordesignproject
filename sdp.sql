@@ -67,13 +67,13 @@ insert into Song values('Time Today', 'Kero Kero Bonito', 'Time \'n\' Place');
 create table User(
 					`uid` int NOT NULL AUTO_INCREMENT,
                     `username` varchar(20) NOT NULL,
-                    `pass_hash` varchar(255) NOT NULL,
+                    `password` varchar(255) NOT NULL,
                     `date_joined` date NOT NULL,
 					primary key (`uid`));
                     
-insert into User values (1, 'elijah', '0', '2024-01-17');
-insert into User values (2, 'conner', '0', '2024-03-25');
-insert into User values (3, 'finngalvin', '0', '2024-03-25');
+insert into User values (1, 'elijah', '1234', '2024-01-17');
+insert into User values (2, 'conner', '1234', '2024-03-25');
+insert into User values (3, 'finngalvin', '1234', '2024-03-25');
 
 create table UserFriend(
 						`uid` int NOT NULL,
