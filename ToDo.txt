@@ -1,16 +1,14 @@
 To-Do List:
-- Finish creating webpages
-	- home, profiles, settings(?), personal lists, admin (add stuff to database), friends list, ...
 - Create accounts
 	- friends list for each account
 
-- Add ability to rate albums
+- Add ability to rate albums for each user
 - Add search / advanced search
 	- search artists, albums, songs, users, maybe lists
 - Add feed with posts from friends
 	- posts can consist of text, images, songs, albums, artists, ...
 	- can be commented on, liked, etc
-- Add DMs
+- Add DMs (?)
 	- can send text, images, songs, albums, artists, ...
 	- group DMs AND individual DMs
 - Add user lists
