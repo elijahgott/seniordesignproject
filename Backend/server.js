@@ -54,7 +54,7 @@ app.get('/songs', (req, res)=> {
 })
 
 app.get('/new', (req, res)=> {
-    const sql = "select * from album where releaseDate = (select MAX(releaseDate) from album);";
+    const sql = "select * from album where releaseDate = (select MAX(releaseDate) from album);"; //newest album
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
@@ -62,13 +62,18 @@ app.get('/new', (req, res)=> {
 })
 
 app.post('/signin', (req, res) => {
+    var currentUser = "Anonymous";
     const sql = "select * from user where username = ? and password = ?";
-    const values = [req.body.username,
-                    req.body.password]
-    db.query(sql, [values], (err, data) => {
-        if(err) return res.json("Login Failed");
-        return res.json(data);
-    })
+    db.query(sql, [req.body.username, req.body.password], (err, data) => {
+        if(err) return res.json("Error");
+        if(data.length > 0){
+            currentUser = req.body.username;
+            return res.json("Login Successful for: " + currentUser)
+        }
+        else{
+            return res.json("Login Unsuccessful")
+        }
+    }) 
 })
 
 app.listen(8081, ()=> {
