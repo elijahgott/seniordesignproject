@@ -17,6 +17,9 @@ import SignIn from "./Pages/SignIn";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 function App() {
+  var currentUser = "Anonymous"; //when user not signed in
+
+
   return (
     <Routes>
       <Route path="/" element={<Home />} />

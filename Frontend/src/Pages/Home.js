@@ -16,6 +16,7 @@ import HomeCarousel from "../MyComponents/HomeCarousel";
 import MyFooter from "../MyComponents/MyFooter";
 
 function Home(){
+    var currentUser = "Anonymous";
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -28,7 +29,7 @@ function Home(){
         <div>
             <MyNav />
             <header className="App-header">
-
+                <h1>Welcome, {currentUser}</h1>
                 <HomeCarousel />
 
                 <Container style={{marginTop: 10}}>
