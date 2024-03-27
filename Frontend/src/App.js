@@ -13,7 +13,6 @@ import New from "./Pages/New";
 import Settings from "./Pages/Settings";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
-import currentUser from 
 
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
