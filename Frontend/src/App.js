@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, {useState} from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -16,10 +16,17 @@ import SignIn from "./Pages/SignIn";
 
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
+import { isSignedIn } from "./Pages/SignIn";
+
+let currentUser = {
+  user: "Anonymous",
+};
+//if user is signed in, change currentUser.user to username
+//if user is not signed in, currentUser.user can remain ANONYMOUS
+
+
+
 function App() {
-  var currentUser = "Anonymous"; //when user not signed in
-
-
   return (
     <Routes>
       <Route path="/" element={<Home />} />
@@ -38,6 +45,7 @@ function App() {
 }
 
 export default App;
+export {currentUser};
 
 /* seniordesignproject/Frontend -> npm start */
 /* seniordesignproject/Backend-> npm start */

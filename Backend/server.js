@@ -1,3 +1,6 @@
+//import {currentUser} from '../Frontend/src/App.js';
+//var user = require('../Frontend/src/App.js');
+
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -61,17 +64,19 @@ app.get('/new', (req, res)=> {
     })
 })
 
+
+
 app.post('/signin', (req, res) => {
-    var currentUser = "Anonymous";
     const sql = "select * from user where username = ? and password = ?";
+    var user;
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if(err) return res.json("Error");
         if(data.length > 0){
-            currentUser = req.body.username;
-            return res.json("Login Successful for: " + currentUser)
+            user = req.body.username;
+            return res.json("Logged in as: " + user)
         }
         else{
-            return res.json("Login Unsuccessful")
+            return res.json("Username and password do not match")
         }
     }) 
 })

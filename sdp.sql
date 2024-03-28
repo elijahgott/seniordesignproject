@@ -121,7 +121,7 @@ create Table UserPost(
                     foreign key (`song_name`) references Song(`name`),
                     foreign key (`album_name`) references Album(`name`));
                     
-insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', null, null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
                     
 -- ALBUM QUERIES
 -- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album
