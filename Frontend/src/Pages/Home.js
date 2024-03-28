@@ -30,7 +30,15 @@ function Home(){
         <div>
             <MyNav />
             <header className="App-header">
-                <h1>Welcome, {currentUser.user}</h1>
+                <Container style={{marginTop:5}}>
+                    <Row>
+                        <Col>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.user}</h1>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Container>
                 <HomeCarousel />
 
                 <Container style={{marginTop: 10}}>

@@ -19,7 +19,7 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import { isSignedIn } from "./Pages/SignIn";
 
 let currentUser = {
-  user: "Anonymous",
+  user: "elijah",
 };
 //if user is signed in, change currentUser.user to username
 //if user is not signed in, currentUser.user can remain ANONYMOUS

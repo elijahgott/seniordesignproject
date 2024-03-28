@@ -1,6 +1,7 @@
 To-Do List:
 - Create accounts
 	- friends list for each account
+- MAKE SIGN IN SYSTEM WORK
 
 - Add ability to rate albums for each user
 - Add search / advanced search

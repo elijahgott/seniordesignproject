@@ -109,6 +109,18 @@ create table UserAlbum(
                     
 insert into UserAlbum values('1', '1989 (Taylor\'s Version)', 'Taylor Swift', '2024-01-17', '1.0');
 
+create table UserList(
+						`uid` int NOT NULL,
+                        `name` varchar(50) NOT NULL,
+                        primary key (`name`),
+                        foreign key (`uid`) references User(`uid`));
+                        
+create table UserSong(
+						`listName` varchar(50) NOT NULL,
+                        `name` varchar(50) NOT NULL, 
+                        foreign key(`listName`) references UserList(`name`),
+                        foreign key(`name`) references Song(`name`));
+
 create Table UserPost(
 					`uid` int NOT NULL,
                     `content` varchar(250),
