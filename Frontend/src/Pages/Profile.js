@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -10,7 +12,27 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import MyNav from "../MyComponents/MyNav";
 
+import {currentUser} from '../App.js';
+
 function Profile(){
+    const [data, setData] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:8081/userlistartist')
+        .then(res => res.json())
+        .then(data => setData(data))
+        .catch(err => console.log(err));
+  }, [])
+
+    const [dataAlbum, setDataAlbum] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:8081/userlistalbum')
+        .then(res => res.json())
+        .then(dataAlbum => setDataAlbum(dataAlbum))
+        .catch(err => console.log(err));
+    }, [])
+
     return(
         <div>
             <MyNav />
@@ -20,7 +42,7 @@ function Profile(){
                         <Card className="profile">
                             {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
                             <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
-                            <h1>USER's Profile</h1>
+                            <h1>{currentUser.user}'s Profile</h1>
                         </Card>
                     </Row>
 
@@ -34,23 +56,19 @@ function Profile(){
                                 
                                 <Row>
                                     <Col>
-                                    <h1>USER's Top 5 Albums</h1>
+                                    <h1>{currentUser.user}'s Top 5 Artists</h1>
                                     <ListGroup>
-                                        <ListGroup.Item variant="secondary">1. More Life - Drake</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">2. Time 'n' Place - Kero Kero Bonito</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">3. Mr. Morale and the Big Steppers - Kendrick Lamar</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">4. Atrocity Exhibition - Danny Brown</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">5. The Life of Pablo - Kanye West</ListGroup.Item>
+                                        {data.map((d, i) => (    
+                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
+                                        ))}
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h1>USER's Top 5 Artists</h1>
+                                    <h1>{currentUser.user}'s Top 5 Albums</h1>
                                     <ListGroup>
-                                        <ListGroup.Item variant="secondary">1. Drake</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">2. Kero Kero Bonito</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">3. Kendrick Lamar</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">4. Danny Brown</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">5. Kanye West</ListGroup.Item>
+                                        {dataAlbum.map((d, i) => (    
+                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>
+                                        ))}
                                     </ListGroup>
                                     </Col>
                                 </Row>                         

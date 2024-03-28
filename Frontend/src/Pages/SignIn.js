@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
-import {currentUser} from '../App.js'
+import {currentUser} from '../App.js';
 
 var isSignedIn = false;
 

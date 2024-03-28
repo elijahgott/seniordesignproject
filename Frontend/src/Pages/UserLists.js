@@ -1,4 +1,6 @@
 import React from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -10,9 +12,19 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
 
 import MyNav from "../MyComponents/MyNav";
+import { currentUser } from "../App";
 
 
 function UserLists(){
+    const [data, setData] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:8081/userlistartist')
+        .then(res => res.json())
+        .then(data => setData(data))
+        .catch(err => console.log(err));
+  }, [])
+
     return(
         <div>
             <MyNav />
@@ -21,10 +33,18 @@ function UserLists(){
                     <Row>
                         <Card className="headerCard">
                             <Card.Body>
-                                <h1>USER's Lists <Button variant="primary" className="addButton" ><Image src={require('./../MiscImages/plus-icon-sm.png')} /></Button></h1>
+                                <h1 style={{textAlign: 'center'}}>{currentUser.user}'s Lists <Button variant="primary" className="addButton" ><Image src={require('./../MiscImages/plus-icon-sm.png')} /></Button></h1>
                                 <Row>
+                                <Col>
+                                    <h1>{currentUser.user}'s Top 5 Artists <Button variant="primary">Edit</Button></h1>
+                                    <ListGroup>
+                                        {data.map((d, i) => (    
+                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
+                                        ))}
+                                    </ListGroup>
+                                    </Col>
                                     <Col>
-                                    <h1>Your Top 5 Albums <Button variant="primary">Edit</Button></h1>
+                                    <h1>{currentUser.user}'s Top 5 Albums <Button variant="primary">Edit</Button></h1>
                                     <ListGroup>
                                         <ListGroup.Item variant="secondary">1. More Life - Drake</ListGroup.Item>
                                         <ListGroup.Item variant="secondary">2. Time 'n' Place - Kero Kero Bonito</ListGroup.Item>
@@ -33,20 +53,9 @@ function UserLists(){
                                         <ListGroup.Item variant="secondary">5. The Life of Pablo - Kanye West</ListGroup.Item>
                                     </ListGroup>
                                     </Col>
-                                    <Col>
-                                    <h1>Your Top 5 Artists <Button variant="primary">Edit</Button></h1>
-                                    
-                                    <ListGroup>
-                                        <ListGroup.Item variant="secondary">1. Drake</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">2. Kero Kero Bonito</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">3. Kendrick Lamar</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">4. Danny Brown</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">5. Kanye West</ListGroup.Item>
-                                    </ListGroup>
-                                    </Col>
                                 </Row>       
                                 <Row>
-                                
+                                <h1 style={{textAlign: 'center'}}>Other Lists</h1>
                                 </Row>                   
                             </Card.Body>
                         </Card>
