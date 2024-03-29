@@ -25,6 +25,15 @@ function UserLists(){
         .catch(err => console.log(err));
   }, [])
 
+    const [dataAlbum, setDataAlbum] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:8081/userlistalbum')
+        .then(res => res.json())
+        .then(dataAlbum => setDataAlbum(dataAlbum))
+        .catch(err => console.log(err));
+    }, [])
+
     return(
         <div>
             <MyNav />
@@ -35,8 +44,8 @@ function UserLists(){
                             <Card.Body>
                                 <h1 style={{textAlign: 'center'}}>{currentUser.user}'s Lists <Button variant="primary" className="addButton" ><Image src={require('./../MiscImages/plus-icon-sm.png')} /></Button></h1>
                                 <Row>
-                                <Col>
-                                    <h1>{currentUser.user}'s Top 5 Artists <Button variant="primary">Edit</Button></h1>
+                                    <Col>
+                                    <h1>{currentUser.user}'s Top 5 Artists</h1>
                                     <ListGroup>
                                         {data.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
@@ -44,16 +53,14 @@ function UserLists(){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h1>{currentUser.user}'s Top 5 Albums <Button variant="primary">Edit</Button></h1>
+                                    <h1>{currentUser.user}'s Top 5 Albums</h1>
                                     <ListGroup>
-                                        <ListGroup.Item variant="secondary">1. More Life - Drake</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">2. Time 'n' Place - Kero Kero Bonito</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">3. Mr. Morale and the Big Steppers - Kendrick Lamar</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">4. Atrocity Exhibition - Danny Brown</ListGroup.Item>
-                                        <ListGroup.Item variant="secondary">5. The Life of Pablo - Kanye West</ListGroup.Item>
+                                        {dataAlbum.map((d, i) => (    
+                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>
+                                        ))}
                                     </ListGroup>
                                     </Col>
-                                </Row>       
+                                </Row>        
                                 <Row>
                                 <h1 style={{textAlign: 'center'}}>Other Lists</h1>
                                 </Row>                   

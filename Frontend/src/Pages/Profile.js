@@ -33,6 +33,15 @@ function Profile(){
         .catch(err => console.log(err));
     }, [])
 
+    const [dataUser, setDataUser] = useState([])
+
+    useEffect(()=>{
+        fetch('http://localhost:8081/users')
+        .then(res => res.json())
+        .then(dataUser => setDataUser(dataUser))
+        .catch(err => console.log(err));
+    }, [])
+
     return(
         <div>
             <MyNav />
@@ -51,7 +60,9 @@ function Profile(){
                             <Card.Body>
                                 <Row>
                                 <h1>Bio:</h1>
-                                <p>I'm soooo good</p> {/* need to get bio from database */}
+                                    {dataUser.map((d, i) => ( //if({currentUser.user} == {d.username})
+                                        <p>{d.bio}</p>
+                                    ))}
                                 </Row>
                                 
                                 <Row>

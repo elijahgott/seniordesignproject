@@ -24,11 +24,11 @@ app.get('/', (re, res)=> {
     })
 })
 
-app.get('/users', (req, res)=> { //SELECT DATE_FORMAT(date_joined, '%d/%m/%Y') FROM user -- to get rid of time part
-    const sql = "SELECT * FROM user";
-    db.query(sql, (err, data) => {
+app.get('/users', (req, res)=> {
+    const sql = "SELECT * FROM user where uid = 1";
+    db.query(sql, (err, dataUser) => {
         if(err) return res.json(err);
-        return res.json(data);
+        return res.json(dataUser);
     })
 })
 
