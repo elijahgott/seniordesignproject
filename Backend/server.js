@@ -1,3 +1,6 @@
+//import {currentUser} from '../Frontend/src/App.js';
+//var user = require('../Frontend/src/App.js');
+
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
@@ -21,11 +24,11 @@ app.get('/', (re, res)=> {
     })
 })
 
-app.get('/users', (req, res)=> { //SELECT DATE_FORMAT(date_joined, '%d/%m/%Y') FROM user -- to get rid of time part
-    const sql = "SELECT * FROM user";
-    db.query(sql, (err, data) => {
+app.get('/users', (req, res)=> {
+    const sql = "SELECT * FROM user where uid = 1";
+    db.query(sql, (err, dataUser) => {
         if(err) return res.json(err);
-        return res.json(data);
+        return res.json(dataUser);
     })
 })
 
@@ -61,17 +64,49 @@ app.get('/new', (req, res)=> {
     })
 })
 
+app.get('/userlist', (req, res)=> {
+    const sql = "select * from userlist where uid = 1;"; //only gets uid 1 lists
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/userlistsong', (req, res)=> {
+    const sql = "select * from userlistsong where uid = 1;"; //only gets songs in lists from uid 1 
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/userlistartist', (req, res)=> {
+    const sql = "select * from userlistartist where uid = 1;"; //only gets artists in lists from uid 1 
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.get('/userlistalbum', (req, res)=> {
+    const sql = "select * from userlistalbum where uid = 1;"; //only gets albums in lists from uid 1 
+    db.query(sql, (err, dataAlbum) => {
+        if(err) return res.json(err);
+        return res.json(dataAlbum);
+    })
+})
+
 app.post('/signin', (req, res) => {
-    var currentUser = "Anonymous";
     const sql = "select * from user where username = ? and password = ?";
+    var user;
     db.query(sql, [req.body.username, req.body.password], (err, data) => {
         if(err) return res.json("Error");
         if(data.length > 0){
-            currentUser = req.body.username;
-            return res.json("Login Successful for: " + currentUser)
+            user = req.body.username;
+            return res.json("Logged in as: " + user)
         }
         else{
-            return res.json("Login Unsuccessful")
+            return res.json("Username and password do not match")
         }
     }) 
 })

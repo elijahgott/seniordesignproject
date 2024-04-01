@@ -4,6 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import axios from 'axios';
 
+import {currentUser} from '../App.js';
+
+var isSignedIn = false;
+
 function SignIn(){
 
     const[username, setUsername] = useState('')
@@ -14,6 +18,8 @@ function SignIn(){
         axios.post('http://localhost:8081/signin', {username, password})
         .then(res => console.log(res))
         .catch(err => console.log(err));
+        currentUser.user = username;
+        isSignedIn = true;
     }
 
     return(
@@ -45,4 +51,5 @@ function SignIn(){
         </div>
     )
 }
-export default SignIn
+export default SignIn;
+export {isSignedIn};
