@@ -1,7 +1,9 @@
 To-Do List:
-- Create accounts
-	- friends list for each account
-- MAKE SIGN IN SYSTEM WORK
+- MOST IMPORTANT
+	- MAKE SIGN IN SYSTEM WORK
+	- USERS ADD ALBUMS ONTO CUSTOM LISTS
+	- USERS RATE ALBUMS
+	- SEARCH FOR ALBUMS, ARTISTS, USERS, SONGS
 
 - Add ability to rate albums for each user
 - Add search / advanced search
@@ -9,15 +11,13 @@ To-Do List:
 - Add feed with posts from friends
 	- posts can consist of text, images, songs, albums, artists, ...
 	- can be commented on, liked, etc
-- Add DMs (?)
+- Add DMs (?) -- probably not going to happen
 	- can send text, images, songs, albums, artists, ...
 	- group DMs AND individual DMs
 - Add user lists
 	- maybe just top 5 / 10 list?
 		- top 5 songs / top 5 albums / top 5 artists
 		- could maybe show this on profile
-
-- Could maybe do Bio / Top 5's, Friends, and something else as tabs in profile page
 
 - Add more artists, albums, songs to database
 	- probably wait until later to do this
