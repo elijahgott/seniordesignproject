@@ -17,7 +17,7 @@ const db = mysql.createConnection({
 })
 
 app.get('/', (re, res)=> {
-    const sql = "SELECT * FROM userpost";
+    const sql = "select * from UserPost where uid IN (select friendID from UserFriend where uid = 1);";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
@@ -65,7 +65,8 @@ app.get('/new', (req, res)=> {
 })
 
 app.get('/userlist', (req, res)=> {
-    const sql = "select * from userlist where uid = 1;"; //only gets uid 1 lists
+    //const sql = `select * from userlist where uid = ${currentUser.uid};`; 
+    const sql = `select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists'));`; //only gets uid 1 lists
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);

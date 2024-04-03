@@ -20,6 +20,7 @@ import { isSignedIn } from "./Pages/SignIn";
 
 let currentUser = {
   user: "elijah",
+  uid: 1
 };
 //if user is signed in, change currentUser.user to username
 //if user is not signed in, currentUser.user can remain ANONYMOUS

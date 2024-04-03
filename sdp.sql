@@ -164,6 +164,9 @@ create Table UserPost(
                     foreign key (`album_name`) references Album(`name`));
                     
 insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('2', 'good stuff', null , 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
+insert into UserPost values('2', 'one of my favorite albums right now', null, null, 'Atrocity Exhibition', '2024-04-03', '13:54:00');
+insert into UserPost values('3', 'not as good as twosoft but it\'ll do', null, 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
                     
 -- ALBUM QUERIES
 -- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album
@@ -174,6 +177,11 @@ insert into UserPost values('1', 'This album is so good I can\'t believe it\'s t
 
 -- FRIEND QUERIES
 -- select friendID from UserFriend where uid = 1; -- all friends for user with uid 1
--- select ALL username from User where uid IN (select ALL friendID from UserFriend where uid = 1); -- username of all friends of user with uid 1]
+-- select ALL username from User where uid IN (select ALL friendID from UserFriend where uid = 1); -- username of all friends of user with uid 1
 
--- name from UserList where uid = 1; -- select all lists by this one chap
+
+-- LISTS
+select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists')); -- select all OTHER lists
+
+-- POSTS
+-- select * from UserPost where uid IN (select friendID from UserFriend where uid = 1); -- select all posts from friends of user with uid 1

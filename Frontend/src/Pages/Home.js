@@ -44,6 +44,7 @@ function Home(){
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.user}</h1>
                                 <HomeCarousel />
+                                
                                 <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button variant="primary" className="addButton" onClick={handleShow}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>
                                 <Modal show={show} onHide={handleClose} backdrop="static">
                                     <Form>
@@ -75,10 +76,10 @@ function Home(){
                                         </Button>
                                         </Modal.Footer>
                                     </Form>
-                                    
                                 </Modal>
+
                                 {data.map((d, i) => (    
-                                    <Card style={{maxWidth: 1025, marginTop: 10, marginLeft: "auto", marginRight: "auto", marginBottom: 10}} border="secondary">
+                                    <Card style={{width: 1025, marginTop: 10, marginLeft: "auto", marginRight: "auto", marginBottom: 10}} border="secondary">
                                         <Card.Body>
                                             <Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link href="#artist">{d.uid} (GET USERNAME FROM UID)</Card.Link>
