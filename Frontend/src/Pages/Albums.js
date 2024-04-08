@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { Link } from "react-router-dom";
 
 import MyNav from "../MyComponents/MyNav";
 
@@ -35,7 +36,7 @@ function Albums(){
                     <Row>
                         <Col>
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums</h1>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>

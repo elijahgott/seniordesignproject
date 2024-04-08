@@ -4,8 +4,8 @@ use SDP;
 
 create table Artist(
 					`name` varchar(50) NOT NULL,
-                    `bio` varchar(250),
-                    `photo` varchar(50),
+                    `bio` varchar(250) NOT NULL,
+                    `photo` varchar(50) DEFAULT 'default.jpg',
                     primary key (`name`));
                     
 insert into Artist values('Taylor Swift', 'Big Chiefs fan', 'tswift.jpg');
@@ -74,7 +74,7 @@ create table User(
                     `bio` varchar(250),
 					primary key (`uid`));
                     
-insert into User values (1, 'elijah', '1234', '2024-01-17', null);
+insert into User values (1, 'elijah', '1234', '2024-01-17', 'i am elijah this is my bio about me');
 insert into User values (2, 'conner', '1234', '2024-03-25', null);
 insert into User values (3, 'finngalvin', '1234', '2024-03-25', null);
 
@@ -153,12 +153,12 @@ insert into UserListArtist values(1, 'Top 5 Artists', 'Danny Brown');
 
 create Table UserPost(
 					`uid` int NOT NULL,
-                    `content` varchar(250),
+                    `content` varchar(250) NOT NULL,
                     `photo` varchar(50),
                     `song_name` varchar(50),
                     `album_name` varchar(50),
-                    `date` date,
-                    `time` time,
+                    `date` date NOT NULL,
+                    `time` time NOT NULL,
                     foreign key (`uid`) references User(`uid`),
                     foreign key (`song_name`) references Song(`name`),
                     foreign key (`album_name`) references Album(`name`));
@@ -186,3 +186,8 @@ select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = '
 
 -- POSTS
 -- select * from UserPost where uid IN (select friendID from UserFriend where uid = 1); -- select all posts from friends of user with uid 1
+
+-- SEARCH BAR
+-- select * from User where username LIKE '%elij%'; -- search for all users with username containing elij
+-- select * from Album where name LIKE '%a%'; -- search for all albums with name containing a
+select * from User, Album, Artist where Album.name LIKE '%a%' OR Artist.name LIKE '%a%' OR User.username LIKE '%a%'; -- search for user, album, and artist

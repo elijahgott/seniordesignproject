@@ -13,16 +13,26 @@ import New from "./Pages/New";
 import Settings from "./Pages/Settings";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
+import AddArtist from "./Pages/AddArtist";
+import AddAlbum from "./Pages/AddAlbum";
 
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 import { isSignedIn } from "./Pages/SignIn";
 import CreatePost from "./Pages/CreatePost";
 
+
 let currentUser = {
   user: "elijah",
   uid: 1
-};
+}; 
+
+/*
+let currentUser = {
+  user: "conner",
+  uid: 2
+}; */
+
 //if user is signed in, change currentUser.user to username
 //if user is not signed in, currentUser.user can remain ANONYMOUS
 
@@ -43,6 +53,8 @@ function App() {
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/createpost" element={<CreatePost/>}/>
+      <Route path="/addartist" element={<AddArtist/>}/>
+      <Route path="/addalbum" element={<AddAlbum/>}/>
     </Routes>
   );
 }

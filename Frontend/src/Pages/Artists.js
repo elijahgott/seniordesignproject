@@ -10,6 +10,7 @@ import Card from 'react-bootstrap/Card';
 import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
 
@@ -31,7 +32,7 @@ function Artists(){
                     <Row>
                         <Col>
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists</h1>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Link to="/AddArtist"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>

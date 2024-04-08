@@ -4,10 +4,12 @@
 const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
+const bodyParser = require('body-parser');
 
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -17,29 +19,27 @@ const db = mysql.createConnection({
 })
 
 app.get('/home', (re, res)=> {
-    const sql = "select * from UserPost where uid IN (select friendID from UserFriend where uid = 1);";
+    const sql = "select * from UserPost where uid IN (select friendID from UserFriend where uid = 1) ORDER BY date DESC;";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
     })
 })
 
-app.post('/home', (req, res)=> {
+
+app.post('/submitpost', (req, res)=> {
     //get data from forms and add to userposts table
-    const sql = `insert into UserPost
-                (
-                    uid, content, photo, song_name, album_name, date, time
-                )
-                values
-                (
-                    ?, ?, ?, ?, ?, ?, ?
-                )`;
-    db.query(sql, [uid, content, photo, song_name, album_name, date, time], (err, data)=> { //error with data being passed from frontend to backend
+    const { uid, content, photo, song_name, album_name, date, time } = req.body;
+    const sql = `insert into UserPost (uid, content, photo, song_name, album_name, date, time)
+                values (?, ?, ?, ?, ?, ?, ?)`;
+    db.query(sql, [uid, content, photo, song_name, album_name, date, time], (err, results)=> {
         if(err){
-            console.log("Error Inserting Post into Database.");
+            console.error("Error inserting data: ", err);
+            res.status(500).send("Error inserting data")
         }
         else{
             console.log("Successfully Inserted Post into Database!");
+            res.status(200).send("Data inserted successfully")
         }
     })
 })
@@ -60,11 +60,51 @@ app.get('/albums', (req, res)=> {
     })
 })
 
+app.post('/submitalbum', (req, res)=> {
+    //get data from forms and add to artists table
+    var { name, artist, description, photo, releaseDate } = req.body;
+    if(!photo){
+        photo = 'default.jpg'
+    }
+    const sql = `insert into Album (name, artist, description, photo, releaseDate)
+                values (?, ?, ?, ?, ?)`;
+    db.query(sql, [name, artist, description, photo, releaseDate], (err, results)=> {
+        if(err){
+            console.error("Error inserting data: ", err);
+            res.status(500).send("Error inserting data")
+        }
+        else{
+            console.log("Successfully Inserted Album into Database!");
+            res.status(200).send("Album inserted successfully")
+        }
+    })
+})
+
 app.get('/artists', (req, res)=> {
     const sql = "SELECT * FROM artist";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
+    })
+})
+
+app.post('/submitartist', (req, res)=> {
+    //get data from forms and add to artists table
+    var { name, bio, photo } = req.body;
+    if(!photo){
+        photo = 'default.jpg'
+    }
+    const sql = `insert into Artist (name, bio, photo)
+                values (?, ?, ?)`;
+    db.query(sql, [name, bio, photo], (err, results)=> {
+        if(err){
+            console.error("Error inserting data: ", err);
+            res.status(500).send("Error inserting data")
+        }
+        else{
+            console.log("Successfully Inserted Artist into Database!");
+            res.status(200).send("Artist inserted successfully")
+        }
     })
 })
 
