@@ -167,6 +167,7 @@ insert into UserPost values('1', 'This album is so good I can\'t believe it\'s t
 insert into UserPost values('2', 'good stuff', null , 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
 insert into UserPost values('2', 'one of my favorite albums right now', null, null, 'Atrocity Exhibition', '2024-04-03', '13:54:00');
 insert into UserPost values('3', 'not as good as twosoft but it\'ll do', null, 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+                 
                     
 -- ALBUM QUERIES
 -- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album

@@ -16,11 +16,31 @@ const db = mysql.createConnection({
     database: 'sdp'
 })
 
-app.get('/', (re, res)=> {
+app.get('/home', (re, res)=> {
     const sql = "select * from UserPost where uid IN (select friendID from UserFriend where uid = 1);";
     db.query(sql, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
+    })
+})
+
+app.post('/home', (req, res)=> {
+    //get data from forms and add to userposts table
+    const sql = `insert into UserPost
+                (
+                    uid, content, photo, song_name, album_name, date, time
+                )
+                values
+                (
+                    ?, ?, ?, ?, ?, ?, ?
+                )`;
+    db.query(sql, [uid, content, photo, song_name, album_name, date, time], (err, data)=> { //error with data being passed from frontend to backend
+        if(err){
+            console.log("Error Inserting Post into Database.");
+        }
+        else{
+            console.log("Successfully Inserted Post into Database!");
+        }
     })
 })
 

@@ -17,6 +17,7 @@ import SignIn from "./Pages/SignIn";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 import { isSignedIn } from "./Pages/SignIn";
+import CreatePost from "./Pages/CreatePost";
 
 let currentUser = {
   user: "elijah",
@@ -41,6 +42,7 @@ function App() {
       <Route path="/settings" element={<Settings />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/signup" element={<SignUp />} />
+      <Route path="/createpost" element={<CreatePost/>}/>
     </Routes>
   );
 }

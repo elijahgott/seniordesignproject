@@ -12,6 +12,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
@@ -23,16 +24,12 @@ function Home(){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/')
+        fetch('http://localhost:8081/home')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
     }, [])
 
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
   
     return(
         <div>
@@ -45,38 +42,7 @@ function Home(){
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.user}</h1>
                                 <HomeCarousel />
                                 
-                                <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button variant="primary" className="addButton" onClick={handleShow}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>
-                                <Modal show={show} onHide={handleClose} backdrop="static">
-                                    <Form>
-                                        <Modal.Header closeButton>
-                                            <Modal.Title>New Post</Modal.Title>
-                                        </Modal.Header>
-                                        <Modal.Body>
-                                            <Form.Label>Post Text</Form.Label>
-                                            <Form.Control type="textarea"></Form.Control>
-                                        </Modal.Body>
-                                        <Modal.Body>
-                                            <Form.Label>Album Name (Optional)</Form.Label>
-                                            <Form.Control type="textarea"></Form.Control>
-                                        </Modal.Body>
-                                        <Modal.Body>
-                                            <Form.Label>Song Name (Optional)</Form.Label>
-                                            <Form.Control type="textarea"></Form.Control>
-                                        </Modal.Body>
-                                        <Modal.Body>
-                                            <Form.Label>Attach Photo (Optional)</Form.Label>
-                                            <Form.Control type="file"></Form.Control>
-                                        </Modal.Body>
-                                        <Modal.Footer>
-                                        <Button variant="secondary" onClick={handleClose}>
-                                            Close
-                                        </Button>
-                                        <Button variant="primary" onClick={handleClose}>
-                                            Submit Post
-                                        </Button>
-                                        </Modal.Footer>
-                                    </Form>
-                                </Modal>
+                                <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
 
                                 {data.map((d, i) => (    
                                     <Card style={{width: 1025, marginTop: 10, marginLeft: "auto", marginRight: "auto", marginBottom: 10}} border="secondary">
