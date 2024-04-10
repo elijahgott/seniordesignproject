@@ -19,9 +19,6 @@ import CreatePost from "./Pages/CreatePost";
 
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
-//if user is signed in, change currentUser.user to username
-//if user is not signed in, currentUser.user can remain ANONYMOUS
-
 function App() {
     const [token, setToken] = useState('');
     const [currentUser, setCurrentUser] = useState(null);

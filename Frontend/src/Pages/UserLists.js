@@ -17,6 +17,38 @@ import MyNav from "../MyComponents/MyNav";
 
 
 function UserLists({currentUser}){
+    //creating new list
+    const uid = currentUser.uid;
+    const [name, setName] = useState('');
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+    
+        fetch('http://localhost:8081/submitlist', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ uid, name }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            console.log(data);
+            handleClose();
+            // Handle success message
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle error message
+          });
+      }; 
+
+    //displaying user lists
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -57,7 +89,7 @@ function UserLists({currentUser}){
                     <Row>
                         <Card className="headerCard">
                             <Card.Body>
-                            <h1 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>{currentUser.user}'s Lists <Button variant="primary" className="addButton" onClick={handleShow}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
+                            <h1 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>{currentUser.username}'s Lists <Button variant="primary" className="addButton" onClick={handleShow}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                                 <Modal show={show} onHide={handleClose} backdrop="static">
                                     <Form>
                                         <Modal.Header closeButton>
@@ -65,13 +97,13 @@ function UserLists({currentUser}){
                                         </Modal.Header>
                                         <Modal.Body>
                                             <Form.Label>List Name</Form.Label>
-                                            <Form.Control type="textarea"></Form.Control>
+                                            <Form.Control type="textarea" name="name" value={name} onChange={(e) => setName(e.target.value)}></Form.Control>
                                         </Modal.Body>
                                         <Modal.Footer>
                                         <Button variant="secondary" onClick={handleClose}>
                                             Close
                                         </Button>
-                                        <Button variant="primary" onClick={handleClose}>
+                                        <Button variant="primary" onClick={handleSubmit}>
                                             Submit
                                         </Button>
                                         </Modal.Footer>
@@ -80,7 +112,7 @@ function UserLists({currentUser}){
                                 
                                 <Row>
                                     <Col>
-                                    <h2>{currentUser}'s Top 5 Artists</h2>
+                                    <h2>{currentUser.username}'s Top 5 Artists</h2>
                                     <ListGroup>
                                         {data.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
@@ -88,7 +120,7 @@ function UserLists({currentUser}){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h2>{currentUser}'s Top 5 Albums</h2>
+                                    <h2>{currentUser.username}'s Top 5 Albums</h2>
                                     <ListGroup>
                                         {dataAlbum.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>

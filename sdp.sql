@@ -82,8 +82,9 @@ create table UserFriend(
 						`uid` int NOT NULL,
                         `friendID` int NOT NULL);
                         
-insert into UserFriend values(1, 2);
-insert into UserFriend values(1, 3);
+insert into UserFriend values(1, 2); -- elijah friends with conner
+insert into UserFriend values(1, 3); -- elijah friends with finngalvin
+insert into UserFriend values(2, 1); -- conner friends with elijah
 
 create table UserList(
 						`uid` int NOT NULL,
