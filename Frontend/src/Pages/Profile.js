@@ -12,9 +12,9 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 import MyNav from "../MyComponents/MyNav";
 
-import {currentUser} from '../App.js';
+/* app crashes when user not signed in and tries to access profile page */
 
-function Profile(){
+function Profile({currentUser}){
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -51,7 +51,7 @@ function Profile(){
                         <Card className="profile">
                             {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
                             <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
-                            <h1>{currentUser.user}'s Profile</h1>
+                            <h1>{currentUser.username}'s Profile</h1>
                         </Card>
                     </Row>
 
@@ -67,7 +67,7 @@ function Profile(){
                                 
                                 <Row>
                                     <Col>
-                                    <h1>{currentUser.user}'s Top 5 Artists</h1>
+                                    <h1>{currentUser.username}'s Top 5 Artists</h1>
                                     <ListGroup>
                                         {data.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
@@ -75,7 +75,7 @@ function Profile(){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h1>{currentUser.user}'s Top 5 Albums</h1>
+                                    <h1>{currentUser.username}'s Top 5 Albums</h1>
                                     <ListGroup>
                                         {dataAlbum.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>

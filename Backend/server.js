@@ -6,6 +6,8 @@ const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
+const jwt = require('jsonwebtoken');
+
 const app = express();
 //app.use(express.json());
 app.use(cors());
@@ -158,22 +160,29 @@ app.get('/userlistalbum', (req, res)=> {
 })
 
 app.post('/signin', (req, res) => {
+    const {username, password} = req.body;
     const sql = "select * from user where username = ? and password = ?";
-    var user;
-    db.query(sql, [req.body.username, req.body.password], (err, data) => {
-        if(err) return res.json("Error");
-        if(data.length > 0){
-            user = req.body.username;
-            return res.json("Logged in as: " + user)
+
+    db.query(sql, [username, password], (err, results) => {
+        if(err){
+            console.error('Error executing query: ', err);
+            res.status(500).json({message: 'Error signing in'});
         }
-        else{
-            return res.json("Username and password do not match")
+        else {
+            if(results.length > 0){
+                const token = jwt.sign({ username }, 'testing_key', { expiresIn: '1h' });
+                res.status(200).json({message: 'Sign in successful', token, user: results[0]});
+            }
+            else {
+                res.status(401).json({message: 'Invalid username or password'})
+            }
         }
-    }) 
-})
+    }); 
+});
+
 
 app.listen(8081, ()=> {
-    console.log("Server Running."); 
+    console.log("Server Running on port 8081."); 
 })
 
 {/*  cd seniordesignproject/Backend -> npm start */}

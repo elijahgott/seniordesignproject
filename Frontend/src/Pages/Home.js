@@ -18,10 +18,14 @@ import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
 import MyFooter from "../MyComponents/MyFooter";
 
-import {currentUser} from '../App.js'
+import SignIn from "./SignIn.js";
 
-function Home(){
+
+
+function Home( {currentUser} ){
     const [data, setData] = useState([])
+
+    
 
     useEffect(()=>{
         fetch('http://localhost:8081/home')
@@ -29,7 +33,6 @@ function Home(){
         .then(data => setData(data))
         .catch(err => console.log(err));
     }, [])
-
   
     return(
         <div>
@@ -39,7 +42,9 @@ function Home(){
                     <Row>
                         <Col>
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.user}</h1>
+                                {currentUser ? (
+                                    <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.username}</h1>
+                                ) : <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, Guest</h1>}
                                 <HomeCarousel />
                                 
                                 <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
@@ -61,7 +66,7 @@ function Home(){
                 </Container>
 
         </header>
-        <MyFooter />
+                <MyFooter />
     </div>
     )
 }

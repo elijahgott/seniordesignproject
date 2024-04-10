@@ -14,10 +14,9 @@ import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 
 import MyNav from "../MyComponents/MyNav";
-import { currentUser } from "../App";
 
 
-function UserLists(){
+function UserLists({currentUser}){
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -81,7 +80,7 @@ function UserLists(){
                                 
                                 <Row>
                                     <Col>
-                                    <h2>{currentUser.user}'s Top 5 Artists</h2>
+                                    <h2>{currentUser}'s Top 5 Artists</h2>
                                     <ListGroup>
                                         {data.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
@@ -89,7 +88,7 @@ function UserLists(){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h2>{currentUser.user}'s Top 5 Albums</h2>
+                                    <h2>{currentUser}'s Top 5 Albums</h2>
                                     <ListGroup>
                                         {dataAlbum.map((d, i) => (    
                                         <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>

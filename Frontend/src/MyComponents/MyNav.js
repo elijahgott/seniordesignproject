@@ -11,8 +11,6 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-
-
 function MyNav(){
     return(
         <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark">

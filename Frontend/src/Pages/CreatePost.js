@@ -14,7 +14,7 @@ import MyNav from '../MyComponents/MyNav.js';
 import {currentUser} from '../App.js';
 import axios from "axios";
 
-function CreatePost(){
+function CreatePost({currentUser}){
     const currentDate = new Date();
     const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
     const curTime = currentDate.getHours() + ':' + currentDate.getMinutes() + ":00";

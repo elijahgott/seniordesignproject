@@ -15,44 +15,40 @@ import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
 import AddArtist from "./Pages/AddArtist";
 import AddAlbum from "./Pages/AddAlbum";
-
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
-
-import { isSignedIn } from "./Pages/SignIn";
 import CreatePost from "./Pages/CreatePost";
 
-
-let currentUser = {
-  user: "elijah",
-  uid: 1
-}; 
-
-/*
-let currentUser = {
-  user: "conner",
-  uid: 2
-}; */
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 //if user is signed in, change currentUser.user to username
 //if user is not signed in, currentUser.user can remain ANONYMOUS
 
-
-
 function App() {
+    const [token, setToken] = useState('');
+    const [currentUser, setCurrentUser] = useState(null);
+
+    const handleSignIn = (newToken, user) => {
+      setToken(newToken);
+      setCurrentUser(user);
+    }
+
+    const handleSignOut = () => {
+      setCurrentUser(null);
+    }
+
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
+      <Route path="/" element={<Home currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/new" element={<New />} />
       <Route path="/albums" element={<Albums />} />
       <Route path="/artists" element={<Artists />} />
       <Route path="/about" element={<About />} />
-      <Route path="/profile" element={<Profile />} />
-      <Route path="/lists" element={<UserLists />} />
-      <Route path="/friends" element={<Friends />} />
-      <Route path="/settings" element={<Settings />} />
-      <Route path="/signin" element={<SignIn />} />
+      <Route path="/profile" element={<Profile currentUser={currentUser}/>} />
+      <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
+      <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
+      <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/createpost" element={<CreatePost/>}/>
+      <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
       <Route path="/addartist" element={<AddArtist/>}/>
       <Route path="/addalbum" element={<AddAlbum/>}/>
     </Routes>
@@ -60,7 +56,6 @@ function App() {
 }
 
 export default App;
-export {currentUser};
 
 /* seniordesignproject/Frontend -> npm start */
 /* seniordesignproject/Backend-> npm start */
