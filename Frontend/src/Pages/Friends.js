@@ -19,9 +19,9 @@ function Friends(){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container>
+                <Container style={{marginBottom: 15}}>
                     <Row>
-                        <Card className="mainBody">
+                        <Card className="mainBody shadow">
                             <Card.Body>
                                 <h1>Friends List</h1>
                                 <Row>

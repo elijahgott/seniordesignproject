@@ -14,7 +14,14 @@
 }
 
 .App-header {
-  background-color: #bbbbbb;
+  background-size: 18px 18px;
+  background: repeating-linear-gradient(
+    -55deg,
+    #BBBBBB,
+    #BBBBBB 10px,
+    #A5A5A5 10px,
+    #A5A5A5 20px
+  );
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,15 +33,6 @@
 
 .App-link {
   color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .table{
@@ -86,4 +84,17 @@
 
 .settingsRow{
   margin-top: 20px;
+}
+
+.shadow{
+  box-shadow: 10px 10px 5px gray;
+}
+
+a{
+  color: inherit;
+  text-decoration: none;
+}
+
+a:hover{
+  color: rgb(160, 160, 160);
 }

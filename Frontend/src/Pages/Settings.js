@@ -21,9 +21,9 @@ function Settings(){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container>
+                <Container style={{marginBottom: 15}}>
                     <Row>
-                        <Card className="mainBody">
+                        <Card className="mainBody shadow">
                             <Card.Body>
                                 <h1>Account Settings</h1>
                                 <Tabs

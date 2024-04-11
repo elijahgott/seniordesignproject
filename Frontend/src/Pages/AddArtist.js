@@ -50,7 +50,7 @@ function AddArtist(){
             <MyNav />
             <header className="App-header">
                 <Container style={{height: "100vh", marginTop: 15}}>
-                    <Card >
+                    <Card className="shadow">
                             <Form style={{marginRight: 25}} onSubmit={handleSubmit}>
                                 <h1 style={{textAlign: "center", marginTop: 10, marginLeft: 15}}>Add New Artist to Database</h1>
                                 <Container style={{marginLeft: 15, marginRight: 15}}>

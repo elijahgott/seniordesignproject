@@ -28,19 +28,18 @@ function Artists(){
             <MyNav />
             <header className="App-header">
             
-            <Container style={{marginTop: 10}}>
+            <Container style={{marginTop: 10, marginBottom: 15}}>
                     <Row>
                         <Col>
-                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Link to="/AddArtist"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>
 
-                    <Row style={{marginLeft:0}}>
-                    {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
+                    <Row style={{marginLeft:0, marginTop: 10}}>
                     {data.map((d, i) => (    
-                                    <Card style={{maxWidth:"27rem"}}>
+                                    <Card className="shadow" style={{maxWidth:"27rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link href="#artist">{d.name}</Card.Link>
@@ -52,12 +51,6 @@ function Artists(){
             </Container>
 
             </header>
-        
-            <div>
-        
-            </div>
-        
-            <p>Kinda like a footer if outside of header</p>
         </div>
     )
 }

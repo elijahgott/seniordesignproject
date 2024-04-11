@@ -45,10 +45,10 @@ function Home( {currentUser} ){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container style={{marginTop:5}}>
+                <Container style={{marginTop:5, marginBottom: 15}}>
                     <Row>
                         <Col>
-                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
                                 {currentUser ? (
                                     <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.username}</h1>
                                 ) : <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, Guest</h1>}

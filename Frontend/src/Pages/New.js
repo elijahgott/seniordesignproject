@@ -16,19 +16,18 @@ function New(){
             <header className="App-header">
                 <Container>
                     <Row>
-                        <Card className="mainBody">
+                        <Card className="mainBody shadow">
                             <Card.Body>
                                 <Row>
                                     <Col>
                                     <h1>New Music</h1>
-                                    New Music and Such
+                                    - Most Recently Released Albums
                                     </Col>
                                 </Row>
                                            
                                 <Row>
                                     <h1>Needed Features</h1>  
                                     <p>- Search for Users, Songs, Albums</p>
-                                    <p>- Insert data into database from website</p>
                                 </Row>              
                             </Card.Body>
                         </Card>

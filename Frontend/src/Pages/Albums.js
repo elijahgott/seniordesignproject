@@ -32,17 +32,17 @@ function Albums(){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container style={{marginTop:5}}>
+                <Container style={{marginTop: 5}}>
                     <Row>
                         <Col>
-                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Top Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginTop: 15}}>Top Albums</h1>
                             </Card>
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{marginTop: 10}}>
                         <Col>
-                            <Card>
+                            <Card className="shadow">
                                 <Card.Body>
                                     <Card.Img variant="top" src={require('./../MusicImages/TaylorSwift_1989(Taylor\'s_Version).jpg')}></Card.Img>
                                     <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
@@ -53,7 +53,7 @@ function Albums(){
                             </Card>
                         </Col>
                         <Col>
-                            <Card>
+                            <Card className="shadow">
                                 <Card.Body>
                                     <Card.Img style={{ justifyContent: "center", display: "flex"}}variant="top" src={require('./../MusicImages/Sampha_Lahai.jpg')}></Card.Img>
                                     <Card.Link href="#cardlink">Lahai</Card.Link>
@@ -64,7 +64,7 @@ function Albums(){
                             </Card>
                         </Col>
                         <Col>
-                            <Card>
+                            <Card className="shadow">
                                 <Card.Body>
                                     <Card.Img variant="top" src={require('./../MusicImages/KidsSeeGhosts_KidsSeeGhosts.jpg')}></Card.Img>
                                     <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>
@@ -77,19 +77,19 @@ function Albums(){
                     </Row>
                 </Container>
                     
-                <Container style={{marginTop: 10}}>
+                <Container style={{marginTop: 20, marginBottom: 15}}>
                     <Row>
                         <Col>
-                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Albums</h1>
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginTop: 15}}>All Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>
 
-                    <Row style={{marginLeft: 0}}>
+                    <Row style={{marginLeft: 0, marginTop: 10}}>
                     {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
                     {data.map((d, i) => (    
-                                    <Card style={{maxWidth:"27rem"}}>
+                                    <Card className="shadow" style={{maxWidth:"27rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link>{d.name}</Card.Link>
@@ -101,11 +101,6 @@ function Albums(){
                     </Row>
                 </Container>
             </header>
-        <div>
-        
-        </div>
-        
-        <p>Kinda like a footer if outside of header</p>
     </div>
     )
 }

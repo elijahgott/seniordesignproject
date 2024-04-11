@@ -85,9 +85,9 @@ function UserLists({currentUser}){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container>
+                <Container style={{marginBottom: 15}}>
                     <Row>
-                        <Card className="headerCard">
+                        <Card className="headerCard shadow">
                             <Card.Body>
                             <h1 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>{currentUser.username}'s Lists <Button variant="primary" className="addButton" onClick={handleShow}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                                 <Modal show={show} onHide={handleClose} backdrop="static">

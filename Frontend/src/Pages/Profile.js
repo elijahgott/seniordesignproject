@@ -46,17 +46,18 @@ function Profile({currentUser}){
         <div>
             <MyNav />
             <header className="App-header">
-                <Container>
+                <Container style={{marginBottom: 15}}>
                     <Row>
-                        <Card className="profile">
+                        <Card className="profile shadow" style={{marginBottom: 10}}>
                             {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
                             <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
                             <h1>{currentUser.username}'s Profile</h1>
+                            <p>maybe throw a nav here with like friends and stuff, maybe not</p>
                         </Card>
                     </Row>
 
                     <Row>
-                        <Card className="headerCard">
+                        <Card className="headerCard shadow">
                             <Card.Body>
                                 <Row>
                                 <h1>Bio:</h1>
