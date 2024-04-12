@@ -8,16 +8,16 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {useNavigate} from "react-router-dom";
 
 import MyNav from '../MyComponents/MyNav.js';
-
-import {currentUser} from '../App.js';
-import axios from "axios";
 
 function AddArtist(){
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
     const [photo, setPhoto] = useState('');
+
+    const navigate = useNavigate();
 
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -37,10 +37,13 @@ function AddArtist(){
           })
           .then(data => {
             console.log(data);
+            alert('Successfully Added Artist');
+            navigate('/artists');
             // Handle success message
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
+            alert('Error Adding Artist');
             // Handle error message
           });
       }; 

@@ -40,10 +40,12 @@ function UserLists({currentUser}){
           .then(data => {
             console.log(data);
             handleClose();
+            alert('Successfully Created List');
             // Handle success message
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
+            alert('Error Creating List')
             // Handle error message
           });
       }; 

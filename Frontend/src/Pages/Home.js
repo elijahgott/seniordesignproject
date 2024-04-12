@@ -16,7 +16,6 @@ import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
-import MyFooter from "../MyComponents/MyFooter";
 
 import SignIn from "./SignIn.js";
 
@@ -75,7 +74,7 @@ function Home( {currentUser} ){
                 </Container>
 
         </header>
-                <MyFooter />
+                
     </div>
     )
 }

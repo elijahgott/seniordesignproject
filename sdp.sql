@@ -176,6 +176,7 @@ insert into UserPost values('3', 'not as good as twosoft but it\'ll do', null, '
 -- select MIN(releaseDate) from album; -- oldest album DATE
 
 -- USER QUERIES
+-- select MAX(uid) from User; selects max UID, which should be the most recently created user
 
 -- FRIEND QUERIES
 -- select friendID from UserFriend where uid = 1; -- all friends for user with uid 1
@@ -183,7 +184,7 @@ insert into UserPost values('3', 'not as good as twosoft but it\'ll do', null, '
 
 
 -- LISTS
-select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists')); -- select all OTHER lists
+-- select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists')); -- select all OTHER lists
 
 -- POSTS
 -- select * from UserPost where uid IN (select friendID from UserFriend where uid = 1); -- select all posts from friends of user with uid 1
@@ -191,4 +192,4 @@ select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = '
 -- SEARCH BAR
 -- select * from User where username LIKE '%elij%'; -- search for all users with username containing elij
 -- select * from Album where name LIKE '%a%'; -- search for all albums with name containing a
-select * from User, Album, Artist where Album.name LIKE '%a%' OR Artist.name LIKE '%a%' OR User.username LIKE '%a%'; -- search for user, album, and artist
+-- select * from User, Album, Artist where Album.name LIKE '%a%' OR Artist.name LIKE '%a%' OR User.username LIKE '%a%'; -- search for user, album, and artist

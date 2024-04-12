@@ -171,7 +171,7 @@ app.post('/submitlist', (req, res)=> {
             res.status(500).send("Error inserting data")
         }
         else{
-            console.log("Successfully Inserted Post into Database!");
+            console.log("Successfully Inserted List into Database!");
             res.status(200).send("Data inserted successfully")
         }
     })
@@ -198,6 +198,30 @@ app.post('/signin', (req, res) => {
     }); 
 });
 
+app.get('/signupuser', (req, res)=> {
+    const sql = "select MAX(uid) from User;"; 
+    db.query(sql, (err, data) => {
+        if(err) return res.json(err);
+        return res.json(data);
+    })
+})
+
+app.post('/signup', (req, res)=> {
+    //get data from forms and add to userposts table
+    const { uid, username, password, dateJoined } = req.body;
+    const sql = `insert into User (uid, username, password, date_joined, bio)
+                values (?, ?, ?, ?, ?)`;
+    db.query(sql, [uid, username, password, dateJoined, null], (err, results)=> {
+        if(err){
+            console.error("Error inserting data: ", err);
+            res.status(500).send("Error inserting data")
+        }
+        else{
+            console.log("Successfully Created New User!");
+            res.status(200).send("New User Created!") 
+        }
+    })
+})
 
 app.listen(8081, ()=> {
     console.log("Server Running on Port 8081"); 

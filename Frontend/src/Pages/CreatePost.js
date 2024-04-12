@@ -11,8 +11,6 @@ import Col from 'react-bootstrap/Col';
 
 import MyNav from '../MyComponents/MyNav.js';
 
-import {currentUser} from '../App.js';
-import axios from "axios";
 
 function CreatePost({currentUser}){
     const currentDate = new Date();
@@ -45,6 +43,7 @@ function CreatePost({currentUser}){
           })
           .then(data => {
             console.log(data);
+            alert("Successfully Created Post");
             // Handle success message
           })
           .catch(error => {
