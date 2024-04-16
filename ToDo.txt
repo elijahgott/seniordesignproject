@@ -1,16 +1,14 @@
 To-Do List:
 - MOST IMPORTANT
-	- MAKE SIGN IN SYSTEM WORK
 	- USERS ADD ALBUMS ONTO CUSTOM LISTS
+	  - Or just list of all listened to / rated albums
 	- USERS RATE ALBUMS
-	- SEARCH FOR ALBUMS, ARTISTS, USERS, SONGS
+	  - 1-10 rating
+	- SEARCH FOR ALBUMS, ARTISTS, USERS, SONGS(?)
 
 - Add ability to rate albums for each user
 - Add search / advanced search
 	- search artists, albums, songs, users, maybe lists
-- Add feed with posts from friends
-	- posts can consist of text, images, songs, albums, artists, ...
-	- can be commented on, liked, etc
 - Add DMs (?) -- probably not going to happen
 	- can send text, images, songs, albums, artists, ...
 	- group DMs AND individual DMs
@@ -18,6 +16,7 @@ To-Do List:
 	- maybe just top 5 / 10 list?
 		- top 5 songs / top 5 albums / top 5 artists
 		- could maybe show this on profile
+- Show songs for each album on album page
 
 - Add more artists, albums, songs to database
 	- probably wait until later to do this
