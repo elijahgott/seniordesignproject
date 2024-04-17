@@ -29,14 +29,14 @@ function App() {
       setCurrentUser(user);
     }
 
-    const handleSignOut = () => {
+    const handleSignOut = () => { 
       setCurrentUser(null);
     }
 
   return (
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
-      <Route path="/" element={<Home currentUser={currentUser} onSignOut={handleSignOut}/>} />
+      <Route path="/" element={<Home currentUser={currentUser}/>} />
       <Route path="/new" element={<New currentUser={currentUser} />} />
       <Route path="/albums" element={<Albums currentUser={currentUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser}/>} />

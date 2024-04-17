@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
 
-function MyNav( {currentUser} ){
+function MyNav( {currentUser}, {onSignOut} ){
 
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
@@ -37,7 +37,6 @@ function MyNav( {currentUser} ){
     }
   }; 
 
-
     return(
         <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark">
           <Container>
@@ -56,7 +55,7 @@ function MyNav( {currentUser} ){
                       <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
                       {currentUser ? (
-                        <NavDropdown.Item><Link to="/signout">Sign Out</Link></NavDropdown.Item>
+                        <NavDropdown.Item>Sign Out</NavDropdown.Item>
                       ) : <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>}
                     </NavDropdown>
                 </Nav>
