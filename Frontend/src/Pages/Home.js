@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Modal from 'react-bootstrap/Modal'
@@ -16,10 +15,6 @@ import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
-
-import SignIn from "./SignIn.js";
-
-
 
 function Home( {currentUser} ){
     const [data, setData] = useState([])
