@@ -4,11 +4,11 @@ To-Do List:
 	  - Or just list of all listened to / rated albums
 	- USERS RATE ALBUMS
 	  - 1-10 rating
-	- SEARCH FOR ALBUMS, ARTISTS, USERS, SONGS(?)
 
 - Add ability to rate albums for each user
-- Add search / advanced search
-	- search artists, albums, songs, users, maybe lists
+
+- Search specifically by User, Album, Artist (?)
+
 - Add DMs (?) -- probably not going to happen
 	- can send text, images, songs, albums, artists, ...
 	- group DMs AND individual DMs

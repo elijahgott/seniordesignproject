@@ -16,6 +16,7 @@ import SignIn from "./Pages/SignIn";
 import AddArtist from "./Pages/AddArtist";
 import AddAlbum from "./Pages/AddAlbum";
 import CreatePost from "./Pages/CreatePost";
+import SearchResults from "./Pages/SearchResults";
 
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
@@ -48,6 +49,7 @@ function App() {
       <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
       <Route path="/addartist" element={<AddArtist/>}/>
       <Route path="/addalbum" element={<AddAlbum/>}/>
+      <Route path="/searchresults" element={<SearchResults/>} />
     </Routes>
   );
 }

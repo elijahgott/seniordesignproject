@@ -98,3 +98,7 @@ a{
 a:hover{
   color: rgb(160, 160, 160);
 }
+
+.no-border{
+  border: none;
+}

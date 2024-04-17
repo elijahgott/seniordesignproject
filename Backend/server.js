@@ -48,6 +48,27 @@ app.post('/submitpost', (req, res)=> {
     })
 })
 
+app.post('/search', (req, res) => {
+    const { search } = req.body;
+    const sql = `
+      SELECT username as name, bio FROM user WHERE username LIKE '%${search}%'
+      UNION
+      SELECT name, bio FROM artist WHERE name LIKE '%${search}%'
+      UNION
+      SELECT name, description as bio FROM album WHERE name LIKE '%${search}%'
+    `;
+  
+    db.query(sql, (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error searching' });
+      } else {
+        res.status(200).json(results);
+        console.log("Successfully Searched Database!");
+      }
+    });
+  });
+
 app.get('/users', (req, res)=> {
     const sql = "SELECT * FROM user";
     db.query(sql, 1 , (err, dataUser) => {

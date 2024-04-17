@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -10,12 +11,39 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
+import { useNavigate } from "react-router-dom";
 
 function MyNav(){
+
+  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+
+  const handleSearch = async () => {
+    try {
+      const response = await fetch(`http://localhost:8081/search`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ search }),
+      });
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      localStorage.setItem('search', JSON.stringify(data)); //saves search results to local storage
+      navigate('/searchresults');
+    }
+    catch (error) {
+      console.error('There was a problem with the fetch operation:', error);
+    }
+  }; 
+
+
     return(
         <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark">
           <Container>
-                <Navbar.Brand href="/" style={{fontWeight: 'bold', color: "lightgray"}}>Music App</Navbar.Brand>
+                <Navbar.Brand style={{fontWeight: 'bold', color: "lightgray"}}><Link to="/">Music App</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -36,12 +64,14 @@ function MyNav(){
                 
                 <Form className="d-flex">
                   <Form.Control
-                    type="search"
+                    type="text"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
+                    value={search}
+                    onChange={(e) => setSearch(e.target.value)}
                   />
-                  <Button variant="primary"><Image src={require('./../MiscImages/search-icon-sm.png')} className="searchButton"></Image></Button>
+                  <Button variant="primary" onClick={handleSearch}><Image src={require('./../MiscImages/search-icon-sm.png')} className="searchButton"></Image></Button>
                 </Form>
               </Navbar.Collapse>
           </Container>

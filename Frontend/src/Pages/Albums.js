@@ -36,7 +36,7 @@ function Albums(){
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15}}>Top Albums</h1>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Top Albums (Still need to get top 3 from database)</h1>
                             </Card>
                         </Col>
                     </Row>
@@ -48,7 +48,6 @@ function Albums(){
                                     <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
                                     <Card.Title>Taylor Swift</Card.Title>
                                     <Card.Subtitle>#1 Album</Card.Subtitle>
-                                    <Card.Text>Album Description</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -59,7 +58,6 @@ function Albums(){
                                     <Card.Link href="#cardlink">Lahai</Card.Link>
                                     <Card.Title>Sampha</Card.Title>
                                     <Card.Subtitle>#2 Album</Card.Subtitle>
-                                    <Card.Text>Album Description</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -70,7 +68,6 @@ function Albums(){
                                     <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>
                                     <Card.Title>Kids See Ghosts</Card.Title>
                                     <Card.Subtitle>#3 Album</Card.Subtitle>
-                                    <Card.Text>Album Description</Card.Text>
                                 </Card.Body>
                             </Card>
                         </Col>
@@ -81,7 +78,7 @@ function Albums(){
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15}}>All Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>

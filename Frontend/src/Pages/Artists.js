@@ -7,7 +7,6 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
-import Table from 'react-bootstrap/Table';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom'
@@ -39,7 +38,7 @@ function Artists(){
 
                     <Row style={{marginLeft:0, marginTop: 10}}>
                     {data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"27rem"}}>
+                                    <Card className="shadow" style={{maxWidth:"27rem"}} border="none">
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link href="#artist">{d.name}</Card.Link>
