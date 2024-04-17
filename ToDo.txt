@@ -4,6 +4,7 @@ To-Do List:
 	  - Or just list of all listened to / rated albums
 	- USERS RATE ALBUMS
 	  - 1-10 rating
+	- Send UID data to server for lots of functions
 
 - Add ability to rate albums for each user
 

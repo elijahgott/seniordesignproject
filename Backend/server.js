@@ -22,7 +22,8 @@ const db = mysql.createConnection({
     database: 'sdp'
 }) 
 
-app.get('/home', (re, res)=> {
+app.get('/home', (req, res)=> {
+    const uid = req.body;
     const sql = `select * from UserPost where uid IN (select friendID from UserFriend where uid = ?) ORDER BY date DESC;`;
     db.query(sql, 1 ,(err, data) => {
         if(err) return res.json(err);

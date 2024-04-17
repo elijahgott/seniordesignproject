@@ -17,6 +17,9 @@ import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
 
 function Home( {currentUser} ){
+    if(currentUser){
+        const uid = currentUser.uid;
+    }
     const [data, setData] = useState([])
 
     useEffect(()=>{
