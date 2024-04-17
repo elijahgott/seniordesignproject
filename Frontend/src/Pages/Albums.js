@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 
 import MyNav from "../MyComponents/MyNav";
 
-function Albums(){
+function Albums( {currentUser} ){
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -30,7 +30,7 @@ function Albums(){
 
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{marginTop: 5}}>
                     <Row>

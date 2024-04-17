@@ -10,10 +10,10 @@ import {Link} from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
 
-function About(){
+function About( {currentUser} ){
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container>
                     <Row>

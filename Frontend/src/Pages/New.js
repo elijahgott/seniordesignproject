@@ -9,10 +9,10 @@ import Col from 'react-bootstrap/Col';
 import MyNav from "../MyComponents/MyNav";
 
 
-function New(){
+function New( {currentUser} ){
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container>
                     <Row>

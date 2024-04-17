@@ -12,7 +12,7 @@ import {useNavigate} from "react-router-dom";
 
 import MyNav from '../MyComponents/MyNav.js';
 
-function AddArtist(){
+function AddArtist( {currentUser} ){
     const [name, setName] = useState('');
     const [bio, setBio] = useState('');
     const [photo, setPhoto] = useState('');
@@ -50,7 +50,7 @@ function AddArtist(){
 
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{height: "100vh", marginTop: 15}}>
                     <Card className="shadow">

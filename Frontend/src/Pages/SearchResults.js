@@ -8,13 +8,13 @@ import Card from 'react-bootstrap/Card';
 
 import MyNav from "../MyComponents/MyNav";
 
-function SearchResults() {
+function SearchResults( {currentUser} ) {
 
     const search = JSON.parse(localStorage.getItem('search')) || [];
 
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{marginTop:5, marginBottom: 15}}>
                     <Row>

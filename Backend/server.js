@@ -20,7 +20,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: '',
     database: 'sdp'
-})
+}) 
 
 app.get('/home', (re, res)=> {
     const sql = `select * from UserPost where uid IN (select friendID from UserFriend where uid = ?) ORDER BY date DESC;`;

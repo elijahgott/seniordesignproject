@@ -13,7 +13,7 @@ import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
 
-function Artists(){
+function Artists( {currentUser} ){
     const [data, setData] = useState([])
 
     useEffect(()=>{
@@ -24,7 +24,7 @@ function Artists(){
   }, [])
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
             
             <Container style={{marginTop: 10, marginBottom: 15}}>

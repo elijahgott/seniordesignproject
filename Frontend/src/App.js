@@ -37,19 +37,19 @@ function App() {
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
       <Route path="/" element={<Home currentUser={currentUser} onSignOut={handleSignOut}/>} />
-      <Route path="/new" element={<New />} />
-      <Route path="/albums" element={<Albums />} />
-      <Route path="/artists" element={<Artists />} />
-      <Route path="/about" element={<About />} />
+      <Route path="/new" element={<New currentUser={currentUser} />} />
+      <Route path="/albums" element={<Albums currentUser={currentUser} />} />
+      <Route path="/artists" element={<Artists currentUser={currentUser}/>} />
+      <Route path="/about" element={<About currentUser={currentUser}/>} />
       <Route path="/profile" element={<Profile currentUser={currentUser}/>} />
       <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
       <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
       <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
       <Route path="/signup" element={<SignUp />} />
       <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
-      <Route path="/addartist" element={<AddArtist/>}/>
-      <Route path="/addalbum" element={<AddAlbum/>}/>
-      <Route path="/searchresults" element={<SearchResults/>} />
+      <Route path="/addartist" element={<AddArtist currentUser={currentUser}/>}/>
+      <Route path="/addalbum" element={<AddAlbum currentUser={currentUser}/>}/>
+      <Route path="/searchresults" element={<SearchResults currentUser={currentUser}/>} />
     </Routes>
   );
 }

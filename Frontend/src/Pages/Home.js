@@ -37,7 +37,7 @@ function Home( {currentUser} ){
   
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{marginTop:5, marginBottom: 15}}>
                     <Row>

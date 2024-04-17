@@ -7,13 +7,11 @@ import Container from 'react-bootstrap/Container';
 import {Link} from 'react-router-dom';
 import {Outlet} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
-import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
 
-function MyNav(){
+function MyNav( {currentUser} ){
 
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
@@ -57,8 +55,9 @@ function MyNav(){
                       <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
                       <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
-                      <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>
-                      <NavDropdown.Item><Link to="/signout">Sign Out</Link></NavDropdown.Item>
+                      {currentUser ? (
+                        <NavDropdown.Item><Link to="/signout">Sign Out</Link></NavDropdown.Item>
+                      ) : <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>}
                     </NavDropdown>
                 </Nav>
                 

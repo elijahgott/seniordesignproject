@@ -16,10 +16,10 @@ import Form from 'react-bootstrap/Form';
 import MyNav from "../MyComponents/MyNav";
 
 
-function Settings(){
+function Settings( {currentUser} ){
     return(
         <div>
-            <MyNav />
+            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>
