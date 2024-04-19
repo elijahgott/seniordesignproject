@@ -68,7 +68,10 @@ function Home( {currentUser} ){
                                 
                                 <HomeCarousel />
 
-                                <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
+                                {currentUser ? (
+                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
+                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
+                                
                                 
                                 {posts.map((post) => (
                                     <Card style={{width: 1025, marginTop: 10, marginLeft: "auto", marginRight: "auto", marginBottom: 10}} border="secondary">

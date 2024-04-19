@@ -50,12 +50,14 @@ function MyNav( {currentUser} ){
                     <Nav.Link style={{ color: "lightgray"}}><Link to="/about">About</Link></Nav.Link>
               
                     <NavDropdown title="Profile" >
-                      <NavDropdown.Item><Link to="/profile">My Profile</Link></NavDropdown.Item>
-                      <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
-                      <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
-                      <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
                       {currentUser ? (
-                        <NavDropdown.Item>Sign Out</NavDropdown.Item>
+                        <>
+                          <NavDropdown.Item><Link to="/profile">My Profile</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
+                          <NavDropdown.Item>Sign Out</NavDropdown.Item>
+                        </>
                       ) : <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>}
                     </NavDropdown>
                 </Nav>
