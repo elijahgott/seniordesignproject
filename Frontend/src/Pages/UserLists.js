@@ -194,7 +194,7 @@ function UserLists({currentUser}){
                                     </Col>
                                 </Row>        
                                 <Row>
-                                <h1 style={{textAlign: 'center'}}>Other Lists</h1>
+                                <h1 style={{textAlign: 'center', marginTop: 10}}>Other Lists</h1>
                                 <p>make it so at most 2 lists show per row</p>
                                     {userList.map((list) => (
                                         <h2>{list.name}</h2>
