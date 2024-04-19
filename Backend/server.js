@@ -22,7 +22,7 @@ const db = mysql.createConnection({
     database: 'sdp'
 }) 
 
-app.get('/', (req, res)=> {
+app.get('/', (req, res)=> { 
     //const uid = req.body;
     const uid = 1;
     //console.log(uid);
@@ -37,9 +37,9 @@ app.get('/', (req, res)=> {
 // Route to handle fetching user posts based on user ID
 app.get('/posts/:uid', (req, res) => {
     const userId = req.params.uid;
-    const sql = `select * from UserPost where uid IN (select friendID from UserFriend where uid = ?) ORDER BY date DESC;`;
+    const sql = `select * from UserPost where uid = ? OR uid IN ((select friendID from UserFriend where uid = ?)) ORDER BY date DESC;`;
   
-    db.query(sql, [userId], (err, results) => {
+    db.query(sql, [userId, userId], (err, results) => {
       if (err) {
         console.error('Error executing query: ', err);
         res.status(500).json({ message: 'Error fetching data' });
@@ -51,10 +51,10 @@ app.get('/posts/:uid', (req, res) => {
 
 app.post('/submitpost', (req, res)=> {
     //get data from forms and add to userposts table
-    const { uid, content, photo, song_name, album_name, date, time } = req.body;
-    const sql = `insert into UserPost (uid, content, photo, song_name, album_name, date, time)
-                values (?, ?, ?, ?, ?, ?, ?)`;
-    db.query(sql, [uid, content, photo, song_name, album_name, date, time], (err, results)=> {
+    const { uid, username, content, photo, song_name, album_name, date, time } = req.body;
+    const sql = `insert into UserPost (uid, username, content, photo, song_name, album_name, date, time)
+                values (?, ?, ?, ?, ?, ?, ?, ?)`;
+    db.query(sql, [uid, username, content, photo, song_name, album_name, date, time], (err, results)=> {
         if(err){
             console.error("Error inserting data: ", err);
             res.status(500).send("Error inserting data")

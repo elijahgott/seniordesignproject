@@ -166,7 +166,7 @@ create Table UserPost(
                     foreign key (`username`) references User(`username`),
                     foreign key (`album_name`) references Album(`name`));
                     
-insert into UserPost values('1', 'elijah','This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('1', 'elijah', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
 insert into UserPost values('2', 'conner', 'good stuff', '', 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
 insert into UserPost values('2', 'conner', 'one of my favorite albums right now', '', '', 'Atrocity Exhibition', '2024-04-03', '13:54:00');
 insert into UserPost values('3', 'finngalvin', 'not as good as twosoft but it\'ll do', '', 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
@@ -189,7 +189,7 @@ insert into UserPost values('3', 'finngalvin', 'not as good as twosoft but it\'l
 -- select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists')); -- select all OTHER lists
 
 -- POSTS
--- select * from UserPost where uid IN (select friendID from UserFriend where uid = 1); -- select all posts from friends of user with uid 1
+-- select * from UserPost where uid = 1 OR uid IN ((select friendID from UserFriend where uid = 1)); -- select all posts from uid 1 or friends of uid 1 
 
 -- SEARCH BAR
 -- select * from User where username LIKE '%elij%'; -- search for all users with username containing elij
