@@ -15,32 +15,76 @@ import MyNav from "../MyComponents/MyNav";
 /* app crashes when user not signed in and tries to access profile page */
 
 function Profile({currentUser}){
-    const [data, setData] = useState([])
+    var uid;
+    if(! currentUser){
+        uid = null;
+    }
+    else{
+        uid = currentUser.uid;
+    }
 
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistartist')
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
-  }, [])
+    //fetch data from current user profile
+    const [profile, setProfile] = useState([]);
 
-    const [dataAlbum, setDataAlbum] = useState([])
+    useEffect(() => {
+        async function fetchProfile() {
+        try {
+            const response = await fetch(`http://localhost:8081/users/${uid}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setProfile(data);
+        } 
+        catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+        }
 
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistalbum')
-        .then(res => res.json())
-        .then(dataAlbum => setDataAlbum(dataAlbum))
-        .catch(err => console.log(err));
-    }, [])
+        fetchProfile();
+    }, []);
 
-    const [dataUser, setDataUser] = useState([])
+        //fetch top 5 artists list from current user
+        const [userArtistList, setUserArtistList] = useState([]);
 
-    useEffect(()=>{
-        fetch('http://localhost:8081/users')
-        .then(res => res.json())
-        .then(dataUser => setDataUser(dataUser))
-        .catch(err => console.log(err));
-    }, [])
+        useEffect(() => {
+            async function fetchUserArtistList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistartist/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserArtistList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserArtistList();
+        }, []);
+
+        //fetch top 5 albums list from current user
+        const [userAlbumList, setUserAlbumList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserAlbumList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistalbum/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserAlbumList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserAlbumList();
+        }, []);
 
     return(
         <div>
@@ -61,25 +105,27 @@ function Profile({currentUser}){
                             <Card.Body>
                                 <Row>
                                 <h1>Bio:</h1>
-                                    {dataUser.map((d, i) => ( //if({currentUser.user} == {d.username})
-                                        <p>{d.bio}</p>
+                                    {profile.map((profile) => (
+                                        <p>{profile.bio}</p>
                                     ))}
                                 </Row>
                                 
                                 <Row>
                                     <Col>
                                     <h1>{currentUser.username}'s Top 5 Artists</h1>
+                                    <p>might want to change database to include rank number</p>
                                     <ListGroup>
-                                        {data.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
+                                        {userArtistList.map((artist) => (
+                                            <ListGroup.Item variant="secondary">{artist.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                     <Col>
                                     <h1>{currentUser.username}'s Top 5 Albums</h1>
+                                    <p>might want to change database to include rank number</p>
                                     <ListGroup>
-                                        {dataAlbum.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>
+                                        {userAlbumList.map((album) => (
+                                            <ListGroup.Item variant="secondary">{album.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>

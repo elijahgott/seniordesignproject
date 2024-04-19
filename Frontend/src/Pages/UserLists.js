@@ -83,6 +83,69 @@ function UserLists({currentUser}){
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+        //fetch top 5 artists list from current user
+        const [userArtistList, setUserArtistList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserArtistList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistartist/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserArtistList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserArtistList();
+        }, []);
+
+        //fetch top 5 albums list from current user
+        const [userAlbumList, setUserAlbumList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserAlbumList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistalbum/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserAlbumList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserAlbumList();
+        }, []);    
+
+        //fetch top 5 albums list from current user
+        const [userList, setUserList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlist/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserList();
+        }, []); 
+
     return(
         <div>
             <MyNav currentUser={currentUser} />
@@ -116,28 +179,26 @@ function UserLists({currentUser}){
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Artists</h2>
                                     <ListGroup>
-                                        {data.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
+                                        {userArtistList.map((artist) => (
+                                            <ListGroup.Item variant="secondary">{artist.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Albums</h2>
                                     <ListGroup>
-                                        {dataAlbum.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>
+                                        {userAlbumList.map((album) => (
+                                            <ListGroup.Item variant="secondary">{album.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                 </Row>        
                                 <Row>
                                 <h1 style={{textAlign: 'center'}}>Other Lists</h1>
-                                {dataList.map((d, i) => (
-                                    <>
-                                        <h2>{d.name}</h2>
-                                        GET SONGS WHERE SONG LIST NAME = LIST NAME
-                                    </>  
-                                ))}
+                                <p>make it so at most 2 lists show per row</p>
+                                    {userList.map((list) => (
+                                        <h2>{list.name}</h2>
+                                    ))}
                                 </Row>                   
                             </Card.Body>
                         </Card>

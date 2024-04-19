@@ -33,8 +33,7 @@ app.get('/', (req, res)=> {
     })
 })
 
-//-----------------------------
-// Route to handle fetching user posts based on user ID
+// handle fetching user posts based on user ID
 app.get('/posts/:uid', (req, res) => {
     const userId = req.params.uid;
     const sql = `select * from UserPost where uid = ? OR uid IN ((select friendID from UserFriend where uid = ?)) ORDER BY date DESC;`;
@@ -94,6 +93,51 @@ app.get('/users', (req, res)=> {
         return res.json(dataUser);
     })
 })
+
+// handle fetching profile based on user ID
+app.get('/users/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from user where uid = ?;`;
+  
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
+
+  // handle fetching top 5 artist list based on user ID
+app.get('/userlistartist/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from userlistartist where uid = ? AND listName = 'Top 5 Artists';`;
+  
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
+
+  // handle fetching top 5 album list based on user ID
+app.get('/userlistalbum/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from userlistalbum where uid = ? AND listName = 'Top 5 Albums';`;
+  
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
 
 app.get('/albums', (req, res)=> {
     const sql = "SELECT * FROM album";
@@ -175,27 +219,26 @@ app.get('/userlist', (req, res)=> {
     })
 })
 
+  // handle fetching top 5 album list based on user ID
+  app.get('/userlist/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from UserList where uid = ? AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists'));`;
+  
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
+
 app.get('/userlistsong', (req, res)=> {
     const sql = "select * from userlistsong where uid = ?;";
     db.query(sql, 1, (err, data) => {
         if(err) return res.json(err);
         return res.json(data);
-    })
-})
-
-app.get('/userlistartist', (req, res)=> {
-    const sql = "select * from userlistartist where uid = ?;"; 
-    db.query(sql, 1, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-app.get('/userlistalbum', (req, res)=> {
-    const sql = "select * from userlistalbum where uid = ?;"; 
-    db.query(sql, 1, (err, dataAlbum) => {
-        if(err) return res.json(err);
-        return res.json(dataAlbum);
     })
 })
 
