@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
 
-function MyNav( {currentUser}, {onSignOut} ){
+function MyNav( {currentUser} ){
 
   const [search, setSearch] = useState('');
   const navigate = useNavigate();

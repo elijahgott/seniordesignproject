@@ -18,19 +18,36 @@ app.use(bodyParser.json());
 const db = mysql.createConnection({
     host: "localhost",
     user: 'root',
-    password: '',
+    password: '', 
     database: 'sdp'
 }) 
 
-app.get('/home', (req, res)=> {
-    const uid = req.body;
+app.get('/', (req, res)=> {
+    //const uid = req.body;
+    const uid = 1;
+    //console.log(uid);
     const sql = `select * from UserPost where uid IN (select friendID from UserFriend where uid = ?) ORDER BY date DESC;`;
-    db.query(sql, 1 ,(err, data) => {
+    db.query(sql, uid ,(err, data) => {
         if(err) return res.json(err);
         return res.json(data);
     })
 })
 
+//-----------------------------
+// Route to handle fetching user posts based on user ID
+app.get('/posts/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from UserPost where uid IN (select friendID from UserFriend where uid = ?) ORDER BY date DESC;`;
+  
+    db.query(sql, [userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
 
 app.post('/submitpost', (req, res)=> {
     //get data from forms and add to userposts table

@@ -9,25 +9,21 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal'
-import Form from 'react-bootstrap/Form'
-import {Link} from 'react-router-dom'
+import Modal from 'react-bootstrap/Modal';
+import Form from 'react-bootstrap/Form';
+import {Link} from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
 
 function Home( {currentUser} ){
-    if(currentUser){
-        const uid = currentUser.uid;
+    var uid;
+    if(! currentUser){
+        uid = null;
     }
-    const [data, setData] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/home')
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
-    }, [])
+    else{
+        uid = currentUser.uid;
+    }
 
     const [users, setUsers] = useState([])
 
@@ -37,7 +33,27 @@ function Home( {currentUser} ){
         .then(users => setUsers(users))
         .catch(err => console.log(err));
     }, [])
-  
+
+    const [posts, setPosts] = useState([]);
+
+    useEffect(() => {
+        async function fetchPosts() {
+        try {
+            const response = await fetch(`http://localhost:8081/posts/${uid}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setPosts(data);
+        } 
+        catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+        }
+
+        fetchPosts();
+    }, []);
+
     return(
         <div>
             <MyNav currentUser={currentUser}/>
@@ -54,17 +70,18 @@ function Home( {currentUser} ){
 
                                 <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
                                 
-                                {data.map((d, i) => (    
+                                {posts.map((post) => (
                                     <Card style={{width: 1025, marginTop: 10, marginLeft: "auto", marginRight: "auto", marginBottom: 10}} border="secondary">
-                                        <Card.Body>
-                                            <Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
-                                            <Card.Link href="#artist">{d.uid}</Card.Link>
-                                            <Card.Text style={{fontSize: 25}}>{d.album_name} - {d.song_name}</Card.Text>
-                                            <Card.Text style={{fontSize: 20}}>{d.content}</Card.Text>
-                                        </Card.Body>
-                                        <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{d.date} - {d.time}</Card.Footer>
-                                    </Card>
+                                    <Card.Body>
+                                        {/*<Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>*/}
+                                        <Card.Link>{post.uid}</Card.Link>
+                                        <Card.Text style={{fontSize: 25}}>{post.album_name} - {post.song_name}</Card.Text>
+                                        <Card.Text style={{fontSize: 20}}>{post.content}</Card.Text>
+                                    </Card.Body>
+                                    <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{post.date} - {post.time}</Card.Footer>
+                                </Card>
                                 ))}
+                                
                                 
                             </Card>
                         </Col>

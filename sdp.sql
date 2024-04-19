@@ -72,7 +72,8 @@ create table User(
                     `password` varchar(255) NOT NULL,
                     `date_joined` date NOT NULL,
                     `bio` varchar(250),
-					primary key (`uid`));
+					primary key (`uid`),
+					key(`username`));
                     
 insert into User values (1, 'elijah', '1234', '2024-01-17', 'i am elijah this is my bio about me');
 insert into User values (2, 'conner', '1234', '2024-03-25', null);
@@ -154,6 +155,7 @@ insert into UserListArtist values(1, 'Top 5 Artists', 'Danny Brown');
 
 create Table UserPost(
 					`uid` int NOT NULL,
+                    `username` varchar(20) NOT NULL,
                     `content` varchar(250) NOT NULL,
                     `photo` varchar(50),
                     `song_name` varchar(50),
@@ -161,13 +163,13 @@ create Table UserPost(
                     `date` date NOT NULL,
                     `time` time NOT NULL,
                     foreign key (`uid`) references User(`uid`),
-                    foreign key (`song_name`) references Song(`name`),
+                    foreign key (`username`) references User(`username`),
                     foreign key (`album_name`) references Album(`name`));
                     
-insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
-insert into UserPost values('2', 'good stuff', null , 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
-insert into UserPost values('2', 'one of my favorite albums right now', null, null, 'Atrocity Exhibition', '2024-04-03', '13:54:00');
-insert into UserPost values('3', 'not as good as twosoft but it\'ll do', null, 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('1', 'elijah','This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('2', 'conner', 'good stuff', '', 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
+insert into UserPost values('2', 'conner', 'one of my favorite albums right now', '', '', 'Atrocity Exhibition', '2024-04-03', '13:54:00');
+insert into UserPost values('3', 'finngalvin', 'not as good as twosoft but it\'ll do', '', 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
                  
                     
 -- ALBUM QUERIES

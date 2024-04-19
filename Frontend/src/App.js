@@ -30,13 +30,14 @@ function App() {
     }
 
     const handleSignOut = () => { 
+      setToken(null);
       setCurrentUser(null);
     }
 
   return (
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
-      <Route path="/" element={<Home currentUser={currentUser}/>} />
+      <Route path="/" element={<Home currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/new" element={<New currentUser={currentUser} />} />
       <Route path="/albums" element={<Albums currentUser={currentUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser}/>} />
