@@ -1,5 +1,6 @@
 To-Do List:
-- MOST IMPORTANT
+------------------ MOST IMPORTANT ------------------
+
 	- USERS ADD / EDIT ALBUMS ONTO LISTS
 	  - Or just list of all listened to / rated albums
 	  
@@ -9,22 +10,19 @@ To-Do List:
 	- ADD FRIENDS
 
 	- GET TOP 3 ALBUMS / ARTISTS FROM DATABASE
-	  - maybe just newest 3 albums, artists idk maybe artist who released most recently
+	  - maybe just newest 3 albums, artists idk maybe 
+	    artist who released most recently
 
 	- UPDATE PROFILE / BIO IN APP
 
-- Add ability to rate albums for each user
+	- SUBMIT PHOTOS IN APP
 
-- Search specifically by User, Album, Artist (?)
+------------------ LESS IMPORTANT ------------------
 
-- Add DMs (?) -- probably not going to happen
-	- can send text, images, songs, albums, artists, ...
-	- group DMs AND individual DMs
-- Add user lists
-	- maybe just top 5 / 10 list?
-		- top 5 songs / top 5 albums / top 5 artists
-		- could maybe show this on profile
-- Show songs for each album on album page
+	- Add DMs -- probably not going to happen
+	  - can send text, images, songs, albums, artists, ...
+	  - group DMs AND individual DMs
 
-- Add more artists, albums, songs to database
-	- probably wait until later to do this
+	- Show songs for each album on album page -- doable, not important
+
+	- Add more artists, albums, songs to database
