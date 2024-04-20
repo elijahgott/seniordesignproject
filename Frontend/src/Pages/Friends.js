@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect } from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -12,9 +13,38 @@ import {Link} from 'react-router-dom';
 
 
 import MyNav from "../MyComponents/MyNav";
-
+import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 
 function Friends( {currentUser} ){
+    var uid;
+    if(! currentUser){
+        uid = null;
+    }
+    else{
+        uid = currentUser.uid;
+    }
+
+    //get friends list for currently logged in user
+    const [friends, setFriends] = useState([]);
+
+    useEffect(() => {
+        async function fetchFriends() {
+        try {
+            const response = await fetch(`http://localhost:8081/friends/${uid}`);
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            const data = await response.json();
+            setFriends(data);
+        } 
+        catch (error) {
+            console.error('There was a problem with the fetch operation:', error);
+        }
+        }
+
+        fetchFriends();
+    }, []);
+
     return(
         <div>
             <MyNav currentUser={currentUser}/>
@@ -23,13 +53,13 @@ function Friends( {currentUser} ){
                     <Row>
                         <Card className="mainBody shadow">
                             <Card.Body>
-                                <h1>Friends List</h1>
+                                <h1>{currentUser.username}'s Friends List</h1>
                                 <Row>
                                     <Col>
                                     <ListGroup>
-                                        <ListGroup.Item variant="secondary"><Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 50, width: 50}}roundedCircle></Image> <Link to="#conner">Conner Biernat</Link></ListGroup.Item>
-                                        <ListGroup.Item variant="secondary"><Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 50, width: 50}}roundedCircle></Image> <Link to="#conner">Henry Sharp</Link></ListGroup.Item>
-                                        <ListGroup.Item variant="secondary"><Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 50, width: 50}}roundedCircle></Image> <Link to="#conner">Finn Galvin</Link></ListGroup.Item>
+                                        {friends.map((friend) => (
+                                            <ListGroupItem variant="secondary">{friend.username}</ListGroupItem>
+                                        ))}
                                     </ListGroup>
                                     </Col>
                                 </Row>                        

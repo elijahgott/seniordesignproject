@@ -12,9 +12,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import Table from "react-bootstrap/Table";
+import { Link } from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
-
 
 function UserLists({currentUser}){
     //creating new list
@@ -41,42 +42,12 @@ function UserLists({currentUser}){
             console.log(data);
             handleClose();
             alert('Successfully Created List');
-            // Handle success message
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             alert('Error Creating List')
-            // Handle error message
           });
       }; 
-
-    //displaying user lists
-    const [data, setData] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistartist')
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
-  }, [])
-
-    const [dataAlbum, setDataAlbum] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistalbum')
-        .then(res => res.json())
-        .then(dataAlbum => setDataAlbum(dataAlbum))
-        .catch(err => console.log(err));
-    }, [])
-
-    const [dataList, setDataList] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlist')
-        .then(res => res.json())
-        .then(dataList => setDataList(dataList))
-        .catch(err => console.log(err));
-    }, [])
 
     const [show, setShow] = useState(false);
 
@@ -177,7 +148,7 @@ function UserLists({currentUser}){
                                 
                                 <Row>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Artists</h2>
+                                    <h2>{currentUser.username}'s Top 5 Artists <Button>Edit</Button></h2>
                                     <ListGroup>
                                         {userArtistList.map((artist) => (
                                             <ListGroup.Item variant="secondary">{artist.name}</ListGroup.Item>
@@ -185,7 +156,7 @@ function UserLists({currentUser}){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Albums</h2>
+                                    <h2>{currentUser.username}'s Top 5 Albums <Button>Edit</Button></h2>
                                     <ListGroup>
                                         {userAlbumList.map((album) => (
                                             <ListGroup.Item variant="secondary">{album.name}</ListGroup.Item>
@@ -194,11 +165,27 @@ function UserLists({currentUser}){
                                     </Col>
                                 </Row>        
                                 <Row>
-                                <h1 style={{textAlign: 'center', marginTop: 10}}>Other Lists</h1>
-                                <p>make it so at most 2 lists show per row</p>
-                                    {userList.map((list) => (
-                                        <h2>{list.name}</h2>
-                                    ))}
+                                    <h1 style={{textAlign: 'center', marginTop: 10}}>Listened List <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                                    <Table striped bordered variant="secondary" style={{borderRadius: "6px", maxWidth: "79rem", marginLeft: "auto", marginRight: "auto"}}>
+                                        <thead>
+                                            <tr style={{textAlign: "center", textDecoration: "none"}}>
+                                                <th>Album Name</th>
+                                                <th>Artist Name</th>
+                                                <th>Date Added</th>
+                                                <th>Rating</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {userList.map((album) => (
+                                                <tr style={{textAlign: "center"}}>
+                                                    <td>{album.name}</td>
+                                                    <td>{album.artist}</td>
+                                                    <td>{album.addedDate}</td>
+                                                    <td>{album.rating}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
                                 </Row>                   
                             </Card.Body>
                         </Card>

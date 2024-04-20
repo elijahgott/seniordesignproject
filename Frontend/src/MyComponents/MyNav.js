@@ -56,9 +56,13 @@ function MyNav( {currentUser} ){
                           <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
-                          <NavDropdown.Item>Sign Out</NavDropdown.Item>
+                          <NavDropdown.Item disabled>Sign Out</NavDropdown.Item>
+                          <NavDropdown.Item disabled>(Refresh to Sign Out)</NavDropdown.Item>
                         </>
-                      ) : <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>}
+                      ) : <>
+                            <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/signup">Sign Up</Link></NavDropdown.Item>
+                          </>}
                     </NavDropdown>
                 </Nav>
                 

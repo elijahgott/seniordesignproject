@@ -95,29 +95,7 @@ create table UserList(
 
 insert into UserList values(1, 'Top 5 Artists'); -- make this a default list on every profile
 insert into UserList values(1, 'Top 5 Albums'); -- make this a default list on every profile
-insert into UserList values(1, 'Fav 2024');
-                        
-create table UserListSong(
-						`uid` int NOT NULL,
-						`listName` varchar(50) NOT NULL,
-                        `name` varchar(50) NOT NULL, 
-                        `artist` varchar(50) NOT NULL,
-                        `album` varchar(50) NOT NULL,
-                        `addedDate` date,
-                        foreign key(`uid`) references User(`uid`),
-                        foreign key(`listName`) references UserList(`name`),
-                        foreign key(`name`) references Song(`name`),
-                        foreign key(`artist`) references Artist(`name`),
-                        foreign key(`album`) references Album(`name`));
--- Elijah's Fav 2024 list
-insert into UserListSong values(1 , 'Fav 2024', 'Fire', 'Kids See Ghosts', 'Kids See Ghosts', '2024-03-28');
-insert into UserListSong values(1 , 'Fav 2024', 'Dancing Circles', 'Sampha', 'Lahai', '2024-03-28');
-insert into UserListSong values(1 , 'Fav 2024', 'Outside', 'Kero Kero Bonito', 'Time \'n\' Place', '2024-03-28');
-insert into UserListSong values(1 , 'Fav 2024', 'Time Today', 'Kero Kero Bonito', 'Time \'n\' Place', '2024-03-28');
-insert into UserListSong values(1 , 'Fav 2024', '4th Dimension (Ft. Louis Prima)', 'Kids See Ghosts', 'Kids See Ghosts', '2024-03-28');
-insert into UserListSong values(1 , 'Fav 2024', 'Blank Space (Taylor\'s Version)', 'Taylor Swift', '1989 (Taylor\'s Version)', '2024-03-28');
-
--- Elijah's Top 5 Songs List
+insert into UserList values(1, 'Listened List'); -- make default list
 
 create table UserListAlbum(
 						`uid` int NOT NULL,
@@ -137,6 +115,9 @@ insert into UserListAlbum values(1, 'Top 5 Albums', 'Lahai', 'Sampha', '2024-03-
 insert into UserListAlbum values(1, 'Top 5 Albums', '1989 (Taylor\'s Version)', 'Taylor Swift', '2024-03-28', null);
 insert into UserListAlbum values(1, 'Top 5 Albums', 'Kids See Ghosts', 'Kids See Ghosts', '2024-03-28', null);
 insert into UserListAlbum values(1, 'Top 5 Albums', 'Atrocity Exhibition', 'Danny Brown', '2024-03-28', null);
+
+-- Elijah's Listened List
+insert into UserListAlbum values(1, 'Listened List', 'Time \'n\' Place', 'Kero Kero Bonito', '2024-04-19', '8');
 
 create table UserListArtist(
 						`uid` int NOT NULL,

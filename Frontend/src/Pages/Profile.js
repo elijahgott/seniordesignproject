@@ -9,6 +9,7 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/Button';
 
 import MyNav from "../MyComponents/MyNav";
 
@@ -112,7 +113,7 @@ function Profile({currentUser}){
                                 
                                 <Row>
                                     <Col>
-                                    <h1>{currentUser.username}'s Top 5 Artists</h1>
+                                    <h1>{currentUser.username}'s Top 5 Artists <Button>Edit</Button></h1>
                                     <p>might want to change database to include rank number</p>
                                     <ListGroup>
                                         {userArtistList.map((artist) => (
@@ -121,7 +122,7 @@ function Profile({currentUser}){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h1>{currentUser.username}'s Top 5 Albums</h1>
+                                    <h1>{currentUser.username}'s Top 5 Albums <Button>Edit</Button></h1>
                                     <p>might want to change database to include rank number</p>
                                     <ListGroup>
                                         {userAlbumList.map((album) => (

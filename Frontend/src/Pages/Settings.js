@@ -25,7 +25,7 @@ function Settings( {currentUser} ){
                     <Row>
                         <Card className="mainBody shadow">
                             <Card.Body>
-                                <h1>Account Settings</h1>
+                                <h1>Account Settings (Not Yet Implemented)</h1>
                                 <Tabs
                                     defaultActiveKey="profile"
                                     id="uncontrolled-tab-example"

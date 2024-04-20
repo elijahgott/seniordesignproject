@@ -25,15 +25,7 @@ function Home( {currentUser} ){
         uid = currentUser.uid;
     }
 
-    const [users, setUsers] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/users')
-        .then(res => res.json())
-        .then(users => setUsers(users))
-        .catch(err => console.log(err));
-    }, [])
-
+    //get posts for currently logged in user
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
