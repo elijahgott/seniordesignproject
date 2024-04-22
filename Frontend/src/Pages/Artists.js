@@ -38,7 +38,7 @@ function Artists( {currentUser} ){
 
                     <Row style={{marginLeft:0, marginTop: 10}}>
                     {data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"27rem"}} border="none">
+                                    <Card className="shadow" style={{maxWidth:"26rem", marginRight: 16, marginBottom: 10}} border="none">
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link href="#artist">{d.name}</Card.Link>

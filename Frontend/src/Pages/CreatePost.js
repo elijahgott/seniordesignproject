@@ -18,6 +18,7 @@ function CreatePost({currentUser}){
     const curTime = currentDate.getHours() + ':' + currentDate.getMinutes() + ":00";
     
     const uid = currentUser.uid;
+    const username = currentUser.username;
     const [content, setContent] = useState('');
     const [album_name, setAlbum_name] = useState('');
     const [song_name, setSong_name] = useState('');
@@ -33,7 +34,7 @@ function CreatePost({currentUser}){
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ uid, content, album_name, song_name, photo, date, time }),
+          body: JSON.stringify({ uid, username, content, album_name, song_name, photo, date, time }),
         })
           .then(response => {
             if (!response.ok) {

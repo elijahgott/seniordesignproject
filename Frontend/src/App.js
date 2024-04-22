@@ -30,6 +30,7 @@ function App() {
     }
 
     const handleSignOut = () => { 
+      setToken(null);
       setCurrentUser(null);
     }
 

@@ -12,9 +12,10 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
+import Table from "react-bootstrap/Table";
+import { Link } from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
-
 
 function UserLists({currentUser}){
     //creating new list
@@ -41,47 +42,80 @@ function UserLists({currentUser}){
             console.log(data);
             handleClose();
             alert('Successfully Created List');
-            // Handle success message
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             alert('Error Creating List')
-            // Handle error message
           });
       }; 
-
-    //displaying user lists
-    const [data, setData] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistartist')
-        .then(res => res.json())
-        .then(data => setData(data))
-        .catch(err => console.log(err));
-  }, [])
-
-    const [dataAlbum, setDataAlbum] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlistalbum')
-        .then(res => res.json())
-        .then(dataAlbum => setDataAlbum(dataAlbum))
-        .catch(err => console.log(err));
-    }, [])
-
-    const [dataList, setDataList] = useState([])
-
-    useEffect(()=>{
-        fetch('http://localhost:8081/userlist')
-        .then(res => res.json())
-        .then(dataList => setDataList(dataList))
-        .catch(err => console.log(err));
-    }, [])
 
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+        //fetch top 5 artists list from current user
+        const [userArtistList, setUserArtistList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserArtistList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistartist/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserArtistList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserArtistList();
+        }, []);
+
+        //fetch top 5 albums list from current user
+        const [userAlbumList, setUserAlbumList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserAlbumList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlistalbum/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserAlbumList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserAlbumList();
+        }, []);    
+
+        //fetch top 5 albums list from current user
+        const [userList, setUserList] = useState([]);
+
+        useEffect(() => {
+            async function fetchUserList() {
+            try {
+                const response = await fetch(`http://localhost:8081/userlist/${uid}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setUserList(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+            }
+            }
+    
+            fetchUserList();
+        }, []); 
 
     return(
         <div>
@@ -114,30 +148,44 @@ function UserLists({currentUser}){
                                 
                                 <Row>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Artists</h2>
+                                    <h2>{currentUser.username}'s Top 5 Artists <Button>Edit</Button></h2>
                                     <ListGroup>
-                                        {data.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name}</ListGroup.Item>
+                                        {userArtistList.map((artist) => (
+                                            <ListGroup.Item variant="secondary">{artist.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Albums</h2>
+                                    <h2>{currentUser.username}'s Top 5 Albums <Button>Edit</Button></h2>
                                     <ListGroup>
-                                        {dataAlbum.map((d, i) => (    
-                                        <ListGroup.Item variant="secondary">{i + 1}. {d.name} - {d.artist}</ListGroup.Item>
+                                        {userAlbumList.map((album) => (
+                                            <ListGroup.Item variant="secondary">{album.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                 </Row>        
                                 <Row>
-                                <h1 style={{textAlign: 'center'}}>Other Lists</h1>
-                                {dataList.map((d, i) => (
-                                    <>
-                                        <h2>{d.name}</h2>
-                                        GET SONGS WHERE SONG LIST NAME = LIST NAME
-                                    </>  
-                                ))}
+                                    <h1 style={{textAlign: 'center', marginTop: 10}}>Listened List <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                                    <Table striped bordered variant="secondary" style={{borderRadius: "6px", maxWidth: "79rem", marginLeft: "auto", marginRight: "auto"}}>
+                                        <thead>
+                                            <tr style={{textAlign: "center", textDecoration: "none"}}>
+                                                <th>Album Name</th>
+                                                <th>Artist Name</th>
+                                                <th>Date Added</th>
+                                                <th>Rating</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {userList.map((album) => (
+                                                <tr style={{textAlign: "center"}}>
+                                                    <td>{album.name}</td>
+                                                    <td>{album.artist}</td>
+                                                    <td>{album.addedDate}</td>
+                                                    <td>{album.rating}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </Table>
                                 </Row>                   
                             </Card.Body>
                         </Card>

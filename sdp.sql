@@ -72,7 +72,8 @@ create table User(
                     `password` varchar(255) NOT NULL,
                     `date_joined` date NOT NULL,
                     `bio` varchar(250),
-					primary key (`uid`));
+					primary key (`uid`),
+					key(`username`));
                     
 insert into User values (1, 'elijah', '1234', '2024-01-17', 'i am elijah this is my bio about me');
 insert into User values (2, 'conner', '1234', '2024-03-25', null);
@@ -92,6 +93,9 @@ create table UserList(
                         primary key (`name`),
                         foreign key (`uid`) references User(`uid`));
 
+insert into UserList values(1, 'Top 5 Artists'); -- make this a default list on every profile
+insert into UserList values(1, 'Top 5 Albums'); -- make this a default list on every profile
+insert into UserList values(1, 'Listened List'); -- make default list
 insert into UserList values(1, 'Listened List'); -- make default for every account
 
 create table UserListAlbum(
@@ -106,6 +110,30 @@ create table UserListAlbum(
                         foreign key(`name`) references Album(`name`),
                         foreign key(`artist`) references Artist(`name`));
                         
+-- Elijah's Top 5 Albums List
+insert into UserListAlbum values(1, 'Top 5 Albums', 'Time \'n\' Place', 'Kero Kero Bonito', '2024-03-28', null);
+insert into UserListAlbum values(1, 'Top 5 Albums', 'Lahai', 'Sampha', '2024-03-28', null);
+insert into UserListAlbum values(1, 'Top 5 Albums', '1989 (Taylor\'s Version)', 'Taylor Swift', '2024-03-28', null);
+insert into UserListAlbum values(1, 'Top 5 Albums', 'Kids See Ghosts', 'Kids See Ghosts', '2024-03-28', null);
+insert into UserListAlbum values(1, 'Top 5 Albums', 'Atrocity Exhibition', 'Danny Brown', '2024-03-28', null);
+
+-- Elijah's Listened List
+insert into UserListAlbum values(1, 'Listened List', 'Time \'n\' Place', 'Kero Kero Bonito', '2024-04-19', '8');
+
+create table UserListArtist(
+						`uid` int NOT NULL,
+						`listName` varchar(50) NOT NULL,
+                        `name` varchar(50) NOT NULL,
+                        foreign key(`uid`) references User(`uid`),
+                        foreign key(`listName`) references UserList(`name`),
+                        foreign key(`name`) references Artist(`name`));
+                        
+-- Elijah's Top 5 Artists List
+insert into UserListArtist values(1, 'Top 5 Artists', 'Sampha'); -- might only allow the Top 5 Artists list for Artist Lists 
+insert into UserListArtist values(1, 'Top 5 Artists', 'Kero Kero Bonito');
+insert into UserListArtist values(1, 'Top 5 Artists', 'Kids See Ghosts');
+insert into UserListArtist values(1, 'Top 5 Artists', 'Taylor Swift');
+insert into UserListArtist values(1, 'Top 5 Artists', 'Danny Brown');
 -- Elijah's Listened List
 insert into UserListAlbum values(1, 'Listened List', 'Time \'n\' Place', 'Kero Kero Bonito', '2024-03-28', null);
 insert into UserListAlbum values(1, 'Listened List', 'Lahai', 'Sampha', '2024-03-28', null);
@@ -115,6 +143,7 @@ insert into UserListAlbum values(1, 'Listened List', 'Atrocity Exhibition', 'Dan
 
 create Table UserPost(
 					`uid` int NOT NULL,
+                    `username` varchar(20) NOT NULL,
                     `content` varchar(250) NOT NULL,
                     `photo` varchar(50),
                     `song_name` varchar(50),
@@ -122,9 +151,13 @@ create Table UserPost(
                     `date` date NOT NULL,
                     `time` time NOT NULL,
                     foreign key (`uid`) references User(`uid`),
-                    foreign key (`song_name`) references Song(`name`),
+                    foreign key (`username`) references User(`username`),
                     foreign key (`album_name`) references Album(`name`));
                     
+insert into UserPost values('1', 'elijah', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
+insert into UserPost values('2', 'conner', 'good stuff', '', 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
+insert into UserPost values('2', 'conner', 'one of my favorite albums right now', '', '', 'Atrocity Exhibition', '2024-04-03', '13:54:00');
+insert into UserPost values('3', 'finngalvin', 'not as good as twosoft but it\'ll do', '', 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
 insert into UserPost values('1', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', null, '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
 insert into UserPost values('2', 'good stuff', null , 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
 insert into UserPost values('2', 'one of my favorite albums right now', null, null, 'Atrocity Exhibition', '2024-04-03', '13:54:00');
@@ -178,7 +211,7 @@ insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor S
 -- select * from TopFiveAlbums where uid = 1; -- gets top five albums list for user with uid 1
 
 -- POSTS
--- select * from UserPost where uid IN (select friendID from UserFriend where uid = 1); -- select all posts from friends of user with uid 1
+-- select * from UserPost where uid = 1 OR uid IN ((select friendID from UserFriend where uid = 1)); -- select all posts from uid 1 or friends of uid 1 
 
 -- SEARCH BAR
 -- select * from User where username LIKE '%elij%'; -- search for all users with username containing elij

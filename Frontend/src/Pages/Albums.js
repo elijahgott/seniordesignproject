@@ -83,10 +83,10 @@ function Albums( {currentUser} ){
                         </Col>
                     </Row>
 
-                    <Row style={{marginLeft: 0, marginTop: 10}}>
+                    <Row style={{marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
                     {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
                     {data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"27rem"}}>
+                                    <Card className="shadow" style={{maxWidth:"26rem", marginRight: 16, marginBottom: 10}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link>{d.name}</Card.Link>
