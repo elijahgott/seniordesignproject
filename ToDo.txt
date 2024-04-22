@@ -15,8 +15,6 @@ To-Do List:
 
 	- UPDATE PROFILE / BIO IN APP
 
-	- SUBMIT PHOTOS IN APP
-
 ------------------ LESS IMPORTANT ------------------
 
 	- Add DMs -- probably not going to happen
@@ -24,5 +22,7 @@ To-Do List:
 	  - group DMs AND individual DMs
 
 	- Show songs for each album on album page -- doable, not important
+
+	- Submit photos in app
 
 	- Add more artists, albums, songs to database
