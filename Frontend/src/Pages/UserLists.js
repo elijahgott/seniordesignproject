@@ -226,7 +226,6 @@ function UserLists({currentUser}){
     //handle submission of album to listened list
     const handleSubmitAlbums = (event) => {
         event.preventDefault();
-        console.log(albumSelection);
         let temp = albumSelection.split('-');
         const album = temp[0];
         const artist = temp[1];

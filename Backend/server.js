@@ -100,7 +100,7 @@ app.get('/users/:uid', (req, res) => {
   // handle fetching friends based on user ID
 app.get('/friends/:uid', (req, res) => {
   const userId = req.params.uid;
-  const sql = `select ALL username from User where uid IN (select ALL friendID from UserFriend where uid = ?);`;
+  const sql = `select * from User where uid IN (select ALL friendID from UserFriend where uid = ?);`;
 
   db.query(sql, [userId], (err, results) => {
     if (err) {
@@ -111,6 +111,39 @@ app.get('/friends/:uid', (req, res) => {
     }
   });
 });
+
+  // handle fetching all other users based on user ID
+  app.get('/addFriend/:uid', (req, res) => {
+    const userId = req.params.uid;
+    const sql = `select * from User where NOT uid = ? AND uid NOT IN(select friendID from UserFriend where uid = ?);`;
+  
+    db.query(sql, [userId, userId], (err, results) => {
+      if (err) {
+        console.error('Error executing query: ', err);
+        res.status(500).json({ message: 'Error fetching data' });
+      } else {
+        res.status(200).json(results);
+      }
+    });
+  });
+
+// handles the insertion of a new friend relationship into the database
+app.post('/addFriend', (req, res)=> {
+  //get data from forms and add to userfriend table
+  var { uid, friendUID} = req.body;
+  const sql = `insert into UserFriend (uid, friendID)
+              values (?, ?)`;
+  db.query(sql, [uid, friendUID], (err, results)=> {
+      if(err){
+          console.error("Error inserting data: ", err);
+          res.status(500).send("Error inserting data")
+      }
+      else{
+          console.log("Successfully Added Friendship into Database!");
+          res.status(200).send("Friend added successfully")
+      }
+  }) 
+})
 
   // handle fetching top 5 artist list based on user ID
 app.get('/userlistartist/:uid', (req, res) => {

@@ -1,13 +1,14 @@
 To-Do List:
 ------------------ MOST IMPORTANT ------------------
 
-	- USERS ADD / EDIT ALBUMS ONTO LISTS
-	  - Or just list of all listened to / rated albums
+	- FIX TOP 5 LISTS
+	  - only allow 1 item per position
 	  
 	- USERS RATE ALBUMS
 	  - 1-10 rating
+	    - works on listened list page, need to add button to albums page
 
-	- ADD FRIENDS
+	- REMOVE FRIENDS
 
 	- GET TOP 3 ALBUMS / ARTISTS FROM DATABASE
 	  - maybe just newest 3 albums, artists idk maybe 
