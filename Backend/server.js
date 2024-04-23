@@ -253,6 +253,42 @@ app.post('/submitlist', (req, res)=> {
     })
 })
 
+// handles the addition of an artist into a user's Top 5 List
+app.post('/submittopfiveartists', (req, res)=> {
+  //get data from forms and add to topfiveartists table
+  const { uid, artistPosition, artistSelection } = req.body;
+  const sql = `insert into TopFiveArtists (uid, position, name)
+              values (?, ?, ?)`;
+  db.query(sql, [uid, artistPosition, artistSelection], (err, results)=> {
+      if(err){
+          console.error("Error inserting data: ", err);
+          res.status(500).send("Error inserting data")
+      }
+      else{
+          console.log("Successfully Inserted Artist into Top 5 List!");
+          res.status(200).send("Data inserted successfully")
+      }
+  })
+})
+
+// handles the addition of an album into a user's Top 5 List
+app.post('/submittopfivealbums', (req, res)=> {
+  //get data from forms and add to topfiveartists table
+  const { uid, albumPosition, album, artist} = req.body;
+  const sql = `insert into TopFiveAlbums (uid, position, name, artistName)
+              values (?, ?, ?, ?)`;
+  db.query(sql, [uid, albumPosition, album, artist], (err, results)=> {
+      if(err){
+          console.error("Error inserting data: ", err);
+          res.status(500).send("Error inserting data")
+      }
+      else{
+          console.log("Successfully Inserted Artist into Top 5 List!");
+          res.status(200).send("Data inserted successfully")
+      }
+  })
+})
+
 // handles signing user in
 app.post('/signin', (req, res) => {
     const {username, password} = req.body;
