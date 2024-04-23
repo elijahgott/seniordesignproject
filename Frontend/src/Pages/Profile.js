@@ -114,19 +114,17 @@ function Profile({currentUser}){
                                 <Row>
                                     <Col>
                                     <h1>{currentUser.username}'s Top 5 Artists <Button>Edit</Button></h1>
-                                    <p>might want to change database to include rank number</p>
                                     <ListGroup>
                                         {userArtistList.map((artist) => (
-                                            <ListGroup.Item variant="secondary">{artist.name}</ListGroup.Item>
+                                            <ListGroup.Item key={artist.position} variant="secondary">{artist.position}. {artist.name}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>
                                     <Col>
                                     <h1>{currentUser.username}'s Top 5 Albums <Button>Edit</Button></h1>
-                                    <p>might want to change database to include rank number</p>
                                     <ListGroup>
                                         {userAlbumList.map((album) => (
-                                            <ListGroup.Item variant="secondary">{album.name}</ListGroup.Item>
+                                            <ListGroup.Item key={album.position} variant="secondary">{album.position}. {album.name} - {album.artistName}</ListGroup.Item>
                                         ))}
                                     </ListGroup>
                                     </Col>

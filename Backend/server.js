@@ -115,7 +115,7 @@ app.get('/friends/:uid', (req, res) => {
   // handle fetching top 5 artist list based on user ID
 app.get('/userlistartist/:uid', (req, res) => {
     const userId = req.params.uid;
-    const sql = `select * from userlistartist where uid = ? AND listName = 'Top 5 Artists';`;
+    const sql = `select * from TopFiveArtists where uid = ?;`;
   
     db.query(sql, [userId], (err, results) => {
       if (err) {
@@ -130,7 +130,7 @@ app.get('/userlistartist/:uid', (req, res) => {
   // handle fetching top 5 album list based on user ID
 app.get('/userlistalbum/:uid', (req, res) => {
     const userId = req.params.uid;
-    const sql = `select * from userlistalbum where uid = ? AND listName = 'Top 5 Albums';`;
+    const sql = `select * from TopFiveALbums where uid = ?;`;
   
     db.query(sql, [userId], (err, results) => {
       if (err) {
@@ -145,7 +145,7 @@ app.get('/userlistalbum/:uid', (req, res) => {
     // handle fetching top 5 album list based on user ID
     app.get('/userlist/:uid', (req, res) => {
       const userId = req.params.uid;
-      const sql = `select * from UserListAlbum where uid = ? AND (listName = 'Listened List');`;
+      const sql = `select * from ListenedList where uid = ?;`;
     
       db.query(sql, [userId], (err, results) => {
         if (err) {
@@ -235,19 +235,19 @@ app.get('/new', (req, res)=> {
     })
 })
 
-// handles the creation of a new list 
+// handles the addition of an album into a user's Listened List
 app.post('/submitlist', (req, res)=> {
-    //get data from forms and add to userposts table
-    const { uid, name } = req.body;
-    const sql = `insert into UserList (uid, name)
-                values (?, ?)`;
-    db.query(sql, [uid, name], (err, results)=> {
+    //get data from forms and add to listenedlist table
+    const { uid, album, artist, dateAdded, rating } = req.body;
+    const sql = `insert into ListenedList (uid, album, artist, dateAdded, rating)
+                values (?, ?, ?, ?, ?)`;
+    db.query(sql, [uid, album, artist, dateAdded, rating], (err, results)=> {
         if(err){
             console.error("Error inserting data: ", err);
             res.status(500).send("Error inserting data")
         }
         else{
-            console.log("Successfully Inserted List into Database!");
+            console.log("Successfully Inserted Album into Listened List!");
             res.status(200).send("Data inserted successfully")
         }
     })
