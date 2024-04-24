@@ -259,10 +259,10 @@ function UserLists({currentUser}){
             setAlbumSelection(e.target.value);
         };
 
-        //handle rating change
+        //handle position change
         const handleAlbumPositionChange = (e) => {
             let newPosition = e.target.value;
-            // Ensure the entered value is within the range 1-10
+            // Ensure the entered value is within the range 1-5
             if (newPosition === '' || (parseInt(newPosition) >= 1 && parseInt(newPosition) <= 5)) {
             setAlbumPosition(newPosition);
             }
