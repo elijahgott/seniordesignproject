@@ -67,13 +67,13 @@ function Home( {currentUser} ){
                                 
                                 {posts.map((post) => (
                                     <Card style={{minWidth: "65rem", marginTop: 10, marginBottom: 10, alignSelf: "center"}} border="secondary">
-                                    <Card.Body>
-                                        {/*<Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img> havent implemented post photos*/} 
-                                        <Card.Link style={{fontWeight: "bold"}}>{post.username}</Card.Link>
-                                        <Card.Text style={{fontSize: 25}}>{post.album_name} - {post.song_name}</Card.Text>
-                                        <Card.Text style={{fontSize: 20, textIndent: 5}}>{post.content}</Card.Text>
-                                    </Card.Body>
-                                    <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{post.date} - {post.time}</Card.Footer>
+                                        <Card.Body>
+                                            {/*<Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img> havent implemented post photos*/} 
+                                            <Card.Link style={{fontWeight: "bold"}}>{post.username}</Card.Link>
+                                            <Card.Text style={{fontSize: 25}}>{post.album_name} - {post.song_name}</Card.Text>
+                                            <Card.Text style={{fontSize: 20, textIndent: 5}}>{post.content}</Card.Text>
+                                        </Card.Body>
+                                        <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{post.date} - {post.time}</Card.Footer>
                                 </Card>
                                 ))}
                             </Card>

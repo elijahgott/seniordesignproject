@@ -145,6 +145,40 @@ app.post('/addFriend', (req, res)=> {
   }) 
 })
 
+// handles the insertion of a new friend relationship into the database
+app.post('/removeFriend', (req, res)=> {
+  //get data from forms and remove from userfriend table
+  var { uid, removeFriendUID} = req.body;
+  const sql = `delete from UserFriend where uid = ? and friendID = ?`;
+  db.query(sql, [uid, removeFriendUID], (err, results)=> {
+      if(err){
+          console.error("Error deleting data: ", err);
+          res.status(500).send("Error deleting data")
+      }
+      else{
+          console.log("Successfully Erased Friendship From Database!");
+          res.status(200).send("Friend added successfully")
+      }
+  }) 
+})
+
+//handles the deletion of a friend relationship from the database
+app.delete('/removeFriend/:userId/:friendId', (req, res) => {
+  const userId = req.params.userId;
+  const friendId = req.params.friendId;
+
+  const sql = 'DELETE FROM UserFriend WHERE uid = ? AND friendId = ?';
+
+  db.query(sql, [userId, friendId], (err, results) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+      res.status(500).json({ message: 'Error removing friendship' });
+    } else {
+      res.status(200).json({ message: 'Successfully removed friendship! :D' });
+    }
+  });
+});
+
   // handle fetching top 5 artist list based on user ID
 app.get('/userlistartist/:uid', (req, res) => {
     const userId = req.params.uid;

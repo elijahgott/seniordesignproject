@@ -109,7 +109,26 @@ function Friends( {currentUser} ){
                 setFriendUID(e.target.value);
             };
     
-        
+        //for removing friend
+        const [removeFriendUID, setRemoveFriendUID] = useState('');
+
+        //handle removing friend from friends list
+        const handleRemove = async (removeFriendUID) => {
+            try {
+                const response = await fetch(`http://localhost:8081/removefriend/${uid}/${removeFriendUID}`, {
+                  method: 'DELETE'
+                });
+                if (!response.ok) {
+                  throw new Error('Network response was not ok');
+                }
+                // Update the friends list after removing the friendship
+                setFriends(friends.filter((friend) => friend.id !== removeFriendUID));
+                alert("Successfully Removed Friendship!");
+              } catch (error) {
+                console.error('There was a problem removing the friendship:', error);
+                alert("Error Removing Friend");
+              }
+          }; 
 
     return(
         <div>
@@ -150,9 +169,9 @@ function Friends( {currentUser} ){
                                     </Modal>
                                 <Row>
                                     {friends.map((friend) => (
-                                        <Card className="shadow" style={{marginBottom: 10}}>
+                                        <Card className="shadow" style={{marginBottom: 10}} key={friend.uid}>
                                             <Card.Body>
-                                                <Card.Link style={{fontWeight: "bold"}}>{friend.username}</Card.Link>
+                                                <Card.Title style={{fontSize: 30, fontWeight: "bold"}}>{friend.username} <Button variant="danger" onClick={() => handleRemove(friend.uid)}>Remove Friend</Button></Card.Title>
                                                 <Card.Text style={{fontSize: 20, textIndent: 5}}>Bio: {friend.bio}</Card.Text>
                                             </Card.Body>
                                             <Card.Footer style={{fontSize: 15, textAlign: "center"}}>Date Joined: {friend.date_joined}</Card.Footer>
