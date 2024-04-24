@@ -74,7 +74,7 @@ function Albums( {currentUser} ){
                     </Row>
                 </Container>
                     
-                <Container style={{marginTop: 20, marginBottom: 15}}>
+                <Container style={{marginTop: 20}}>
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
@@ -82,7 +82,8 @@ function Albums( {currentUser} ){
                             </Card>
                         </Col>
                     </Row>
-
+                </Container>
+                <Container>
                     <Row style={{marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
                     {/*This displays everything correctly, just need to adjust width to match with "All Albums" above*/}
                     {data.map((d, i) => (    

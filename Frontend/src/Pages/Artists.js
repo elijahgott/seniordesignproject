@@ -27,7 +27,7 @@ function Artists( {currentUser} ){
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
             
-            <Container style={{marginTop: 10, marginBottom: 15}}>
+            <Container style={{maxWidth: "83rem", marginTop: 10, marginBottom: 15}}>
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
@@ -35,8 +35,9 @@ function Artists( {currentUser} ){
                             </Card>
                         </Col>
                     </Row>
-
-                    <Row style={{marginLeft:0, marginTop: 10}}>
+            </Container>
+            <Container>
+                    <Row style={{marginLeft:0}}>
                     {data.map((d, i) => (    
                                     <Card className="shadow" style={{maxWidth:"26rem", marginRight: 16, marginBottom: 10}} border="none">
                                         <Card.Body>
