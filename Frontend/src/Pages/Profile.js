@@ -241,7 +241,6 @@ function Profile({currentUser}){
                                 <Row>
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Artists <Button onClick={handleShowArtists}>Edit</Button></h2>
-                                    <p>FIX multiple of same position</p>
                                     <Modal show={showArtists} onHide={handleCloseArtists} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
@@ -278,7 +277,6 @@ function Profile({currentUser}){
                                     </Col>
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Albums <Button onClick={handleShowAlbums}>Edit</Button></h2>
-                                    <p>FIX multiple of same position</p>
                                     <Modal show={showAlbums} onHide={handleCloseAlbums} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>

@@ -27,26 +27,24 @@ function Artists( {currentUser} ){
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
             
-            <Container style={{maxWidth: "83rem", marginTop: 10, marginBottom: 15}}>
-                    <Row>
+            <Container>
+                    <Row style={{marginTop: 10}}>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Link to="/AddArtist"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         </Col>
                     </Row>
-            </Container>
-            <Container>
-                    <Row style={{marginLeft:0}}>
-                    {data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"26rem", marginRight: 16, marginBottom: 10}} border="none">
-                                        <Card.Body>
-                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
-                                            <Card.Link href="#artist">{d.name}</Card.Link>
-                                            <Card.Text style={{fontSize: 20}}>{d.bio}</Card.Text>
-                                        </Card.Body>
-                                    </Card>
-                    ))}
+                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        {data.map((d, i) => (    
+                                        <Card className="shadow" style={{maxWidth:"26rem"}} border="none">
+                                            <Card.Body>
+                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                                <Card.Title style={{fontSize: 30}}>{d.name}</Card.Title>
+                                                <Card.Text style={{fontSize: 20}}>{d.bio}</Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                        ))}
                     </Row>
             </Container>
 

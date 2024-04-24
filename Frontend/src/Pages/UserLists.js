@@ -280,7 +280,6 @@ function UserLists({currentUser}){
                                 <Row>
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Artists <Button onClick={handleShowArtists}>Edit</Button></h2>
-                                    <p>FIX multiple of same position</p>
                                     <Modal show={showArtists} onHide={handleCloseArtists} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
@@ -317,7 +316,6 @@ function UserLists({currentUser}){
                                     </Col>
                                     <Col>
                                     <h2>{currentUser.username}'s Top 5 Albums <Button onClick={handleShowAlbums}>Edit</Button></h2>
-                                    <p>FIX multiple of same position</p>
                                     <Modal show={showAlbums} onHide={handleCloseAlbums} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
@@ -356,7 +354,6 @@ function UserLists({currentUser}){
 
                                 <Row>
                                     <h1 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>{currentUser.username}'s Listened List <Button variant="primary" className="addButton" onClick={handleShowListened}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
-                                    <p>FIX being able to add multiple of same album</p>
                                     <Modal show={showListened} onHide={handleCloseListened} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>

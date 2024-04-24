@@ -129,6 +129,7 @@ create Table ListenedList(
                         `artist` varchar(50),
                         `dateAdded` date NOT NULL,
                         `rating` int, -- 1 -> 10
+                        primary key(`uid`, `album`),
                         foreign key(`uid`) references User(`uid`),
                         foreign key(`album`) references Album(`name`),
                         foreign key(`artist`) references Artist(`name`));
@@ -164,6 +165,7 @@ create Table TopFiveArtists(
 						`uid` int NOT NULL,
                         `position` int NOT NULL, -- 1 -> 5
                         `name` varchar(50) NOT NULL,
+                        primary key(`uid`, `position`),
                         foreign key (`uid`) references User(`uid`),
                         foreign key(`name`) references Artist(`name`));
                         
@@ -179,6 +181,7 @@ create Table TopFiveAlbums(
                         `position` int NOT NULL, -- 1 -> 5
                         `name` varchar(50) NOT NULL,
                         `artistName` varchar(50) NOT NULL,
+                        primary key(`uid`, `position`),
                         foreign key (`uid`) references User(`uid`),
                         foreign key(`name`) references Album(`name`),
                         foreign key(`artistname`) references Album(`artist`));
@@ -188,7 +191,6 @@ insert into TopFiveAlbums values('1', '2', 'Kids See Ghosts', 'Kids See Ghosts')
 insert into TopFiveAlbums values('1', '3', 'Time \'n\' Place', 'Kero Kero Bonito');
 insert into TopFiveAlbums values('1', '4', 'Lahai', 'Sampha');
 insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor Swift');
-                 
                     
 -- ALBUM QUERIES
 -- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album
@@ -197,6 +199,7 @@ insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor S
 
 -- USER QUERIES
 -- select MAX(uid) from User; -- selects max UID, which is the most recently created user (used when creating a new account to automatically assign a UID)
+-- update User set bio = "im elijah this is my new bio about me" where uid = 1; -- update bio for user where uid = 1;
 
 -- FRIEND QUERIES
 -- select friendID from UserFriend where uid = 1; -- all friends uid for user with uid 1
