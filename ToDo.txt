@@ -6,6 +6,10 @@ To-Do List:
 	    artist who released most recently
 
 	- UPDATE PROFILE / BIO IN APP
+	
+	- UPDATE TOP 5 LIST POSITIONS
+
+	- UPDATE ALBUM RATINGS IN LISTENED LIST
 
 ------------------ LESS IMPORTANT ------------------
 

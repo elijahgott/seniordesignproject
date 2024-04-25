@@ -97,6 +97,23 @@ app.get('/users/:uid', (req, res) => {
     });
   });
 
+// handle updating user
+app.put('/updateuser/:uid', (req, res) => {
+  const uid = req.params.uid;
+  const { newUsername, bio } = req.body;
+
+  const sql = 'update User set username = ?, bio = ? where uid = ?;';
+
+  db.query(sql, [newUsername, bio, uid], (err, results) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+      res.status(500).json({ message: 'Error updating user' });
+    } else {
+      res.status(200).json({ message: 'User updated successfully' });
+    }
+  });
+});
+
   // handle fetching friends based on user ID
 app.get('/friends/:uid', (req, res) => {
   const userId = req.params.uid;
