@@ -97,7 +97,7 @@ create table UserList(
 						`uid` int NOT NULL,
                         `name` varchar(50) NOT NULL,
                         primary key (`name`),
-                        foreign key (`uid`) references User(`uid`));
+                        foreign key (`uid`) references User(`uid`) on delete cascade);
 
 insert into UserList values(1, 'Listened List');
 
@@ -109,8 +109,8 @@ create table UserListAlbum(
                         `artist` varchar(50) NOT NULL,
                         `addedDate` date,
                         `rating` int, -- 1-10 scale, not easy to set a max int value on MySQL
-                        foreign key(`uid`) references User(`uid`),
-                        foreign key(`listName`) references UserList(`name`),
+                        foreign key(`uid`) references User(`uid`) on delete cascade,
+                        foreign key(`listName`) references UserList(`name`) on delete cascade,
                         foreign key(`name`) references Album(`name`),
                         foreign key(`artist`) references Artist(`name`));
                         
@@ -130,7 +130,7 @@ create Table ListenedList(
                         `dateAdded` date NOT NULL,
                         `rating` int, -- 1 -> 10
                         primary key(`uid`, `album`),
-                        foreign key(`uid`) references User(`uid`),
+                        foreign key(`uid`) references User(`uid`) on delete cascade,
                         foreign key(`album`) references Album(`name`),
                         foreign key(`artist`) references Artist(`name`));
                         
@@ -151,8 +151,8 @@ create Table UserPost(
                     `album_name` varchar(50),
                     `date` date NOT NULL,
                     `time` time NOT NULL,
-                    foreign key (`uid`) references User(`uid`),
-                    foreign key (`username`) references User(`username`),
+                    foreign key (`uid`) references User(`uid`)on delete cascade,
+                    foreign key (`username`) references User(`username`) on update cascade on delete cascade,
                     foreign key (`album_name`) references Album(`name`));
                     
 insert into UserPost values('1', 'elijah', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
@@ -166,7 +166,7 @@ create Table TopFiveArtists(
                         `position` int NOT NULL, -- 1 -> 5
                         `name` varchar(50) NOT NULL,
                         primary key(`uid`, `position`),
-                        foreign key (`uid`) references User(`uid`),
+                        foreign key (`uid`) references User(`uid`) on delete cascade,
                         foreign key(`name`) references Artist(`name`));
                         
 insert into TopFiveArtists values('1', '1', 'Danny Brown');
@@ -182,7 +182,7 @@ create Table TopFiveAlbums(
                         `name` varchar(50) NOT NULL,
                         `artistName` varchar(50) NOT NULL,
                         primary key(`uid`, `position`),
-                        foreign key (`uid`) references User(`uid`),
+                        foreign key (`uid`) references User(`uid`) on delete cascade,
                         foreign key(`name`) references Album(`name`),
                         foreign key(`artistname`) references Album(`artist`));
                         
@@ -199,7 +199,8 @@ insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor S
 
 -- USER QUERIES
 -- select MAX(uid) from User; -- selects max UID, which is the most recently created user (used when creating a new account to automatically assign a UID)
--- update User set bio = "im elijah this is my new bio about me" where uid = 1; -- update bio for user where uid = 1;
+-- update User set username = "gelo", bio = "im elijah this is my new bio about me" where uid = 1; -- update bio for user where uid = 1;
+-- delete from User where uid = 2; -- deletes user with uid 2
 
 -- FRIEND QUERIES
 -- select friendID from UserFriend where uid = 1; -- all friends uid for user with uid 1

@@ -45,9 +45,6 @@ const [artist, setArtist] = useState('');
 const dateAdded = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
 const [rating, setRating] = useState('');
 
-console.log("album: " + album);
-console.log("artist: " + artist);
-
 //handle starting rating - pass album and artist data from data.map
 const handleStartRating = (albumPar, artistPar) => {
     handleShowRating();

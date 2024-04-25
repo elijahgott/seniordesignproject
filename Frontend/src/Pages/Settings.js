@@ -64,16 +64,18 @@ function Settings( {currentUser} ){
                     <Row>
                         <Card className="mainBody shadow">
                             <Card.Body>
-                                <h1>{/*{currentUser.username}*/}'s Account Settings (Not Yet Implemented)</h1>
+                                <h1>{currentUser.username}'s Account Settings</h1>
                                         <Form>
                                             <Row className="settingsRow">
                                                 <Col>
                                                     <h3>Username</h3>
-                                                        <Form.Control type="username" value={newUsername} onChange={handleUsernameChange} className="me-2" aria-label="Username" />
+                                                        <Form.Control type="username" value={newUsername} onChange={handleUsernameChange} className="me-2" aria-label="Username" aria-describedby="usernameRefresh"/>
+                                                        <Form.Text id="usernameRefresh" style={{fontSize: 15}} muted>Your updated username will not be visible until after refreshing and signing back in.</Form.Text>
                                                 </Col>
                                                 <Col>
                                                     <h3>Profile Picture</h3>
                                                         <Form.Control disabled type="file" />
+                                                        <Form.Text style={{fontSize: 15}} muted>Updating profile pictures is not yet supported.</Form.Text>
                                                 </Col>
                                             </Row>
                                             <Row className="settingsRow">
