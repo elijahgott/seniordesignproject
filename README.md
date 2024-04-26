@@ -8,13 +8,29 @@ The main purpose of this project is to aid in tracking and rating albums you hav
 
 ### Design
 
-This app was designed using React and React Bootstrap, so many of the smaller aesthetic choices, like the rounded corners on buttons, were predetermined by the bootstrap. The overall look was something I wanted to feel somewhat professional, but not boring, which led me to choose dark blue and light gray as the main colors, with black text and a white background for that text for readability. In a few places, I left buttons disabled to show that I have plans for further functionality, but I may have run out of time, not quite figured out how to implement the functionality, or felt that it was more important to add functionality elsewhere before coming back to implement this at a later time. 
+This app was designed using React and React Bootstrap, so many of the smaller aesthetic choices, like the rounded corners on buttons, for example, were predetermined by the bootstrap. I wanted the overall look to feel somewhat professional, but not boring, which led me to choose dark blue and light gray as the main colors, with black text and a white background on the main content for readability. In a few places, I left buttons disabled to show that I have plans for further functionality, but I may have run out of time, not quite figured out how to implement the functionality, or felt that it was more important to add functionality elsewhere before coming back to implement this at a later time. 
 
 ### Technical Details
 
-This project uses React (https://react.dev/) for the Frontend, Javascript for the Backend, and CSS for some styling.  
+This project uses React (https://react.dev/) for the Frontend, Javascript for the Backend, and React Bootstrap (https://react-bootstrap.netlify.app/) and CSS for some styling.  
 The SQL database was created using MySQL (https://www.mysql.com/), and XAMPP (https://www.apachefriends.org/) is used to run a local Apache server and a local MySQL server.  
 To run the local server to view/debug the webpages, NPM is used (https://www.npmjs.com/).
+
+### Known Issues
+
+Due to myself having no prior experience with JavaScript or React, and very little experience overall in web development, there are some glaring issues with the Music App. Many of these are things that will get fixed over time, however they were not deemed important enough to focus my efforts on at this time. Some of these issues are:
+
+- Passwords are stored in database
+- Refreshing the page signs the user out
+- Unable to upload images for profile pictures, artist photos, or album cover photos. 
+
+### Planned Features
+
+With further development time, I would like to implement many more features to the app, including:
+
+- Scrape data from Spotify for artists, albums, and potentially songs.
+- Display album tracklists
+- Add DMs between users
 
 ### Getting Started
 
@@ -37,20 +53,20 @@ To run the local server to view/debug the webpages, NPM is used (https://www.npm
 
 #### (2) Run Frontend server from terminal:
 
-    (1) Open a terminal in the /seniordesignproject directory
+    1. Open a terminal in the /seniordesignproject directory
 
-    (2) <.../seniordesignproject> cd Frontend 
+    2. <.../seniordesignproject> cd Frontend 
 
-    (3) <.../seniordesignproject/Frontend> npm start 
+    3. <.../seniordesignproject/Frontend> npm start 
 
 #### (3) Run backend server from terminal:
 ##### NOTE: You must start the XAMPP Apache and MYSQL servers BEFORE running the backend server. 
 
-    (1) Open a terminal in the /seniordesignproject directory
+    1. Open a terminal in the /seniordesignproject directory
 
-    (2) <.../seniordesignproject> cd Backend
+    2. <.../seniordesignproject> cd Backend
 
-    (3) <.../seniordesignproject/Backend> npm start
+    3. <.../seniordesignproject/Backend> npm start
 
 ### (4) Use the app!
 
