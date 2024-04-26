@@ -20,17 +20,20 @@ To run the local server to view/debug the webpages, NPM is used (https://www.npm
 
 #### (1) Using XAMPP:
 
-    (1) After installing, open XAMPP Control Panel and start the Apache and MYSQL servers.
+    1. After installing, open XAMPP Control Panel and start the Apache and MYSQL servers.
         - The default ports for the Apache server should be 80, 443
         - The default ports for the MYSQL server should be 3306
 
-    (2) In your browser, type "localhost/dashboard" into the address bar, and navigate to phpMyAdmin using the top Navbar. 
+    2. In your browser, type "localhost/dashboard" into the address bar, and 
+        navigate to phpMyAdmin using the top Navbar. 
 
-    (3) At the top of phpMyAdmin, click "Import" to import the MYSQL database.
+    3. At the top of phpMyAdmin, click "Import" to import the MYSQL database.
 
-    (4) Choose the "sdp.sql" file located in the /seniordesignproject folder, and click import at the bottom of the page. 
+    4. Choose the "sdp.sql" file located in the /seniordesignproject folder, 
+        and click import at the bottom of the page. 
 
-    (5) You should now see the sdp database present on the left-side database listing. 
+    5. You should now see the sdp database present on the left-side database
+        listing. 
 
 #### (2) Run Frontend server from terminal:
 
@@ -51,7 +54,8 @@ To run the local server to view/debug the webpages, NPM is used (https://www.npm
 
 ### (4) Use the app!
 
-    - You can now use the app. You will need to create an account to use all of the app's features, but there are some features accessible without making an account. 
+    - You can now use the app. You will need to create an account to use all of the app's 
+        features, but there are some features accessible without making an account. 
         - The account I've used for testing is:
             username: elijah
             password: 1234
