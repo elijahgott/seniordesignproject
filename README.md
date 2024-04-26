@@ -20,38 +20,38 @@ To run the local server to view/debug the webpages, NPM is used (https://www.npm
 
 #### (1) Using XAMPP:
 
-(1) After installing, open XAMPP Control Panel and start the Apache and MYSQL servers.
-    - The default ports for the Apache server should be 80, 443
-    - The default ports for the MYSQL server should be 3306
+    (1) After installing, open XAMPP Control Panel and start the Apache and MYSQL servers.
+        - The default ports for the Apache server should be 80, 443
+        - The default ports for the MYSQL server should be 3306
 
-(2) In your browser, type "localhost/dashboard" into the address bar, and navigate to phpMyAdmin using the top Navbar. 
+    (2) In your browser, type "localhost/dashboard" into the address bar, and navigate to phpMyAdmin using the top Navbar. 
 
-(3) At the top of phpMyAdmin, click "Import" to import the MYSQL database.
+    (3) At the top of phpMyAdmin, click "Import" to import the MYSQL database.
 
-(4) Choose the "sdp.sql" file located in the /seniordesignproject folder, and click import at the bottom of the page. 
+    (4) Choose the "sdp.sql" file located in the /seniordesignproject folder, and click import at the bottom of the page. 
 
-(5) You should now see the sdp database present on the left-side database listing. 
+    (5) You should now see the sdp database present on the left-side database listing. 
 
 #### (2) Run Frontend server from terminal:
 
-(1) Open a terminal in the /seniordesignproject directory
+    (1) Open a terminal in the /seniordesignproject directory
 
-(2) <.../seniordesignproject> cd Frontend 
+    (2) <.../seniordesignproject> cd Frontend 
 
-(3) <.../seniordesignproject/Frontend> npm start 
+    (3) <.../seniordesignproject/Frontend> npm start 
 
 #### (3) Run backend server from terminal:
 ##### NOTE: You must start the XAMPP Apache and MYSQL servers BEFORE running the backend server. 
 
-(1) Open a terminal in the /seniordesignproject directory
+    (1) Open a terminal in the /seniordesignproject directory
 
-(2) <.../seniordesignproject> cd Backend
+    (2) <.../seniordesignproject> cd Backend
 
-(3) <.../seniordesignproject/Backend> npm start
+    (3) <.../seniordesignproject/Backend> npm start
 
 ### (4) Use the app!
 
-- You can now use the app. You will need to create an account to use all of the app's features, but there are some features accessible without making an account. 
-    - The account I've used for testing is:
-        username: elijah
-        password: 1234
+    - You can now use the app. You will need to create an account to use all of the app's features, but there are some features accessible without making an account. 
+        - The account I've used for testing is:
+            username: elijah
+            password: 1234
