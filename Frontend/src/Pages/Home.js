@@ -61,8 +61,8 @@ function Home( {currentUser} ){
                                 <HomeCarousel />
 
                                 {currentUser ? (
-                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
-                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
+                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button style={{marginBottom: 5}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
+                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button style={{marginBottom: 5}} disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
                                 
                                 
                                 {posts.map((post) => (

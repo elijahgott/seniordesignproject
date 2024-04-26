@@ -12,6 +12,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
+import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
 import MyNav from "../MyComponents/MyNav";
 
@@ -109,7 +110,8 @@ function Profile({currentUser}){
             fetchUserAlbumList();
         }, []);
 
-            // for top 5 artists modal
+    //ADD TO TOP 5 ARTISTS LIST
+    // for top 5 artists modal
     const [showArtists, setShowArtists] = useState(false);
     const handleCloseArtists = () => setShowArtists(false);
     const handleShowArtists = () => setShowArtists(true);
@@ -160,6 +162,60 @@ function Profile({currentUser}){
             }
         };
 
+    // UPDATING ARTIST LIST
+    // for update top 5 artists modal
+    const [showUpdateArtists, setShowUpdateArtists] = useState(false);
+    const handleCloseUpdateArtists = () => setShowUpdateArtists(false);
+    const handleShowUpdateArtists = () => setShowUpdateArtists(true);
+
+    //let position = '';
+    const [artistUpdatePosition, setArtistUpdatePosition] = useState('');
+    const [artistUpdateSelection, setArtistUpdateSelection] = useState('');
+
+    //handle submission of artist to listened list
+    const handleSubmitUpdateArtists = (event) => {
+        event.preventDefault();
+    
+        fetch('http://localhost:8081/updatetopfiveartists', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ uid, artistUpdatePosition, artistUpdateSelection }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            console.log(data);
+            handleCloseUpdateArtists();
+            alert('Successfully Added Artist to Top 5 List');
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('Error Adding Artist to Top 5 List')
+          });
+      }; 
+
+        //handles selection of artist from dropdown list
+        const handleArtistUpdateSelectionChange = (e) => {
+            setArtistUpdateSelection(e.target.value);
+        };
+
+        //handles artist position change
+        const handleArtistUpdatePositionChange = (e) => {
+            let newPosition = e.target.value;
+            // Ensure the entered value is within the range 1-10
+            if (newPosition === '' || (parseInt(newPosition) >= 1 && parseInt(newPosition) <= 5)) {
+            setArtistUpdatePosition(newPosition);
+            }
+        };
+
+
+    //ADDING TO TOP 5 ALBUMS LIST
     // for top 5 albums modal
     const [showAlbums, setShowAlbums] = useState(false);
     const handleCloseAlbums = () => setShowAlbums(false);
@@ -214,6 +270,60 @@ function Profile({currentUser}){
             }
         };
 
+    //UPDATE ALBUMS LIST
+    // for top 5 albums modal
+    const [showUpdateAlbums, setShowUpdateAlbums] = useState(false);
+    const handleCloseUpdateAlbums = () => setShowUpdateAlbums(false);
+    const handleShowUpdateAlbums = () => setShowUpdateAlbums(true);
+
+    const [albumUpdatePosition, setAlbumUpdatePosition] = useState('');
+    const [albumUpdateSelection, setAlbumUpdateSelection] = useState('');
+
+    //handle updating position on top 5 albums
+    const handleUpdateAlbums = (event) => {
+        event.preventDefault();
+        let temp = albumUpdateSelection.split('-');
+        const album = temp[0];
+        const artist = temp[1];
+    
+        fetch('http://localhost:8081/updatetopfivealbums', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ uid, albumUpdatePosition, album, artist }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            console.log(data);
+            handleCloseUpdateAlbums();
+            alert('Successfully Added Album to Top 5 List');
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('Error Adding Album to Top 5 List')
+          });
+      }; 
+
+        //handles selection of album from dropdown list
+        const handleAlbumUpdateSelectionChange = (e) => {
+            setAlbumUpdateSelection(e.target.value);
+        };
+
+        //handle position change
+        const handleAlbumUpdatePositionChange = (e) => {
+            let newPosition = e.target.value;
+            // Ensure the entered value is within the range 1-5
+            if (newPosition === '' || (parseInt(newPosition) >= 1 && parseInt(newPosition) <= 5)) {
+            setAlbumUpdatePosition(newPosition);
+            }
+        };
+
     return(
         <div>
             <MyNav currentUser={currentUser} />
@@ -240,11 +350,12 @@ function Profile({currentUser}){
                                 
                                 <Row>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Artists <Button onClick={handleShowArtists}>Edit</Button></h2>
+                                    <h2>{currentUser.username}'s Top 5 Artists <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowArtists}>Add</Button><Button variant="secondary" onClick={handleShowUpdateArtists}>Edit</Button></ButtonGroup></h2>
+                                    {/* ADD ARTISTS TO TOP 5 MODAL*/}
                                     <Modal show={showArtists} onHide={handleCloseArtists} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
-                                                <Modal.Title>Edit Top Five Artists</Modal.Title>
+                                                <Modal.Title>Add to Top Five Artists</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
                                                 <Row>
@@ -269,6 +380,35 @@ function Profile({currentUser}){
                                             </Modal.Footer>
                                         </Form>
                                     </Modal>
+                                    {/* UPDATE POSITION ON TOP 5 ARTISTS MODAL*/}
+                                    <Modal show={showUpdateArtists} onHide={handleCloseUpdateArtists} backdrop="static">
+                                        <Form>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Edit Top Five Artists</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <Row>
+                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                                        <Form.Control type="number" min={1} max={5} value={artistUpdatePosition} onChange={handleArtistUpdatePositionChange}></Form.Control>
+                                                    <Form.Label style={{fontWeight: "bold"}}>Artist:</Form.Label>
+                                                        <select value={artistUpdateSelection} onChange={handleArtistUpdateSelectionChange}>
+                                                            <option value={''}>Select an Artist</option>
+                                                            {artists.map((artist) => (
+                                                                <option value={artist.name}>{artist.name}</option>
+                                                            ))}
+                                                        </select>
+                                                </Row>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleCloseArtists}>
+                                                    Close
+                                                </Button>
+                                                <Button variant="primary" onClick={handleSubmitUpdateArtists}>
+                                                    Submit
+                                                </Button>
+                                            </Modal.Footer>
+                                        </Form>
+                                    </Modal>
                                     <ListGroup>
                                         {userArtistList.map((artist) => (
                                             <ListGroup.Item key={artist.position} variant="secondary">{artist.position}. {artist.name}</ListGroup.Item>
@@ -276,11 +416,12 @@ function Profile({currentUser}){
                                     </ListGroup>
                                     </Col>
                                     <Col>
-                                    <h2>{currentUser.username}'s Top 5 Albums <Button onClick={handleShowAlbums}>Edit</Button></h2>
+                                    <h2>{currentUser.username}'s Top 5 Albums <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowAlbums}>Add</Button><Button variant="secondary" onClick={handleShowUpdateAlbums}>Edit</Button></ButtonGroup></h2>
+                                    {/* ADD ALBUMS TO TOP 5 MODAL*/}
                                     <Modal show={showAlbums} onHide={handleCloseAlbums} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
-                                                <Modal.Title>Edit Top Five Albums</Modal.Title>
+                                                <Modal.Title>Add to Top Five Albums</Modal.Title>
                                             </Modal.Header>
                                             <Modal.Body>
                                                 <Row>
@@ -300,6 +441,35 @@ function Profile({currentUser}){
                                                     Close
                                                 </Button>
                                                 <Button variant="primary" onClick={handleSubmitAlbums}>
+                                                    Submit
+                                                </Button>
+                                            </Modal.Footer>
+                                        </Form>
+                                    </Modal>
+                                    {/* UPDATE POSITION ON TOP 5 ALBUMS MODAL*/}
+                                    <Modal show={showUpdateAlbums} onHide={handleCloseUpdateAlbums} backdrop="static">
+                                        <Form>
+                                            <Modal.Header closeButton>
+                                                <Modal.Title>Edit Top Five Albums</Modal.Title>
+                                            </Modal.Header>
+                                            <Modal.Body>
+                                                <Row>
+                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                                        <Form.Control type="number" min={1} max={5} value={albumUpdatePosition} onChange={handleAlbumUpdatePositionChange}></Form.Control>
+                                                    <Form.Label style={{fontWeight: "bold"}}>Album:</Form.Label>
+                                                        <select value={albumUpdateSelection} onChange={handleAlbumUpdateSelectionChange}>
+                                                            <option value={''}>Select an Album</option>
+                                                            {albums.map((album) => (
+                                                                <option value={album.name + '-' + album.artist}>{album.name} - {album.artist}</option>
+                                                            ))}
+                                                        </select>
+                                                </Row>
+                                            </Modal.Body>
+                                            <Modal.Footer>
+                                                <Button variant="secondary" onClick={handleCloseUpdateAlbums}>
+                                                    Close
+                                                </Button>
+                                                <Button variant="primary" onClick={handleUpdateAlbums}>
                                                     Submit
                                                 </Button>
                                             </Modal.Footer>

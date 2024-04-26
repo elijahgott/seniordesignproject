@@ -1,15 +1,9 @@
 To-Do List:
 ------------------ MOST IMPORTANT ------------------
 
-	- GET TOP 3 ALBUMS / ARTISTS FROM DATABASE
-	  - maybe just newest 3 albums, artists idk maybe 
-	    artist who released most recently
-	
-	- UPDATE TOP 5 LIST POSITIONS
-	  - only if position is already in database for uid
+	- Hide rating buttons on albums page for guest users
 
-	- UPDATE ALBUM RATINGS IN LISTENED LIST
-	  - only if album already has rating from uid
+	- Hide add to database buttons for guests on albums and artists pages
 
 ------------------ LESS IMPORTANT ------------------
 

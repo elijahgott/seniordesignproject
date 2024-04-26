@@ -28,7 +28,8 @@ insert into Album values('Kids See Ghosts', 'Kids See Ghosts', 'Kids See Ghosts 
 insert into Album values('Lahai', 'Sampha', 'Lahai is the second studio album by English musician Sampha, released on 20 October 2023 through Young, marking his first release in over six years. (Wikipedia)', 'Sampha_Lahai.jpg', '2023-10-20');
 insert into Album values('Time \'n\' Place', 'Kero Kero Bonito', 'Time \'n\' Place is the second studio album by British indie pop band Kero Kero Bonito, released on 1 October 2018 through Polyvinyl Record Co in North America and self-released worldwide. (Wikipedia)', 'KeroKeroBonito_TimenPlace.jpg', '2018-10-1');
 insert into Album values('Atrocity Exhibition', 'Danny Brown', 'Cool Album! Very Good! - Elijah', 'DannyBrown_AtrocityExhibition.jpg', '2016-09-27');
-                    
+
+/*                    
 create table Song(
 					`name` varchar(50) NOT NULL,
                     `artist` varchar(50) NOT NULL,
@@ -69,6 +70,7 @@ insert into Song values('Rose Tint', 'Sampha', 'Lahai');
 -- Some songs from Time 'n' Place
 insert into Song values('Outside', 'Kero Kero Bonito', 'Time \'n\' Place');
 insert into Song values('Time Today', 'Kero Kero Bonito', 'Time \'n\' Place');
+*/
 
 create table User(
 					`uid` int NOT NULL AUTO_INCREMENT,
@@ -81,7 +83,6 @@ create table User(
                     
 insert into User values (1, 'elijah', '1234', '2024-01-17', 'i am elijah this is my bio about me');
 insert into User values (2, 'conner', '1234', '2024-03-25', null);
-insert into User values (3, 'finngalvin', '1234', '2024-03-25', null);
 
 -- Table to store friendships between accounts, this is a one way (maybe more like following?)
 create table UserFriend(
@@ -158,7 +159,6 @@ create Table UserPost(
 insert into UserPost values('1', 'elijah', 'This album is so good I can\'t believe it\'s the same songs released again.', '1_02022024.jpg', '', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
 insert into UserPost values('2', 'conner', 'good stuff', '', 'Time Today' , 'Time \'n\' Place', '2024-04-03', '13:53:00');
 insert into UserPost values('2', 'conner', 'one of my favorite albums right now', '', '', 'Atrocity Exhibition', '2024-04-03', '13:54:00');
-insert into UserPost values('3', 'finngalvin', 'not as good as twosoft but it\'ll do', '', 'Blank Space (Taylor\'s Version)', '1989 (Taylor\'s Version)', '2024-02-02', '08:55:00');
 
 -- User specific top 5 artists, with rankings 1-5
 create Table TopFiveArtists(
@@ -191,11 +191,13 @@ insert into TopFiveAlbums values('1', '2', 'Kids See Ghosts', 'Kids See Ghosts')
 insert into TopFiveAlbums values('1', '3', 'Time \'n\' Place', 'Kero Kero Bonito');
 insert into TopFiveAlbums values('1', '4', 'Lahai', 'Sampha');
 insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor Swift');
-                    
+             
+-- ARTIST QUERIES
+-- select * from Artist INNER JOIN(SELECT artist, AVG(rating) AS average_rating FROM listenedlist GROUP BY artist ORDER BY average_rating DESC LIMIT 3) as T ON Artist.name = T.artist; -- top 3 artists
+             
 -- ALBUM QUERIES
 -- select * from album where releaseDate = (select MAX(releaseDate) from album); -- most recently released album
--- select * from album where releaseDate = (select TOP(3) releaseDate from album); --trying to get top 3 most recently released albums
--- select MIN(releaseDate) from album; -- oldest album DATE
+-- select * from Album INNER JOIN(SELECT album, AVG(rating) AS average_rating FROM listenedlist GROUP BY album ORDER BY average_rating DESC LIMIT 3) as T ON Album.name = T.album; -- top 3 rated albums
 
 -- USER QUERIES
 -- select MAX(uid) from User; -- selects max UID, which is the most recently created user (used when creating a new account to automatically assign a UID)
@@ -205,7 +207,6 @@ insert into TopFiveAlbums values('1', '5', '1989 (Taylor\'s Version)', 'Taylor S
 -- FRIEND QUERIES
 -- select friendID from UserFriend where uid = 1; -- all friends uid for user with uid 1
 -- select ALL username from User where uid IN (select ALL friendID from UserFriend where uid = 1); -- username of all friends of user with uid 1
-
 
 -- LISTS
 -- select * from UserList where uid = 1 AND (NOT (name = 'Top 5 Albums' OR name = 'Top 5 Artists')); -- select all OTHER lists (not top 5s)
