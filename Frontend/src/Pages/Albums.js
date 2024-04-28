@@ -166,7 +166,7 @@ const handleSubmitRating = (event) => {
                         {data.map((d, i) => (    
                                         <Card className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
-                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
                                                 <Card.Link>{d.name}</Card.Link>
                                                 <Card.Title>{d.artist}</Card.Title>
                                                 <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
@@ -183,7 +183,7 @@ const handleSubmitRating = (event) => {
                     {data.map((d, i) => (    
                                     <Card className="shadow" style={{maxWidth:"26rem"}}>
                                         <Card.Body>
-                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
                                             <Card.Link>{d.name}</Card.Link>
                                             <Card.Title>{d.artist}</Card.Title>
                                             <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
@@ -192,23 +192,6 @@ const handleSubmitRating = (event) => {
                     ))}
                 </Row>
                     }
-                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {data.map((d, i) => (    
-                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
-                                            <Card.Body>
-                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
-                                                <Card.Link>{d.name}</Card.Link>
-                                                <Card.Title>{d.artist}</Card.Title>
-                                                <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
-                                            </Card.Body>
-                                            <Card.Footer>
-                                                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                                    <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
-                                                </div>
-                                            </Card.Footer>
-                                        </Card>
-                        ))}
-                    </Row>
                 </Container>
             </header>
     </div>

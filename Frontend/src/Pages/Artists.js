@@ -77,7 +77,7 @@ function Artists( {currentUser} ){
                         {data.map((d, i) => (    
                                         <Card className="shadow" style={{maxWidth:"26rem"}} border="none">
                                             <Card.Body>
-                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
                                                 <Card.Link>{d.name}</Card.Link>
                                                 <Card.Text style={{fontSize: 20}}>{d.bio}</Card.Text>
                                             </Card.Body>
