@@ -61,9 +61,16 @@ function Artists( {currentUser} ){
             <Container style={{marginBottom: 15}}>
                     <Row style={{marginTop: 10}}>
                         <Col>
+                        {currentUser ? (
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Link to="/AddArtist"><Button style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
+                        ) : 
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Button disabled style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
+                            </Card>
+                        }
+                            
                         </Col>
                     </Row>
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
@@ -71,7 +78,7 @@ function Artists( {currentUser} ){
                                         <Card className="shadow" style={{maxWidth:"26rem"}} border="none">
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
-                                                <Card.Title style={{fontSize: 30}}>{d.name}</Card.Title>
+                                                <Card.Link>{d.name}</Card.Link>
                                                 <Card.Text style={{fontSize: 20}}>{d.bio}</Card.Text>
                                             </Card.Body>
                                         </Card>

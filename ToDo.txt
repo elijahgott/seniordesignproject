@@ -1,9 +1,6 @@
 To-Do List:
 ------------------ MOST IMPORTANT ------------------
 
-	- Hide rating buttons on albums page for guest users
-
-	- Hide add to database buttons for guests on albums and artists pages
 
 ------------------ LESS IMPORTANT ------------------
 

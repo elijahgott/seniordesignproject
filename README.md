@@ -23,6 +23,8 @@ Due to myself having no prior experience with JavaScript or React, and very litt
 - Passwords are stored in database
 - Refreshing the page signs the user out
 - Unable to upload images for profile pictures, artist photos, or album cover photos. 
+- When entering a photo file name for Artists or Albums that is not present in the /MusicImages folder, the Artists or Albums page will crash. 
+    - To avoid this, only enter a file name that is already present in the /MusicImages folder, or enter no file name at all. 
 
 ### Planned Features
 
@@ -31,6 +33,7 @@ With further development time, I would like to implement many more features to t
 - Scrape data from Spotify for artists, albums, and potentially songs.
 - Display album tracklists
 - Add DMs between users
+- Add ability for users to review albums, rather than just rate them. 
 
 ### Getting Started
 
