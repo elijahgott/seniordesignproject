@@ -78,3 +78,6 @@ With further development time, I would like to implement many more features to t
         - The account I've used for testing is:
             username: elijah
             password: 1234
+    - NOTE
+        - There is a rare issue where the XAMPP MySQL database gives an error and will not start. 
+           The only solution I have found for this is to uninstall and reinstall XAMPP. 
