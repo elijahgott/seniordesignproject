@@ -12,7 +12,7 @@ This app was designed using React and React Bootstrap, so many of the smaller ae
 
 ### Technical Details
 
-This project uses React (https://react.dev/) for the Frontend, Javascript for the Backend, and React Bootstrap (https://react-bootstrap.netlify.app/) and CSS for some styling.  
+This project uses React (https://react.dev/) for the Frontend, Javascript for the Backend, and React Bootstrap (https://react-bootstrap.netlify.app/) and CSS for the styling.  
 The SQL database was created using MySQL (https://www.mysql.com/), and XAMPP (https://www.apachefriends.org/) is used to run a local Apache server and a local MySQL server.  
 To run the local server to view/debug the webpages, NPM is used (https://www.npmjs.com/).
 

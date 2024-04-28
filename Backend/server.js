@@ -259,6 +259,15 @@ app.get('/topthreealbums', (req, res)=> {
   })
 })
 
+// get 3 most recently released albums
+app.get('/newalbums', (req, res)=> {
+  const sql = "select * from Album ORDER BY releaseDate DESC LIMIT 3;";
+  db.query(sql, (err, data) => {
+      if(err) return res.json(err);
+      return res.json(data);
+  })
+})
+
 // handles the insertion of a new album into the database
 app.post('/submitalbum', (req, res)=> {
     //get data from forms and add to artists table
