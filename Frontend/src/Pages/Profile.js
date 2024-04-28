@@ -334,7 +334,6 @@ function Profile({currentUser}){
                             {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
                             <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
                             <h1>{currentUser.username}'s Profile</h1>
-                            <p>maybe throw a nav here with like friends and stuff, maybe not</p>
                         </Card>
                     </Row>
 
