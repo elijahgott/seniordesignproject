@@ -1,15 +1,6 @@
 To-Do List:
 ------------------ MOST IMPORTANT ------------------
 
-	- FIX TOP 5 LISTS / LISTENED LIST
-	  - only allow 1 item per position (top 5)
-	  - only allow 1 entry per album (listened list)
-
-	- GET TOP 3 ALBUMS / ARTISTS FROM DATABASE
-	  - maybe just newest 3 albums, artists idk maybe 
-	    artist who released most recently
-
-	- UPDATE PROFILE / BIO IN APP
 
 ------------------ LESS IMPORTANT ------------------
 

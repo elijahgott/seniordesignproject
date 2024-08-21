@@ -39,7 +39,6 @@ function AddArtist( {currentUser} ){
             console.log(data);
             alert('Successfully Added Artist');
             navigate('/artists');
-            // Handle success message
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);

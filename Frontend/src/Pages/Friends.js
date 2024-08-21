@@ -138,7 +138,7 @@ function Friends( {currentUser} ){
                     <Row>
                         <Card className="mainBody shadow">
                             <Card.Body>
-                                <h1>{currentUser.username}'s Friends List <Button onClick={handleShowAdd}>Add Friend</Button></h1>
+                                <h1>{currentUser.username}'s Friends List <Button style={{marginBottom: 5}} onClick={handleShowAdd}>Add Friend</Button></h1>
                                 <Modal show={showAdd} onHide={handleCloseAdd} backdrop="static">
                                         <Form>
                                             <Modal.Header closeButton>
@@ -171,7 +171,7 @@ function Friends( {currentUser} ){
                                     {friends.map((friend) => (
                                         <Card className="shadow" style={{marginBottom: 10}} key={friend.uid}>
                                             <Card.Body>
-                                                <Card.Title style={{fontSize: 30, fontWeight: "bold"}}>{friend.username} <Button variant="danger" onClick={() => handleRemove(friend.uid)}>Remove Friend</Button></Card.Title>
+                                                <Card.Title style={{fontSize: 30, fontWeight: "bold"}}>{friend.username} <Button style={{marginBottom: 5}} variant="danger" onClick={() => handleRemove(friend.uid)}>Remove Friend</Button></Card.Title>
                                                 <Card.Text style={{fontSize: 20, textIndent: 5}}>Bio: {friend.bio}</Card.Text>
                                             </Card.Body>
                                             <Card.Footer style={{fontSize: 15, textAlign: "center"}}>Date Joined: {friend.date_joined}</Card.Footer>

@@ -56,7 +56,7 @@ function SignIn( {onSignIn} ){
                             <input type="password" placeholder='Enter Password' className='form-control' value={password} onChange={(e) => setPassword(e.target.value)}/>
                         </div>
                         <div className='mb-2'>
-                            <input type='checkbox' className='custom-control custom-checkbox' id='check' />
+                            <input type='checkbox' className='custom-control custom-checkbox' id='check' disabled/>
                             <label style={{fontSize: 18}} htmlFor='check' className='custom-input-label ms-2'>Remember Me</label>
                         </div>
                         <div className='d-grid'>

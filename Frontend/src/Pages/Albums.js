@@ -27,6 +27,15 @@ function Albums( {currentUser} ){
         .catch(err => console.log(err));
   }, [])
 
+  const [topThreeAlbums, setTopThreeAlbums] = useState([])
+
+  useEffect(()=>{
+      fetch('http://localhost:8081/topthreealbums')
+      .then(res => res.json())
+      .then(topThreeAlbums => setTopThreeAlbums(topThreeAlbums))
+      .catch(err => console.log(err));
+}, [])
+
 //for rating modal
 const [showRating, setShowRating] = useState(false);
 const handleCloseRating = () => setShowRating(false);
@@ -44,9 +53,6 @@ const [album, setAlbum] = useState('');
 const [artist, setArtist] = useState('');
 const dateAdded = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
 const [rating, setRating] = useState('');
-
-console.log("album: " + album);
-console.log("artist: " + artist);
 
 //handle starting rating - pass album and artist data from data.map
 const handleStartRating = (albumPar, artistPar) => {
@@ -96,58 +102,45 @@ const handleSubmitRating = (event) => {
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginTop: 5}}>
+                <Container style={{marginTop: 10}}>
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Top Albums (Still need to get top 3 from database)</h1>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Top Albums</h1>
                             </Card>
                         </Col>
                     </Row>
-                    <Row style={{marginTop: 10}}>
-                        <Col>
-                            <Card className="shadow">
-                                <Card.Body>
-                                    <Card.Img variant="top" src={require('./../MusicImages/TaylorSwift_1989(Taylor\'s_Version).jpg')}></Card.Img>
-                                    <Card.Link href="#cardlink">1989 (Taylor's Version)</Card.Link>
-                                    <Card.Title>Taylor Swift</Card.Title>
-                                    <Card.Subtitle>#1 Album</Card.Subtitle>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card className="shadow">
-                                <Card.Body>
-                                    <Card.Img style={{ justifyContent: "center", display: "flex"}}variant="top" src={require('./../MusicImages/Sampha_Lahai.jpg')}></Card.Img>
-                                    <Card.Link href="#cardlink">Lahai</Card.Link>
-                                    <Card.Title>Sampha</Card.Title>
-                                    <Card.Subtitle>#2 Album</Card.Subtitle>
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                        <Col>
-                            <Card className="shadow">
-                                <Card.Body>
-                                    <Card.Img variant="top" src={require('./../MusicImages/KidsSeeGhosts_KidsSeeGhosts.jpg')}></Card.Img>
-                                    <Card.Link href="#cardlink">Kids See Ghosts</Card.Link>
-                                    <Card.Title>Kids See Ghosts</Card.Title>
-                                    <Card.Subtitle>#3 Album</Card.Subtitle>
-                                </Card.Body>
-                            </Card>
-                        </Col>
+                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        {topThreeAlbums.map((albums, i) => (    
+                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                            <Card.Body>
+                                                <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                                <Card.Link>{albums.name}</Card.Link>
+                                                <Card.Title>{albums.artist}</Card.Title>
+                                                <Card.Subtitle>#{i+1} Album</Card.Subtitle>
+                                                <Card.Subtitle style={{marginTop: 3}}>Average Rating: {albums.average_rating}</Card.Subtitle>
+                                                <Card.Text style={{fontSize: 20}}>{albums.description}</Card.Text>
+                                            </Card.Body>
+                                        </Card>
+                        ))}
                     </Row>
                 </Container>
                     
-                <Container style={{marginTop: 20}}>
+                <Container style={{marginTop: 10, marginBottom: 15}}>
                     <Row>
                         <Col>
+                        {currentUser ? (
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Link to="/AddAlbum"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Link to="/AddAlbum"><Button style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
+                        ) :
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Button disabled style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
+                            </Card>
+                        }
+                            
                         </Col>
                     </Row>
-                </Container>
-                <Container>
                     <Modal show={showRating} onHide={handleCloseRating} backdrop="static">
                         <Form>
                             <Modal.Header closeButton>
@@ -169,24 +162,36 @@ const handleSubmitRating = (event) => {
                                 </Modal.Footer>
                         </Form>
                     </Modal>
-                    <Row style={{marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                    {currentUser ? (<Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        {data.map((d, i) => (    
+                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                            <Card.Body>
+                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
+                                                <Card.Link>{d.name}</Card.Link>
+                                                <Card.Title>{d.artist}</Card.Title>
+                                                <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
+                                            </Card.Body>
+                                            <Card.Footer>
+                                                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                                    <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
+                                                </div>
+                                            </Card.Footer>
+                                        </Card>
+                        ))}
+                    </Row>) :
+                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
                     {data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"26rem", marginRight: 16, marginBottom: 10}}>
+                                    <Card className="shadow" style={{maxWidth:"26rem"}}>
                                         <Card.Body>
-                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img>
+                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
                                             <Card.Link>{d.name}</Card.Link>
                                             <Card.Title>{d.artist}</Card.Title>
                                             <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
                                         </Card.Body>
-                                        <Card.Footer>
-                                            <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                                <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
-                                            </div>
-                                        </Card.Footer>
                                     </Card>
                     ))}
-                    
-                    </Row>
+                </Row>
+                    }
                 </Container>
             </header>
     </div>

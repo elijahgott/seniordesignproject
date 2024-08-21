@@ -97,6 +97,23 @@ app.get('/users/:uid', (req, res) => {
     });
   });
 
+// handle updating user
+app.put('/updateuser/:uid', (req, res) => {
+  const uid = req.params.uid;
+  const { newUsername, bio } = req.body;
+
+  const sql = 'update User set username = ?, bio = ? where uid = ?;';
+
+  db.query(sql, [newUsername, bio, uid], (err, results) => {
+    if (err) {
+      console.error('Error executing query: ', err);
+      res.status(500).json({ message: 'Error updating user' });
+    } else {
+      res.status(200).json({ message: 'User updated successfully' });
+    }
+  });
+});
+
   // handle fetching friends based on user ID
 app.get('/friends/:uid', (req, res) => {
   const userId = req.params.uid;
@@ -233,6 +250,24 @@ app.get('/albums', (req, res)=> {
     })
 })
 
+// get top 3 highest rated albums (on average)
+app.get('/topthreealbums', (req, res)=> {
+  const sql = "select * from Album INNER JOIN(SELECT album, AVG(rating) AS average_rating FROM listenedlist GROUP BY album ORDER BY average_rating DESC LIMIT 3) as T ON Album.name = T.album";
+  db.query(sql, (err, data) => {
+      if(err) return res.json(err);
+      return res.json(data);
+  })
+})
+
+// get 3 most recently released albums
+app.get('/newalbums', (req, res)=> {
+  const sql = "select * from Album ORDER BY releaseDate DESC LIMIT 3;";
+  db.query(sql, (err, data) => {
+      if(err) return res.json(err);
+      return res.json(data);
+  })
+})
+
 // handles the insertion of a new album into the database
 app.post('/submitalbum', (req, res)=> {
     //get data from forms and add to artists table
@@ -263,6 +298,15 @@ app.get('/artists', (req, res)=> {
     })
 })
 
+// gets top 3 rated artists in database
+app.get('/topthreeartists', (req, res)=> {
+  const sql = "select * from Artist INNER JOIN(SELECT artist, AVG(rating) AS average_rating FROM listenedlist GROUP BY artist ORDER BY average_rating DESC LIMIT 3) as T ON Artist.name = T.artist";
+  db.query(sql, (err, data) => {
+      if(err) return res.json(err);
+      return res.json(data);
+  })
+})
+
 // handles the insertion of a new artist into the database
 app.post('/submitartist', (req, res)=> {
     //get data from forms and add to artists table
@@ -284,7 +328,8 @@ app.post('/submitartist', (req, res)=> {
     })
 })
 
-// gets all songs in database (unused)
+/*
+// gets all songs in database
 app.get('/songs', (req, res)=> {
     const sql = "SELECT * FROM song";
     db.query(sql, (err, data) => {
@@ -292,6 +337,7 @@ app.get('/songs', (req, res)=> {
         return res.json(data);
     })
 })
+*/
 
 // gets newest album in database (would like to get top 3 newest)
 app.get('/new', (req, res)=> {
@@ -320,6 +366,23 @@ app.post('/submitlist', (req, res)=> {
     })
 })
 
+// handles updating an album's rating in a user's Listened List
+app.post('/updatelist', (req, res)=> {
+  //get data from forms and update listenedlist table
+  const { uid, albumUpdate, artistUpdate, dateUpdated, ratingUpdate } = req.body;
+  const sql = `update ListenedList set rating = ?, dateAdded = ? where uid = ? AND album = ? AND artist = ?`;
+  db.query(sql, [ratingUpdate, dateUpdated, uid, albumUpdate, artistUpdate], (err, results)=> {
+      if(err){
+          console.error("Error inserting data: ", err);
+          res.status(500).send("Error inserting data")
+      }
+      else{
+          console.log("Successfully Updated Album Rating in Listened List!");
+          res.status(200).send("Data updated successfully")
+      }
+  })
+})
+
 // handles the addition of an artist into a user's Top 5 List
 app.post('/submittopfiveartists', (req, res)=> {
   //get data from forms and add to topfiveartists table
@@ -338,6 +401,23 @@ app.post('/submittopfiveartists', (req, res)=> {
   })
 })
 
+// handles the updating a position of a user's Top 5 List
+app.post('/updatetopfiveartists', (req, res)=> {
+  //get data from forms and add to topfiveartists table
+  const { uid, artistUpdatePosition, artistUpdateSelection } = req.body;
+  const sql = `update TopFiveArtists set name = ? where uid = ? and position = ?`;
+  db.query(sql, [artistUpdateSelection, uid, artistUpdatePosition], (err, results)=> {
+      if(err){
+          console.error("Error updating data: ", err);
+          res.status(500).send("Error updating data")
+      }
+      else{
+          console.log("Successfully Updated Position on Top 5 List!");
+          res.status(200).send("Data updated successfully")
+      }
+  })
+})
+
 // handles the addition of an album into a user's Top 5 List
 app.post('/submittopfivealbums', (req, res)=> {
   //get data from forms and add to topfiveartists table
@@ -350,8 +430,25 @@ app.post('/submittopfivealbums', (req, res)=> {
           res.status(500).send("Error inserting data")
       }
       else{
-          console.log("Successfully Inserted Artist into Top 5 List!");
+          console.log("Successfully Inserted Album into Top 5 List!");
           res.status(200).send("Data inserted successfully")
+      }
+  })
+})
+
+// handles updating a position on a user's Top 5 List
+app.post('/updatetopfivealbums', (req, res)=> {
+  //get data from forms and add to topfiveartists table
+  const { uid, albumUpdatePosition, album, artist} = req.body;
+  const sql = `update TopFiveAlbums set name = ?, artistName = ? where uid = ? and position = ?`;
+  db.query(sql, [album, artist, uid, albumUpdatePosition], (err, results)=> {
+      if(err){
+          console.error("Error inserting data: ", err);
+          res.status(500).send("Error inserting data")
+      }
+      else{
+          console.log("Successfully Updated Position of Top 5 List!");
+          res.status(200).send("Data updated successfully")
       }
   })
 })

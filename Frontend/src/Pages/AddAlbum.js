@@ -86,7 +86,7 @@ function AddAlbum( {currentUser} ){
                                     <Form.Label>Attach Photo</Form.Label>
                                     <Form.Control type="file" disabled="true"></Form.Control>
 
-                                    <Form.Label style={{fontSize: 25}}>Artist Photo File Name (include file extension)*</Form.Label>
+                                    <Form.Label style={{fontSize: 25}}>Album Photo File Name (include file extension)*</Form.Label>
                                     <Form.Control type="textarea" name="photo" value={photo} onChange={(e) => setPhoto(e.target.value)}></Form.Control>
                                     <p style={{fontSize: 15}}>* denotes required field.</p>
                                 </Form.Group>

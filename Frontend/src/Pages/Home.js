@@ -61,12 +61,12 @@ function Home( {currentUser} ){
                                 <HomeCarousel />
 
                                 {currentUser ? (
-                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
-                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
+                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button style={{marginBottom: 5}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
+                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button style={{marginBottom: 5}} disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
                                 
                                 
                                 {posts.map((post) => (
-                                    <Card style={{minWidth: "65rem", marginTop: 10, marginBottom: 10, alignSelf: "center"}} border="secondary">
+                                    <Card style={{width: "65rem", marginTop: 10, marginBottom: 10, alignSelf: "center"}} border="secondary">
                                         <Card.Body>
                                             {/*<Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img> havent implemented post photos*/} 
                                             <Card.Link style={{fontWeight: "bold"}}>{post.username}</Card.Link>
