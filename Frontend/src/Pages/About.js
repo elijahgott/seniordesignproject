@@ -15,17 +15,11 @@ function About( {currentUser} ){
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginBottom: 15}}>
+                <Container style={{marginBottom: 15, minHeight: '100dvh'}}>
                     <Row>
-                        <Col>
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem", marginTop: 10}}>
-                                <h1 style={{marginTop: 10, textAlign: "center"}}>About <Link to="/">MUSIC APP</Link></h1>
-                            </Card>
-                        </Col>
-                    </Row>
-                    <Row>
-                        <Card className="mainBody shadow" style={{maxWidth: "81rem", marginTop: 10, marginLeft: 12}}>
+                        <Card className="mainBody shadow" style={{maxWidth: "81rem", marginTop: 10, paddingTop: 15, paddingLeft: 40, paddingRight: 40, paddingBottom: 40}}>
                             <Col style={{width: "70rem", alignSelf: "center"}}>
+                                <h1 style={{marginTop: 10, textAlign: "center"}}>About <Link to="/" style={{textDecoration: "underline"}}>Music Tracker</Link></h1>
                                 <h1 style={{marginTop: 10}}>General</h1>
                                 <p style={{textIndent: 25, fontSize: 25}}>This is my unnamed senior design project, hence the "Music App" title. It is inspired by <a href="https://letterboxd.com/">Letterboxd</a>, which I have found useful for tracking the movies I want to watch and have already watched, and rating them. In a previous course, a partner and I made a similar, yet very simple, application for video games, so it felt natural for my Senior Design Project to be in the same vein, but expanded upon.</p>
                                 <p style={{textIndent: 25, fontSize: 25}}>The main purpose of this project is to aid in tracking and rating albums you have listened to. However, there are plenty of other functions that naturally coincide with this main objective. For example, creating and signing into accounts, updating info about these accounts, creating lists for each account, adding new albums and artists into the database, and many more functions were needed just for the basic functionality of the project.</p>

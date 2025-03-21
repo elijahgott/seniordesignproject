@@ -102,3 +102,13 @@ a:hover{
 .no-border{
   border: none;
 }
+
+h1{
+  letter-spacing: 2px;
+  font-weight: bold;
+}
+
+h2{
+  letter-spacing: 1px;
+  font-weight: bold;
+}

@@ -36,6 +36,11 @@ function Albums( {currentUser} ){
       .catch(err => console.log(err));
 }, [])
 
+let hasFetched = false;
+if(topThreeAlbums.length > 0){
+    hasFetched = true;
+}
+
 //for rating modal
 const [showRating, setShowRating] = useState(false);
 const handleCloseRating = () => setShowRating(false);
@@ -102,7 +107,7 @@ const handleSubmitRating = (event) => {
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginTop: 10}}>
+                <Container style={{marginTop: 10, minHeight: '100dvh'}}>
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
@@ -111,7 +116,8 @@ const handleSubmitRating = (event) => {
                         </Col>
                     </Row>
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {topThreeAlbums.map((albums, i) => (    
+                        {hasFetched ?
+                        topThreeAlbums.map((albums, i) => (    
                                         <Card className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
@@ -122,12 +128,39 @@ const handleSubmitRating = (event) => {
                                                 <Card.Text style={{fontSize: 20}}>{albums.description}</Card.Text>
                                             </Card.Body>
                                         </Card>
-                        ))}
+                        )) :
+                        <>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Dirt.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Dirt</Card.Link>
+                                    <Card.Title>Alice In Chains</Card.Title>
+                                    <Card.Subtitle>Release Date: September 29, 1992</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Alice in Chains' second studio album.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Facelift.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Facelift</Card.Link>
+                                    <Card.Title>Alice In Chains</Card.Title>
+                                    <Card.Subtitle>Release Date: August 21, 1990</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Alice in Chains' debut studio album.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/Nirvana_Bleach.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Bleach</Card.Link>
+                                    <Card.Title>Nirvana</Card.Title>
+                                    <Card.Subtitle>Release Date: June 15, 1989</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Nirvana's debut studio album.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </>
+                    }
                     </Row>
-                </Container>
-                    
-                <Container style={{marginTop: 10, marginBottom: 15}}>
-                    <Row>
+                    <Row style={{marginTop: 30}}>
                         <Col>
                         {currentUser ? (
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>

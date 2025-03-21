@@ -38,9 +38,9 @@ function MyNav( {currentUser} ){
   }; 
 
     return(
-        <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark">
+        <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark" style={{paddingTop: 20, paddingBottom: 20}}>
           <Container>
-                <Navbar.Brand style={{fontWeight: 'bold', color: "lightgray"}}><Link to="/">Music App</Link></Navbar.Brand>
+                <Navbar.Brand style={{fontWeight: 'bold', color: "lightgray"}}><Link to="/">Music Tracker</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">

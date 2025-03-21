@@ -53,10 +53,10 @@ function Home( {currentUser} ){
                 <Container style={{marginTop:5, marginBottom: 15}}>
                     <Row>
                         <Col>
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard shadow" style={{maxWidth:"81rem", minHeight: '100dvh'}}>
                                 {currentUser ? (
-                                    <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, {currentUser.username}</h1>
-                                ) : <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>Welcome, Guest</h1>}
+                                    <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"20px", fontWeight: "bold"}}>Welcome, {currentUser.username}</h1>
+                                ) : <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"20px", fontWeight: "bold"}}>Welcome, Guest</h1>}
                                 
                                 <HomeCarousel />
 

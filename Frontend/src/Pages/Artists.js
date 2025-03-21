@@ -32,11 +32,16 @@ function Artists( {currentUser} ){
         .catch(err => console.log(err));
     }, [])
 
+    let hasFetched = false;
+    if(topThreeArtists.length > 0){
+        hasFetched = true;
+    }
+
     return(
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-            <Container style={{marginTop: 10}}>
+            <Container style={{marginTop: 10, minHeight: '100dvh'}}>
                     <Row>
                         <Col>
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
@@ -45,7 +50,8 @@ function Artists( {currentUser} ){
                         </Col>
                     </Row>
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {topThreeArtists.map((artists, i) => (    
+                        {hasFetched ?
+                        topThreeArtists.map((artists, i) => (    
                                         <Card className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${artists.photo}`)} style={{maxWidth: 500}}></Card.Img>
@@ -55,11 +61,39 @@ function Artists( {currentUser} ){
                                                 <Card.Text style={{fontSize: 20}}>{artists.bio}</Card.Text>
                                             </Card.Body>
                                         </Card>
-                        ))}
+                        )):
+                        <>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/aliceinchains.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Alice in Chains</Card.Link>
+                                    <Card.Subtitle>#1 Artist</Card.Subtitle>
+                                    <Card.Subtitle style={{marginTop: 3}}>Average Rating: 100</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Alice in Chains is an American rock band formed in Seattle in 1987.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/nirvana.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Nirvana</Card.Link>
+                                    <Card.Subtitle>#2 Artist</Card.Subtitle>
+                                    <Card.Subtitle style={{marginTop: 3}}>Average Rating: 95</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Nirvana was an American rock band formed in Aberdeen, Washington, in 1987. Founded by lead singer and guitarist Kurt Cobain and bassist Krist Novoselic.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                <Card.Body>
+                                    <Card.Img variant="top" src={require(`./../MusicImages/dannybrown.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                    <Card.Link>Danny Brown</Card.Link>
+                                    <Card.Subtitle>#3 Artist</Card.Subtitle>
+                                    <Card.Subtitle style={{marginTop: 3}}>Average Rating: 90</Card.Subtitle>
+                                    <Card.Text style={{fontSize: 20}}>Daniel Dewan Sewell, better known as Danny Brown, is an American rapper, singer and songwriter from Detroit, Michigan.</Card.Text>
+                                </Card.Body>
+                            </Card>
+                        </>
+                    }
                     </Row>
-                </Container>
-            <Container style={{marginBottom: 15}}>
-                    <Row style={{marginTop: 10}}>
+                    <Row style={{marginTop: 30}}>
                         <Col>
                         {currentUser ? (
                             <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
