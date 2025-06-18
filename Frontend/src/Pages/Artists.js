@@ -46,18 +46,18 @@ function Artists( {currentUser} ){
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-            <Container style={{marginTop: 10, minHeight: '100dvh'}}>
+            <Container className="containerCard shadow">
                     <Row>
                         <Col>
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Top Artists</h1>
+                            <Card className="no-border" style={{maxWidth:"81rem"}}>
+                                <h1 className="title">Top Artists</h1>
                             </Card>
                         </Col>
                     </Row>
-                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                    <Row className="cardRow">
                         {hasFetched ?
                         topThreeArtists.map((artists, i) => (    
-                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                        <Card style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${artists.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                                 <Card.Link>{artists.name}</Card.Link>
@@ -68,7 +68,7 @@ function Artists( {currentUser} ){
                                         </Card>
                         )):
                         <>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/aliceinchains.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Alice in Chains</Card.Link>
@@ -77,7 +77,7 @@ function Artists( {currentUser} ){
                                     <Card.Text style={{fontSize: 20}}>Alice in Chains is an American rock band formed in Seattle in 1987.</Card.Text>
                                 </Card.Body>
                             </Card>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/nirvana.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Nirvana</Card.Link>
@@ -86,7 +86,7 @@ function Artists( {currentUser} ){
                                     <Card.Text style={{fontSize: 20}}>Nirvana was an American rock band formed in Aberdeen, Washington, in 1987. Founded by lead singer and guitarist Kurt Cobain and bassist Krist Novoselic.</Card.Text>
                                 </Card.Body>
                             </Card>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/dannybrown.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Danny Brown</Card.Link>
@@ -101,20 +101,22 @@ function Artists( {currentUser} ){
                     <Row style={{marginTop: 30}}>
                         <Col>
                         {currentUser ? (
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Link to="/AddArtist"><Button style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         ) : 
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Button disabled style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                             </Card>
                         }
                             
                         </Col>
                     </Row>
+                    
+                    {data.length !== 0 ? 
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
                         {data.map((d, i) => (    
-                                        <Card className="shadow" style={{maxWidth:"26rem"}} border="none">
+                                        <Card style={{maxWidth:"26rem"}} border="none">
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
                                                 <Card.Link>{d.name}</Card.Link>
@@ -123,6 +125,12 @@ function Artists( {currentUser} ){
                                         </Card>
                         ))}
                     </Row>
+                    : 
+                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        <p className="smallText notLoaded">Nothing to see here...</p>
+                    </Row>
+                    }
+                    
             </Container>
 
             </header>

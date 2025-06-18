@@ -203,9 +203,13 @@ h2{
   border-radius: 24px;
   text-align: center;
   background-color: rgba(40, 40, 40, 0.2) !important;
-  border: 2px solid rgba(40, 40, 40, 0.4) !important;
+  border: rgba(40, 40, 40, 0.2) !important;
   padding: 20px 12px;
   margin: 32px auto;
+}
+
+.newFeaturesButton:hover{
+  border: rgba(40, 40, 40, 0.2) !important;
 }
 
 .featuresGrid{
@@ -240,4 +244,9 @@ h2{
 
 .right{
   text-align: right;
+}
+
+.notLoaded{
+  padding: 24px 0;
+  text-align: center;
 }
