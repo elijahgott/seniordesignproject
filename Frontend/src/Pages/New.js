@@ -6,11 +6,16 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from "react-bootstrap/Button";
 
 import MyNav from "../MyComponents/MyNav";
 
 
 function New( {currentUser} ){
+    useEffect(() => {
+            document.title ="Music Tracker - New"
+        }, []);
+
     const [newAlbums, setNewAlbums] = useState([])
 
     useEffect(()=>{
@@ -82,29 +87,41 @@ function New( {currentUser} ){
                             }
                         </Row>
                     </Container>
-                    <Container style={{marginTop: 30, marginBottom: 15}}>
+
+                    <Button className="smallText newFeaturesButton" href="#newFeatures">New Features v</Button>
+
+                    <Container className="containerCard shadow" id="newFeatures">
                         <Row>
                             <Col>
-                                <Card className="headerCard shadow" style={{maxWidth:"81rem", paddingBottom: 30}}>
-                                    <h1 className="title" >New Features</h1>
-                                    <Col style={{maxWidth: "70rem", paddingLeft: 40, paddingRight: 40, alignSelf: "center"}}>
-                                        <h2 style={{marginTop: 10}}>Creating Posts</h2>
-                                        <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Signed-in users are able to create posts and view their friends posts! These posts consist of an album and/or song from that album, and whatever the user wants to write about that album/song. There are plans to allow the user to upload photos as a part of a post, as well.</p>
+                                <Card className="headerCard">
+                                    <h1 className="title">New Features</h1>
+                                    <Col className="featuresGrid" style={{width: "90%", maxWidth: "70rem", paddingLeft: 40, paddingRight: 40, alignSelf: "center"}}>
+                                        <div>
+                                            <h2>Creating Posts</h2>
+                                            <p style={{marginTop: 4, textIndent: 20, fontSize: 24}}>Signed-in users are able to create posts and view their friends posts! These posts consist of an album and/or song from that album, and whatever the user wants to write about that album/song. There are plans to allow the user to upload photos as a part of a post, as well.</p>
+                                        </div>
 
-                                        <h2 style={{marginTop: 10}}>Adding Artists and Albums to Database</h2>
-                                        <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Signed-in users are able to add new artists and albums to the database! For the time being, users cannot upload artist photos or album photos, meaning a default photo will be used. There are plans to allow users to upload their own photos, however.</p>
+                                        <div>
+                                            <h2>Adding Artists and Albums to Database</h2>
+                                            <p style={{marginTop: 4, textIndent: 20, fontSize: 24}}>Signed-in users are able to add new artists and albums to the database! For the time being, users cannot upload artist photos or album photos, meaning a default photo will be used. There are plans to allow users to upload their own photos, however.</p>
+                                        </div>
 
-                                        <h2 style={{marginTop: 10}}>Rating Albums</h2>
-                                        <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Signed-in users are able to rate albums they have lsitened to, on a scale of 1-10, which will also add that album onto their Listened List, which is a list of all albums that the user has listened to and rated. Users are also able to edit their ratings of albums already on their listened list.</p>
-
-                                        <h2 style={{marginTop: 10}}>Adding Friends</h2>
-                                        <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Users can add friends, which will allow the user to view their friends' posts. They are also able to un-add a friend, causing their posts to no longer be on the user's home page.</p>
-
-                                        <h2 style={{marginTop: 10}}>Editing Profiles</h2>
-                                        <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Signed-in users can edit their basic profile information, such as their username and bio, and these changes will take effect for their friends, and on their previous posts.</p>
-
-                                        <h2 style={{marginTop: 10}}>And More!</h2>
+                                        <div>
+                                            <h2>Rating Albums</h2>
+                                            <p style={{marginTop: 4, textIndent: 20, fontSize: 24}}>Signed-in users are able to rate albums they have lsitened to, on a scale of 1-10, which will also add that album onto their Listened List, which is a list of all albums that the user has listened to and rated. Users are also able to edit their ratings of albums already on their listened list.</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <h2>Adding Friends</h2>
+                                            <p style={{marginTop: 4, textIndent: 20, fontSize: 24}}>Users can add friends, which will allow the user to view their friends' posts. They are also able to un-add a friend, causing their posts to no longer be on the user's home page.</p>
+                                        </div>
+                                        
+                                        <div>
+                                            <h2>Editing Profiles</h2>
+                                            <p style={{marginTop: 4, textIndent: 20, fontSize: 24}}>Signed-in users can edit their basic profile information, such as their username and bio, and these changes will take effect for their friends, and on their previous posts.</p>
+                                        </div>
                                     </Col>
+                                    <h2 style={{marginTop: 24, marginBottom: 16, textAlign: "center"}}>And More!</h2>
                                 </Card>
                             </Col>
                         </Row>

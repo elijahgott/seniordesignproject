@@ -19,6 +19,10 @@ import MyNav from "../MyComponents/MyNav";
 /* app crashes when user not signed in and tries to access profile page */
 
 function Profile({currentUser}){
+    useEffect(() => {
+            document.title ="Music Tracker - Profile"
+        }, []);
+
     var uid;
     if(! currentUser){
         uid = null;

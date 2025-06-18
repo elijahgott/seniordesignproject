@@ -15,8 +15,13 @@ import {Link} from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
+import SignIn from "./SignIn";
 
 function Home( {currentUser} ){
+    useEffect(() => {
+        document.title ="Music Tracker - Home"
+    }, []);
+
     var uid;
     if(! currentUser){
         uid = null;
@@ -61,9 +66,13 @@ function Home( {currentUser} ){
                                 <HomeCarousel />
 
                                 {currentUser ? (
-                                    <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Link to="/CreatePost"><Button style={{marginBottom: 5}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
-                                ) : <h2 style={{textAlign:"center", marginBottom: 10, marginTop: 10}}>Posts <Button style={{marginBottom: 5}} disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h2>}
-                                
+                                    <h2 className="postsTitle">Posts <Link to="/CreatePost"><Button style={{marginBottom: 5}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h2>
+                                ) : 
+                                <>
+                                    <h2 className="postsTitle">Posts <Button style={{marginBottom: 5}} disabled><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button>
+                                    </h2>
+                                    <p className="smallText"><Link to="/SignIn">Sign in</Link> to see posts.</p>
+                                </>}   
                                 
                                 {posts.map((post) => (
                                     <Card style={{width: "65rem", marginTop: 10, marginBottom: 10, alignSelf: "center"}} border="secondary">

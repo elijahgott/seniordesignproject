@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -9,6 +10,9 @@ import Card from 'react-bootstrap/Card';
 import MyNav from "../MyComponents/MyNav";
 
 function SearchResults( {currentUser} ) {
+    useEffect(() => {
+        document.title ="Music Tracker - Results"
+    }, []);
 
     const search = JSON.parse(localStorage.getItem('search')) || [];
 

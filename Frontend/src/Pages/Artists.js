@@ -14,6 +14,10 @@ import {Link} from 'react-router-dom'
 import MyNav from "../MyComponents/MyNav";
 
 function Artists( {currentUser} ){
+    useEffect(() => {
+            document.title ="Music Tracker - Artists"
+        }, []);
+
     const [data, setData] = useState([])
 
     useEffect(()=>{

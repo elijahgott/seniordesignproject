@@ -6,6 +6,10 @@ import {Link} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
 function SignUp(){
+  useEffect(() => {
+        document.title ="Music Tracker - Sign Up"
+    }, []);
+
     const currentDate = new Date();
     const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
     const navigate = useNavigate();

@@ -17,6 +17,10 @@ import Form from "react-bootstrap/Form";
 import MyNav from "../MyComponents/MyNav";
 
 function Albums( {currentUser} ){
+    useEffect(() => {
+        document.title ="Music Tracker - Albums"
+    }, []);
+
     const currentDate = new Date();
     const [data, setData] = useState([])
 

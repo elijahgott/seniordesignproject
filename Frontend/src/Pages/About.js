@@ -1,4 +1,5 @@
 import React from "react";
+import { useState, useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
@@ -11,6 +12,10 @@ import {Link} from 'react-router-dom';
 import MyNav from "../MyComponents/MyNav";
 
 function About( {currentUser} ){
+    useEffect(() => {
+            document.title ="Music Tracker - About"
+        }, []);
+
     return(
         <div>
             <MyNav currentUser={currentUser}/>

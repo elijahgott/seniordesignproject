@@ -1,10 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useState, useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 
 function SignIn( {onSignIn} ){
+  useEffect(() => {
+          document.title ="Music Tracker - Sign In"
+      }, []);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
