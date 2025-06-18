@@ -113,7 +113,7 @@ function Artists( {currentUser} ){
                         </Col>
                     </Row>
                     
-                    {data.length !== 0 ? 
+                    {hasFetched ? 
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
                         {data.map((d, i) => (    
                                         <Card style={{maxWidth:"26rem"}} border="none">

@@ -112,18 +112,18 @@ const handleSubmitRating = (event) => {
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginTop: 10, minHeight: '100dvh'}}>
+                <Container className="containerCard shadow">
                     <Row>
                         <Col>
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Top Albums</h1>
+                            <Card className="no-border" style={{maxWidth:"81rem"}}>
+                                <h1 className="title">Top Albums</h1>
                             </Card>
                         </Col>
                     </Row>
-                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                    <Row className="cardRow">
                         {hasFetched ?
                         topThreeAlbums.map((albums, i) => (    
-                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                        <Card style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                                 <Card.Link>{albums.name}</Card.Link>
@@ -135,7 +135,7 @@ const handleSubmitRating = (event) => {
                                         </Card>
                         )) :
                         <>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Dirt.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Dirt</Card.Link>
@@ -144,7 +144,7 @@ const handleSubmitRating = (event) => {
                                     <Card.Text style={{fontSize: 20}}>Alice in Chains' second studio album.</Card.Text>
                                 </Card.Body>
                             </Card>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Facelift.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Facelift</Card.Link>
@@ -153,7 +153,7 @@ const handleSubmitRating = (event) => {
                                     <Card.Text style={{fontSize: 20}}>Alice in Chains' debut studio album.</Card.Text>
                                 </Card.Body>
                             </Card>
-                            <Card className="shadow" style={{maxWidth:"26rem"}}>
+                            <Card style={{maxWidth:"26rem"}}>
                                 <Card.Body>
                                     <Card.Img variant="top" src={require(`./../MusicImages/Nirvana_Bleach.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                     <Card.Link>Bleach</Card.Link>
@@ -168,11 +168,11 @@ const handleSubmitRating = (event) => {
                     <Row style={{marginTop: 30}}>
                         <Col>
                         {currentUser ? (
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Link to="/AddAlbum"><Button style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
                             </Card>
                         ) :
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
+                            <Card className="headerCard" style={{maxWidth:"81rem"}}>
                                 <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Button disabled style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                             </Card>
                         }
@@ -201,7 +201,8 @@ const handleSubmitRating = (event) => {
                         </Form>
                     </Modal>
                     {currentUser ? (<Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {data.map((d, i) => (    
+                        {hasFetched ? 
+                            data.map((d, i) => (    
                                         <Card className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
@@ -215,10 +216,17 @@ const handleSubmitRating = (event) => {
                                                 </div>
                                             </Card.Footer>
                                         </Card>
-                        ))}
+                        ))
+                        :
+                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                            <p className="smallText notLoaded">Nothing to see here...</p>
+                        </Row>
+                        }
+                        
                     </Row>) :
                     <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                    {data.map((d, i) => (    
+                        {hasFetched ? 
+                            data.map((d, i) => (    
                                     <Card className="shadow" style={{maxWidth:"26rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
@@ -227,7 +235,13 @@ const handleSubmitRating = (event) => {
                                             <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
                                         </Card.Body>
                                     </Card>
-                    ))}
+                            ))
+                        :
+                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                            <p className="smallText notLoaded">Nothing to see here...</p>
+                        </Row>
+                        }
+                    
                 </Row>
                     }
                 </Container>
