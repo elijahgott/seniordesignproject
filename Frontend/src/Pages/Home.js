@@ -16,6 +16,7 @@ import {Link} from 'react-router-dom';
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
 import SignIn from "./SignIn";
+import MyFooter from "../MyComponents/MyFooter";
 
 function Home( {currentUser} ){
     useEffect(() => {
@@ -89,9 +90,8 @@ function Home( {currentUser} ){
                         </Col>
                     </Row>
                 </Container>
-
         </header>
-                
+        <MyFooter />
     </div>
     )
 }

@@ -9,7 +9,7 @@ import Col from 'react-bootstrap/Col';
 import Button from "react-bootstrap/Button";
 
 import MyNav from "../MyComponents/MyNav";
-
+import MyFooter from "../MyComponents/MyFooter";
 
 function New( {currentUser} ){
     useEffect(() => {
@@ -127,6 +127,7 @@ function New( {currentUser} ){
                         </Row>
                     </Container>
             </header>
+            <MyFooter />
         </div>
     )
 }

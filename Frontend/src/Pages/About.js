@@ -10,6 +10,7 @@ import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
+import MyFooter from "../MyComponents/MyFooter";
 
 function About( {currentUser} ){
     useEffect(() => {
@@ -39,6 +40,7 @@ function About( {currentUser} ){
                     </Row>
                 </Container>
             </header>
+            <MyFooter />
         </div>
     )
 }

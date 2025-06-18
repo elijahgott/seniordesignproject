@@ -66,6 +66,7 @@
 
 .main-body{
   max-width: 85rem;
+  margin-bottom: 24px;
 }
 
 .profile{
@@ -212,4 +213,31 @@ h2{
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   justify-items: center;
+}
+
+.footer{
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  padding: 24px 0;
+  border-top: 8px solid rgb(245, 245, 245);
+}
+
+.footer > h1{
+  font-size: 32px;
+  letter-spacing: 4px;
+  font-weight: bold;
+}
+
+.footerTable{
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.left{
+  text-align: left;
+}
+
+.right{
+  text-align: right;
 }

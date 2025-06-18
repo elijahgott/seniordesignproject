@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col';
 import {Link} from 'react-router-dom'
 
 import MyNav from "../MyComponents/MyNav";
+import MyFooter from "../MyComponents/MyFooter";
 
 function Artists( {currentUser} ){
     useEffect(() => {
@@ -125,6 +126,7 @@ function Artists( {currentUser} ){
             </Container>
 
             </header>
+            <MyFooter />
         </div>
     )
 }

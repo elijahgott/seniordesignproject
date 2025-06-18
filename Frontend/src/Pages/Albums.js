@@ -15,6 +15,7 @@ import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 
 import MyNav from "../MyComponents/MyNav";
+import MyFooter from "../MyComponents/MyFooter";
 
 function Albums( {currentUser} ){
     useEffect(() => {
@@ -231,6 +232,7 @@ const handleSubmitRating = (event) => {
                     }
                 </Container>
             </header>
+            <MyFooter />
     </div>
     )
 }
