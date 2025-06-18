@@ -213,10 +213,17 @@ h2{
 }
 
 .featuresGrid{
+  margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 24px;
   justify-items: center;
+}
+
+@media(max-width: 991px){
+  .featuresGrid{
+    grid-template-columns: 1fr;
+  }
 }
 
 .footer{
