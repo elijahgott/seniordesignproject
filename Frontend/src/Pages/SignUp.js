@@ -58,7 +58,7 @@ function SignUp(){
     }, [])
 
     return(
-        <div className='App-header login template d-flex justify-content-center align-items-center 100-w vh-100' style={{backgroundColor: "#bbbbbb"}}>
+        <div className='App-header login template d-flex justify-content-center align-items-center 100-w vh-100'>
             <div className='form_container p-5 rounded bg-white shadow'>
                 <form onSubmit={handleSubmit}>
                     <h3 className='text-center'>Sign Up</h3>
