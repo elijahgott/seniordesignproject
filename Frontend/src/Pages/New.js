@@ -29,18 +29,18 @@ function New( {currentUser} ){
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginTop: 10}}>
+                <Container className="containerCard shadow">
                         <Row>
                             <Col>
-                                <Card className="headerCard shadow" style={{maxWidth:"81rem"}}>
-                                    <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>Newest Albums</h1>
+                                <Card className="no-border" style={{maxWidth:"81rem"}}>
+                                    <h1 className="title">Newest Albums</h1>
                                 </Card>
                             </Col>
                         </Row>
-                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        <Row className="cardRow">
                             {hasFetched ? 
                                 newAlbums.map((albums, i) => (    
-                                                <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                                <Card style={{maxWidth:"26rem"}}>
                                                     <Card.Body>
                                                         <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
                                                         <Card.Link>{albums.name}</Card.Link>
@@ -51,7 +51,7 @@ function New( {currentUser} ){
                                                 </Card>
                                 )) :
                                 <>
-                                    <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                    <Card style={{maxWidth:"26rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Dirt.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link>Dirt</Card.Link>
@@ -60,7 +60,7 @@ function New( {currentUser} ){
                                             <Card.Text style={{fontSize: 20}}>Alice in Chains' second studio album.</Card.Text>
                                         </Card.Body>
                                     </Card>
-                                    <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                    <Card style={{maxWidth:"26rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Facelift.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link>Facelift</Card.Link>
@@ -69,7 +69,7 @@ function New( {currentUser} ){
                                             <Card.Text style={{fontSize: 20}}>Alice in Chains' debut studio album.</Card.Text>
                                         </Card.Body>
                                     </Card>
-                                    <Card className="shadow" style={{maxWidth:"26rem"}}>
+                                    <Card style={{maxWidth:"26rem"}}>
                                         <Card.Body>
                                             <Card.Img variant="top" src={require(`./../MusicImages/Nirvana_Bleach.jpg`)} style={{maxWidth: 500}}></Card.Img>
                                             <Card.Link>Bleach</Card.Link>
@@ -86,7 +86,7 @@ function New( {currentUser} ){
                         <Row>
                             <Col>
                                 <Card className="headerCard shadow" style={{maxWidth:"81rem", paddingBottom: 30}}>
-                                    <h1 style={{textAlign: "center", marginTop: 25, marginBottom: 10}}>New Features</h1>
+                                    <h1 className="title" >New Features</h1>
                                     <Col style={{maxWidth: "70rem", paddingLeft: 40, paddingRight: 40, alignSelf: "center"}}>
                                         <h2 style={{marginTop: 10}}>Creating Posts</h2>
                                         <p style={{marginTop: 5, textIndent: 20, fontSize: 25}}>Signed-in users are able to create posts and view their friends posts! These posts consist of an album and/or song from that album, and whatever the user wants to write about that album/song. There are plans to allow the user to upload photos as a part of a post, as well.</p>

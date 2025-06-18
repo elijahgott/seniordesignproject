@@ -38,30 +38,30 @@ function MyNav( {currentUser} ){
   }; 
 
     return(
-        <Navbar expand = "lg" className="bg-body-tertiary" data-bs-theme="dark" style={{paddingTop: 20, paddingBottom: 20}}>
+        <Navbar className="navbar" expand="lg" style={{paddingTop: 20, paddingBottom: 20}}>
           <Container>
-                <Navbar.Brand style={{fontWeight: 'bold', color: "lightgray"}}><Link to="/">Music Tracker</Link></Navbar.Brand>
+                <Navbar.Brand style={{width: "auto", fontWeight: "bold"}}><Link to="/" className="navlink navbrand">💿 Music Tracker</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/new">New</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/artists">Artists</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/albums">Albums</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/about">About</Link></Nav.Link>
+                    <Nav.Link style={{ color: "lightgray"}}><Link to="/new" className="navlink">New</Link></Nav.Link>
+                    <Nav.Link style={{ color: "lightgray"}}><Link to="/artists" className="navlink">Artists</Link></Nav.Link>
+                    <Nav.Link style={{ color: "lightgray"}}><Link to="/albums" className="navlink">Albums</Link></Nav.Link>
+                    <Nav.Link style={{ color: "lightgray"}}><Link to="/about" className="navlink">About</Link></Nav.Link>
               
-                    <NavDropdown title="Profile" >
+                    <NavDropdown title="Profile" className="navlink">
                       {currentUser ? (
                         <>
-                          <NavDropdown.Item><Link to="/profile">My Profile</Link></NavDropdown.Item>
-                          <NavDropdown.Item><Link to="/lists">My Lists</Link></NavDropdown.Item>
-                          <NavDropdown.Item><Link to="/friends">Friends</Link></NavDropdown.Item>
-                          <NavDropdown.Item><Link to="/settings">Settings</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/profile" className="navlink">My Profile</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/lists" className="navlink">My Lists</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/friends" className="navlink">Friends</Link></NavDropdown.Item>
+                          <NavDropdown.Item><Link to="/settings" className="navlink">Settings</Link></NavDropdown.Item>
                           <NavDropdown.Item disabled>Sign Out</NavDropdown.Item>
                           <NavDropdown.Item disabled>(Refresh to Sign Out)</NavDropdown.Item>
                         </>
                       ) : <>
-                            <NavDropdown.Item><Link to="/signin">Sign In</Link></NavDropdown.Item>
-                            <NavDropdown.Item><Link to="/signup">Sign Up</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/signin" className="navlink">Sign In</Link></NavDropdown.Item>
+                            <NavDropdown.Item><Link to="/signup" className="navlink">Sign Up</Link></NavDropdown.Item>
                           </>}
                     </NavDropdown>
                 </Nav>

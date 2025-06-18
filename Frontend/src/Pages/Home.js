@@ -50,13 +50,13 @@ function Home( {currentUser} ){
         <div>
             <MyNav currentUser={currentUser}/>
             <header className="App-header">
-                <Container style={{marginTop:5, marginBottom: 15}}>
+                <Container className="main-body">
                     <Row>
                         <Col>
-                            <Card className="headerCard shadow" style={{maxWidth:"81rem", minHeight: '100dvh'}}>
+                            <Card className="headerCard no-border shadow" style={{maxWidth:"81rem", minHeight: '100dvh'}}>
                                 {currentUser ? (
-                                    <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"20px", fontWeight: "bold"}}>Welcome, {currentUser.username}</h1>
-                                ) : <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"20px", fontWeight: "bold"}}>Welcome, Guest</h1>}
+                                    <h1 className="title">Welcome, {currentUser.username}</h1>
+                                ) : <h1 className="title">Welcome, Guest</h1>}
                                 
                                 <HomeCarousel />
 
