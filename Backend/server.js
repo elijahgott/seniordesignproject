@@ -2,13 +2,26 @@ const express = require('express');
 const mysql = require('mysql');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const middleware = require('./utils/middleware')
 
 const jwt = require('jsonwebtoken');
 
 const app = express();
 
+const loginRouter = require('./controllers/login')
+const usersRouter = require('./controllers/users')
+const albumsRouter = require('./controllers/albums')
+const artistsRouter = require('./controllers/artists')
+const postsRouter = require('./controllers/posts')
+
 app.use(cors());
 app.use(bodyParser.json());
+
+app.use('/api/login', loginRouter)
+app.use('/api/users', usersRouter)
+app.use('/api/albums', albumsRouter)
+app.use('/api/artists', artistsRouter)
+app.use('/api/posts', postsRouter)
 
 const db = mysql.createConnection({
     host: "localhost",
@@ -17,38 +30,6 @@ const db = mysql.createConnection({
     database: 'sdp'
 }) 
 
-// handle fetching user posts based on user ID
-app.get('/posts/:uid', (req, res) => {
-    const userId = req.params.uid;
-    const sql = `select * from UserPost where uid = ? OR uid IN ((select friendID from UserFriend where uid = ?)) ORDER BY date DESC;`;
-  
-    db.query(sql, [userId, userId], (err, results) => {
-      if (err) {
-        console.error('Error executing query: ', err);
-        res.status(500).json({ message: 'Error fetching data' });
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  });
-
-// handle the creation of a new post
-app.post('/submitpost', (req, res)=> {
-    //get data from forms and add to userposts table
-    const { uid, username, content, photo, song_name, album_name, date, time } = req.body;
-    const sql = `insert into UserPost (uid, username, content, photo, song_name, album_name, date, time)
-                values (?, ?, ?, ?, ?, ?, ?, ?)`;
-    db.query(sql, [uid, username, content, photo, song_name, album_name, date, time], (err, results)=> {
-        if(err){
-            console.error("Error inserting data: ", err);
-            res.status(500).send("Error inserting data")
-        }
-        else{
-            console.log("Successfully Inserted Post into Database!");
-            res.status(200).send("Data inserted successfully")
-        }
-    })
-})
 
 //handle searches done in the navbar
 app.post('/search', (req, res) => {
@@ -71,48 +52,6 @@ app.post('/search', (req, res) => {
       }
     });
   });
-
-
-//gets list of all users
-app.get('/users', (req, res)=> {
-    const sql = "SELECT * FROM user";
-    db.query(sql, 1 , (err, dataUser) => {
-        if(err) return res.json(err);
-        return res.json(dataUser);
-    })
-})
-
-// handle fetching profile based on user ID
-app.get('/users/:uid', (req, res) => {
-    const userId = req.params.uid;
-    const sql = `select * from user where uid = ?;`;
-  
-    db.query(sql, [userId], (err, results) => {
-      if (err) {
-        console.error('Error executing query: ', err);
-        res.status(500).json({ message: 'Error fetching data' });
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  });
-
-// handle updating user
-app.put('/updateuser/:uid', (req, res) => {
-  const uid = req.params.uid;
-  const { newUsername, bio } = req.body;
-
-  const sql = 'update User set username = ?, bio = ? where uid = ?;';
-
-  db.query(sql, [newUsername, bio, uid], (err, results) => {
-    if (err) {
-      console.error('Error executing query: ', err);
-      res.status(500).json({ message: 'Error updating user' });
-    } else {
-      res.status(200).json({ message: 'User updated successfully' });
-    }
-  });
-});
 
   // handle fetching friends based on user ID
 app.get('/friends/:uid', (req, res) => {
@@ -196,107 +135,6 @@ app.delete('/removeFriend/:userId/:friendId', (req, res) => {
   });
 });
 
-  // handle fetching top 5 artist list based on user ID
-app.get('/userlistartist/:uid', (req, res) => {
-    const userId = req.params.uid;
-    const sql = `select * from TopFiveArtists where uid = ?;`;
-  
-    db.query(sql, [userId], (err, results) => {
-      if (err) {
-        console.error('Error executing query: ', err);
-        res.status(500).json({ message: 'Error fetching data' });
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  });
-
-  // handle fetching top 5 album list based on user ID
-app.get('/userlistalbum/:uid', (req, res) => {
-    const userId = req.params.uid;
-    const sql = `select * from TopFiveALbums where uid = ?;`;
-  
-    db.query(sql, [userId], (err, results) => {
-      if (err) {
-        console.error('Error executing query: ', err);
-        res.status(500).json({ message: 'Error fetching data' });
-      } else {
-        res.status(200).json(results);
-      }
-    });
-  });
-
-    // handle fetching top 5 album list based on user ID
-    app.get('/userlist/:uid', (req, res) => {
-      const userId = req.params.uid;
-      const sql = `select * from ListenedList where uid = ?;`;
-    
-      db.query(sql, [userId], (err, results) => {
-        if (err) {
-          console.error('Error executing query: ', err);
-          res.status(500).json({ message: 'Error fetching data' });
-        } else {
-          res.status(200).json(results);
-        }
-      });
-    });
-
-// get all albums in database
-app.get('/albums', (req, res)=> {
-    const sql = "SELECT * FROM album";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
-
-// get top 3 highest rated albums (on average)
-app.get('/topthreealbums', (req, res)=> {
-  const sql = "select * from Album INNER JOIN(SELECT album, AVG(rating) AS average_rating FROM listenedlist GROUP BY album ORDER BY average_rating DESC LIMIT 3) as T ON Album.name = T.album";
-  db.query(sql, (err, data) => {
-      if(err) return res.json(err);
-      return res.json(data);
-  })
-})
-
-// get 3 most recently released albums
-app.get('/newalbums', (req, res)=> {
-  const sql = "select * from Album ORDER BY releaseDate DESC LIMIT 3;";
-  db.query(sql, (err, data) => {
-      if(err) return res.json(err);
-      return res.json(data);
-  })
-})
-
-// handles the insertion of a new album into the database
-app.post('/submitalbum', (req, res)=> {
-    //get data from forms and add to artists table
-    var { name, artist, description, photo, releaseDate } = req.body;
-    if(!photo){
-        photo = 'default.jpg'
-    }
-    const sql = `insert into Album (name, artist, description, photo, releaseDate)
-                values (?, ?, ?, ?, ?)`;
-    db.query(sql, [name, artist, description, photo, releaseDate], (err, results)=> {
-        if(err){
-            console.error("Error inserting data: ", err);
-            res.status(500).send("Error inserting data")
-        }
-        else{
-            console.log("Successfully Inserted Album into Database!");
-            res.status(200).send("Album inserted successfully")
-        }
-    }) 
-})
-
-// gets all artists in database
-app.get('/artists', (req, res)=> {
-    const sql = "SELECT * FROM artist";
-    db.query(sql, (err, data) => {
-        if(err) return res.json(err);
-        return res.json(data);
-    })
-})
 
 // gets top 3 rated artists in database
 app.get('/topthreeartists', (req, res)=> {
@@ -305,27 +143,6 @@ app.get('/topthreeartists', (req, res)=> {
       if(err) return res.json(err);
       return res.json(data);
   })
-})
-
-// handles the insertion of a new artist into the database
-app.post('/submitartist', (req, res)=> {
-    //get data from forms and add to artists table
-    var { name, bio, photo } = req.body;
-    if(!photo){
-        photo = 'default.jpg'
-    }
-    const sql = `insert into Artist (name, bio, photo)
-                values (?, ?, ?)`;
-    db.query(sql, [name, bio, photo], (err, results)=> {
-        if(err){
-            console.error("Error inserting data: ", err);
-            res.status(500).send("Error inserting data")
-        }
-        else{
-            console.log("Successfully Inserted Artist into Database!");
-            res.status(200).send("Artist inserted successfully")
-        }
-    })
 })
 
 /*
@@ -453,27 +270,7 @@ app.post('/updatetopfivealbums', (req, res)=> {
   })
 })
 
-// handles signing user in
-app.post('/signin', (req, res) => {
-    const {username, password} = req.body;
-    const sql = "select * from user where username = ? and password = ?";
 
-    db.query(sql, [username, password], (err, results) => {
-        if(err){
-            console.error('Error executing query: ', err);
-            res.status(500).json({message: 'Error signing in'});
-        }
-        else {
-            if(results.length > 0){
-                const token = jwt.sign({ username }, 'testing_key', { expiresIn: '1h' });
-                res.status(200).json({message: 'Sign in successful', token, user: results[0]});
-            }
-            else {
-                res.status(401).json({message: 'Invalid username or password'})
-            }
-        }
-    }); 
-});
 
 // gets maximum value of UID in database for creation of a new account
 app.get('/signupuser', (req, res)=> {
@@ -502,8 +299,9 @@ app.post('/signup', (req, res)=> {
     })
 })
 
-app.listen(8081, ()=> {
-    console.log("Server Running on Port 8081"); 
-})
+app.use(middleware.unknownEndpoint)
+app.use(middleware.errorHandler)
 
 {/*  cd seniordesignproject/Backend -> npm start */}
+
+module.exports = app
