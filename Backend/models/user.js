@@ -8,7 +8,7 @@ const userSchema = new mongoose.Schema({
     minLength: 3
   },
   passwordHash: String,
-  dateJoined: Date,
+  dateJoined: String,
   bio: {
     type: String,
     required: false,
