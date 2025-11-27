@@ -1,31 +1,33 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-  username: {
+const albumSchema = new mongoose.Schema({
+  name: {
     type: String,
     required: true,
     unique: false,
-    minLength: 3
+    minLength: 1
   },
-  passwordHash: String,
-  dateJoined: Date,
-  bio: {
+  artist: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Artist'
+  },
+  description: {
     type: String,
     required: false,
-    unique: false,
     maxLength: 255
-  }
+  },
+  photoURL: String,
+  releaseDate: Date
 })
 
-userSchema.set('toJSON', {
+albumSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
-    delete returnedObject.passwordHash
   }
 })
 
-const User = mongoose.model('User', userSchema)
+const Album = mongoose.model('Album', albumSchema)
 
-module.exports = User
+module.exports = Album
