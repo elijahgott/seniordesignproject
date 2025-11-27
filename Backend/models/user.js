@@ -14,7 +14,19 @@ const userSchema = new mongoose.Schema({
     required: false,
     unique: false,
     maxLength: 255
-  }
+  },
+  posts: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Post'
+    }
+  ],
+  following: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }
+  ]
 })
 
 userSchema.set('toJSON', {
