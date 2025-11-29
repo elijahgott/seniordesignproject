@@ -1,8 +1,9 @@
 import React from "react";
-import { useEffect } from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
@@ -12,21 +13,25 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Button from "react-bootstrap/Button";
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
-import { Link } from 'react-router-dom';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import { useNavigate } from "react-router-dom";
-
-import MyNav from "../MyComponents/MyNav";
 
 function UserLists({currentUser}){
     const currentDate = new Date();
     const navigate = useNavigate();
+
+    const [uid, setUid] = useState(null)
+
+    useEffect(() => {
+      if(currentUser){
+        setUid(currentUser.id)
+      }
+    })
     
     //fetch all albums from database
     const [albums, setAlbums] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/albums')
+        fetch('http://localhost:8081/api/albums')
         .then(res => res.json())
         .then(albums => setAlbums(albums))
         .catch(err => console.log(err));
@@ -36,7 +41,7 @@ function UserLists({currentUser}){
   const [artists, setArtists] = useState([])
 
   useEffect(()=>{
-      fetch('http://localhost:8081/artists')
+      fetch('http://localhost:8081/api/artists')
       .then(res => res.json())
       .then(artists => setArtists(artists))
       .catch(err => console.log(err));
@@ -44,7 +49,7 @@ function UserLists({currentUser}){
 
 // ADD ALBUM AND RATING TO LISTENED LIST
     //values to send to database when adding album to listened list
-    const uid = currentUser.uid;
+    // const uid = currentUser.id;
     const [listSelection, setListSelection] = useState('');
     let album = '';
     let artist = '';
@@ -76,7 +81,7 @@ function UserLists({currentUser}){
             album = (temp[0]);
             artist = (temp[1]);
     
-        fetch('http://localhost:8081/submitlist', {
+        fetch('http://localhost:8081/api/submitlist', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -139,7 +144,7 @@ function UserLists({currentUser}){
             albumUpdate = (temp2[0]);
             artistUpdate = (temp2[1]);
     
-        fetch('http://localhost:8081/updatelist', {
+        fetch('http://localhost:8081/api/updatelist', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -176,7 +181,7 @@ function UserLists({currentUser}){
         useEffect(() => {
             async function fetchUserArtistList() {
             try {
-                const response = await fetch(`http://localhost:8081/userlistartist/${uid}`);
+                const response = await fetch(`http://localhost:8081/api/userlistartist/${uid}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -197,7 +202,7 @@ function UserLists({currentUser}){
         useEffect(() => {
             async function fetchUserAlbumList() {
             try {
-                const response = await fetch(`http://localhost:8081/userlistalbum/${uid}`);
+                const response = await fetch(`http://localhost:8081/api/userlistalbum/${uid}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -218,7 +223,7 @@ function UserLists({currentUser}){
         useEffect(() => {
             async function fetchUserList() {
             try {
-                const response = await fetch(`http://localhost:8081/userlist/${uid}`);
+                const response = await fetch(`http://localhost:8081/api/userlist/${uid}`);
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
@@ -247,7 +252,7 @@ function UserLists({currentUser}){
     const handleSubmitArtists = (event) => {
         event.preventDefault();
     
-        fetch('http://localhost:8081/submittopfiveartists', {
+        fetch('http://localhost:8081/api/submittopfiveartists', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -299,7 +304,7 @@ function UserLists({currentUser}){
     const handleSubmitUpdateArtists = (event) => {
         event.preventDefault();
     
-        fetch('http://localhost:8081/updatetopfiveartists', {
+        fetch('http://localhost:8081/api/updatetopfiveartists', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -353,7 +358,7 @@ function UserLists({currentUser}){
         const album = temp[0];
         const artist = temp[1];
     
-        fetch('http://localhost:8081/submittopfivealbums', {
+        fetch('http://localhost:8081/api/submittopfivealbums', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -407,7 +412,7 @@ function UserLists({currentUser}){
         const album = temp[0];
         const artist = temp[1];
     
-        fetch('http://localhost:8081/updatetopfivealbums', {
+        fetch('http://localhost:8081/api/updatetopfivealbums', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -444,8 +449,11 @@ function UserLists({currentUser}){
             setAlbumUpdatePosition(newPosition);
             }
         };
-
-    return(
+    
+    
+    return !currentUser ? (<div>Loading...</div>)
+      :
+      (
         <div>
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
@@ -652,16 +660,17 @@ function UserLists({currentUser}){
                                     </Modal>
                                 </Row>
                                 <Row style={{marginLeft: 0, marginTop: 10}}>
-                                {userList.map((list) => (    
-                                                <Card className="shadow" style={{maxWidth:"25rem", marginRight: 8, marginLeft: 8, marginBottom: 10}}>
-                                                    <Card.Body>
-                                                        {/*<Card.Img variant="top" src={require(`./../MusicImages/${album.photo}`)} style={{maxWidth: 500}}></Card.Img>*/}
-                                                        <Card.Title style={{textAlign: "center", fontWeight: "bold", fontSize: 25}}>{list.album} - {list.artist}</Card.Title>
-                                                        <Card.Text style={{fontSize: 15, textAlign: "center"}}>Your Rating: {list.rating} / 10</Card.Text>
-                                                    </Card.Body>
-                                                    <Card.Text style={{fontSize: 10, textAlign: "center", color: "gray"}}>Date Added: {list.dateAdded}</Card.Text>
-                                                </Card>
-                                ))}
+                                  {userList.length === 0 ? (<div className="text-center">Nothing here yet...</div>) : 
+                                  userList.map((list) => (    
+                                    <Card className="shadow" style={{maxWidth:"25rem", marginRight: 8, marginLeft: 8, marginBottom: 10}}>
+                                        <Card.Body>
+                                            {/*<Card.Img variant="top" src={require(`./../MusicImages/${album.photo}`)} style={{maxWidth: 500}}></Card.Img>*/}
+                                            <Card.Title style={{textAlign: "center", fontWeight: "bold", fontSize: 25}}>{list.album} - {list.artist}</Card.Title>
+                                            <Card.Text style={{fontSize: 15, textAlign: "center"}}>Your Rating: {list.rating} / 10</Card.Text>
+                                        </Card.Body>
+                                        <Card.Text style={{fontSize: 10, textAlign: "center", color: "gray"}}>Date Added: {list.dateAdded}</Card.Text>
+                                    </Card>
+                                  ))}
                                 </Row>
                             </Card.Body>
                         </Card>

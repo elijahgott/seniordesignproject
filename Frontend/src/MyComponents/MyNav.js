@@ -1,5 +1,7 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
@@ -9,12 +11,12 @@ import {Outlet} from 'react-router-dom';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
-import { useNavigate } from "react-router-dom";
+
 
 function MyNav( {currentUser, handleSignOut} ){
 
-  const [search, setSearch] = useState('');
-  const navigate = useNavigate();
+  const [search, setSearch] = useState('')
+  const navigate = useNavigate()
 
   const handleSearch = async () => {
     try {
@@ -40,7 +42,7 @@ function MyNav( {currentUser, handleSignOut} ){
     return(
         <Navbar className="navbar" expand="lg" style={{paddingTop: 20, paddingBottom: 20}}>
           <Container>
-                <Navbar.Brand style={{width: "auto", fontWeight: "bold"}}><Link to="/" className="navlink navbrand">💿 Music Tracker</Link></Navbar.Brand>
+                <Navbar.Brand style={{width: "auto", fontWeight: "bold"}}><Link to="/" className="navlink navbrand"><span role="img" aria-label="compact disc emoji">💿</span> Music Tracker</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
@@ -56,7 +58,7 @@ function MyNav( {currentUser, handleSignOut} ){
                           <NavDropdown.Item><Link to="/lists" className="navlink">My Lists</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/friends" className="navlink">Friends</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/settings" className="navlink">Settings</Link></NavDropdown.Item>
-                          <NavDropdown.Item onClick={handleSignOut} >Sign Out</NavDropdown.Item>
+                          <NavDropdown.Item onClick={handleSignOut} ><Link className="navlink">Sign Out</Link></NavDropdown.Item>
                         </>
                       ) : <>
                             <NavDropdown.Item><Link to="/signin" className="navlink">Sign In</Link></NavDropdown.Item>

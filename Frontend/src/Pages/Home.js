@@ -9,13 +9,9 @@ import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Modal from 'react-bootstrap/Modal';
-import Form from 'react-bootstrap/Form';
 import {Link} from 'react-router-dom';
 
-import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
-import SignIn from "./SignIn";
 import MyFooter from "../MyComponents/MyFooter";
 
 function Home( {currentUser} ){

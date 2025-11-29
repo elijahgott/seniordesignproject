@@ -14,28 +14,20 @@ import Modal from 'react-bootstrap/Modal';
 import Form from 'react-bootstrap/Form';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 
-import MyNav from "../MyComponents/MyNav";
-
-/* app crashes when user not signed in and tries to access profile page */
-
 function Profile({currentUser}){
+    const [uid, setUid] = useState(null)
     useEffect(() => {
             document.title ="Music Tracker - Profile"
+            if(currentUser){
+              setUid(currentUser.id)
+            }
         }, []);
-
-    var uid;
-    if(! currentUser){
-        uid = null;
-    }
-    else{
-        uid = currentUser.uid;
-    }
 
     //fetch all albums from database
     const [albums, setAlbums] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/albums')
+        fetch('http://localhost:8081/api/albums')
         .then(res => res.json())
         .then(albums => setAlbums(albums))
         .catch(err => console.log(err));
@@ -45,32 +37,32 @@ function Profile({currentUser}){
   const [artists, setArtists] = useState([])
 
   useEffect(()=>{
-      fetch('http://localhost:8081/artists')
+      fetch('http://localhost:8081/api/artists')
       .then(res => res.json())
       .then(artists => setArtists(artists))
       .catch(err => console.log(err));
 }, [])
 
-    //fetch data from current user profile
-    const [profile, setProfile] = useState([]);
+    // //fetch data from current user profile
+    // const [profile, setProfile] = useState([]);
 
-    useEffect(() => {
-        async function fetchProfile() {
-        try {
-            const response = await fetch(`http://localhost:8081/users/${uid}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-            const data = await response.json();
-            setProfile(data);
-        } 
-        catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
-        }
+    // useEffect(() => {
+    //     async function fetchProfile() {
+    //     try {
+    //         const response = await fetch(`http://localhost:8081/users/${uid}`);
+    //         if (!response.ok) {
+    //             throw new Error('Network response was not ok');
+    //         }
+    //         const data = await response.json();
+    //         setProfile(data);
+    //     } 
+    //     catch (error) {
+    //         console.error('There was a problem with the fetch operation:', error);
+    //     }
+    //     }
 
-        fetchProfile();
-    }, []);
+    //     fetchProfile();
+    // }, []);
 
         //fetch top 5 artists list from current user
         const [userArtistList, setUserArtistList] = useState([]);
@@ -328,7 +320,9 @@ function Profile({currentUser}){
             }
         };
 
-    return(
+    return !currentUser ? (<div>Loading...</div>)
+        : 
+      (
         <div>
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
@@ -344,10 +338,8 @@ function Profile({currentUser}){
                         <Card className="headerCard shadow">
                             <Card.Body>
                                 <Row>
-                                <h1>Bio:</h1>
-                                    {profile.map((profile) => (
-                                        <p>{profile.bio}</p>
-                                    ))}
+                                  <h1>Bio:</h1>
+                                  <p>{currentUser.bio}</p>
                                 </Row>
                                 
                                 <Row>

@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import {Link} from 'react-router-dom';
 import Button from "react-bootstrap/esm/Button";
 import Form from 'react-bootstrap/Form';
@@ -8,9 +7,6 @@ import Container from 'react-bootstrap/Container';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-
-import MyNav from '../MyComponents/MyNav.js';
-
 
 function CreatePost({currentUser}){
     const currentDate = new Date();

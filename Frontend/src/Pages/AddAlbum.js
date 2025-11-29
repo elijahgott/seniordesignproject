@@ -1,6 +1,5 @@
 import React from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import {Link} from 'react-router-dom';
 import Button from "react-bootstrap/esm/Button";
 import Form from 'react-bootstrap/Form';
@@ -9,9 +8,6 @@ import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {useNavigate} from "react-router-dom";
-
-import MyNav from '../MyComponents/MyNav.js';
-
 
 function AddAlbum( {currentUser} ){
     const [name, setName] = useState('');

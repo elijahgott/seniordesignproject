@@ -130,7 +130,9 @@ function Friends( {currentUser} ){
               }
           }; 
 
-    return(
+    return !currentUser ? (<div>Loading...</div>)
+    : 
+      (
         <div>
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
@@ -167,7 +169,9 @@ function Friends( {currentUser} ){
                                         </Form>
                                     </Modal>
                                 <Row>
-                                    {friends.map((friend) => (
+                                    {friends.length === 0 ? (<div className="text-center">You don't have any friends 😢</div>)
+                                    : 
+                                    friends.map((friend) => (
                                         <Card className="shadow" style={{marginBottom: 10}} key={friend.uid}>
                                             <Card.Body>
                                                 <Card.Title style={{fontSize: 30, fontWeight: "bold"}}>{friend.username} <Button style={{marginBottom: 5}} variant="danger" onClick={() => handleRemove(friend.uid)}>Remove Friend</Button></Card.Title>

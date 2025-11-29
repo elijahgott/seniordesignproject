@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -24,6 +25,7 @@ import MyNav from "./MyComponents/MyNav";
 import userService from './services/users'
 
 function App() {
+  const navigate = useNavigate()
     const [token, setToken] = useState('');
     const [currentUser, setCurrentUser] = useState(null);
 
@@ -36,6 +38,7 @@ function App() {
       setToken(null)
       setCurrentUser(null)
       window.localStorage.removeItem('loggedInMusicAppUser')
+      navigate('/')
     }
 
     // get currently logged in user
