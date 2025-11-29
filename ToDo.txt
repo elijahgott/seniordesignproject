@@ -13,3 +13,6 @@ To-Do List:
 	- Submit photos in app
 
 	- Add more artists, albums, songs to database
+
+  - Do I need to keep albums / artists in database?
+    - Maybe could only store albums added to user lists, just use Spottify API for rest?

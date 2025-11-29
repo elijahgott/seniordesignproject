@@ -5,6 +5,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 
+import loginService from '../services/login'
+import userService from '../services/users'
+
 function SignIn( {onSignIn} ){
   useEffect(() => {
           document.title ="Music Tracker - Sign In"
@@ -19,24 +22,23 @@ function SignIn( {onSignIn} ){
         event.preventDefault();
     
         try {
-          const response = await fetch('http://localhost:8081/signin', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ username, password }),
-          });
+          const loggedInUser = await loginService.login({ username, password })
+          console.log(loggedInUser)
+          window.localStorage.setItem(
+            'loggedInMusicAppUser', JSON.stringify(loggedInUser)
+          )
     
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
+          const user = await userService.getOne(loggedInUser.id)
+          if(user){
+            onSignIn(user)
+            setUsername('')
+            setPassword('')
+            navigate('/')
           }
-    
-          const data = await response.json();
-          setMessage(data.message);
-          if(data.token){
-            onSignIn(data.token, data.user);
-            navigate('/');
+          else{
+            setMessage('Could not find user.')
           }
+
           //console.log(data.user.username, data.user.uid);
 
         } catch (error) {

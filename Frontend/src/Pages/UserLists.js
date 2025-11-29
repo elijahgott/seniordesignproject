@@ -447,7 +447,6 @@ function UserLists({currentUser}){
 
     return(
         <div>
-            <MyNav currentUser={currentUser} />
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>

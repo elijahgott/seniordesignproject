@@ -28,7 +28,7 @@ usersRouter.get('/', async (req, res)=> {
 usersRouter.get('/:id', async (req, res) => {
   const id = req.params.id
 
-  const user = User.findById({ _id: id })
+  const user = await User.findById({ _id: id })
   user ? 
     res.json(user) :
     res.status(404).send({ error: `Could not find user with ID: ${id}.`})

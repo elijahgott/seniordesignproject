@@ -1,6 +1,7 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 
 import Home from "./Pages/Home";
 import About from "./Pages/About";
@@ -18,40 +19,60 @@ import AddAlbum from "./Pages/AddAlbum";
 import CreatePost from "./Pages/CreatePost";
 import SearchResults from "./Pages/SearchResults";
 
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import MyNav from "./MyComponents/MyNav";
+
+import userService from './services/users'
 
 function App() {
     const [token, setToken] = useState('');
     const [currentUser, setCurrentUser] = useState(null);
 
-    const handleSignIn = (newToken, user) => {
-      setToken(newToken);
-      setCurrentUser(user);
+    const handleSignIn = (user) => {
+      setToken(user.token)
+      setCurrentUser(user)
     }
 
     const handleSignOut = () => { 
-      setToken(null);
-      setCurrentUser(null);
+      setToken(null)
+      setCurrentUser(null)
+      window.localStorage.removeItem('loggedInMusicAppUser')
     }
 
+    // get currently logged in user
+    useEffect(() => {
+      const fetchUser = async () => {
+        const loggedInUserJSON = window.localStorage.getItem('loggedInMusicAppUser')
+        if(loggedInUserJSON){
+          const userWithToken = JSON.parse(loggedInUserJSON)
+          const user = await userService.getOne(userWithToken.id)
+          setCurrentUser(user)
+        }
+      }
+      fetchUser()
+    }, [])
+
   return (
-    <Routes>
-      <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
-      <Route path="/" element={<Home currentUser={currentUser}/>} />
-      <Route path="/new" element={<New currentUser={currentUser} />} />
-      <Route path="/albums" element={<Albums currentUser={currentUser} />} />
-      <Route path="/artists" element={<Artists currentUser={currentUser}/>} />
-      <Route path="/about" element={<About currentUser={currentUser}/>} />
-      <Route path="/profile" element={<Profile currentUser={currentUser}/>} />
-      <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
-      <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
-      <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
-      <Route path="/signup" element={<SignUp />} />
-      <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
-      <Route path="/addartist" element={<AddArtist currentUser={currentUser}/>}/>
-      <Route path="/addalbum" element={<AddAlbum currentUser={currentUser}/>}/>
-      <Route path="/searchresults" element={<SearchResults currentUser={currentUser}/>} />
-    </Routes>
+    <>
+      <MyNav currentUser={currentUser} handleSignOut={handleSignOut} />
+      <Routes>
+        <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
+        <Route path="/" element={<Home currentUser={currentUser}/>} />
+        <Route path="/new" element={<New currentUser={currentUser} />} />
+        <Route path="/albums" element={<Albums currentUser={currentUser} />} />
+        <Route path="/artists" element={<Artists currentUser={currentUser}/>} />
+        <Route path="/about" element={<About currentUser={currentUser}/>} />
+        <Route path="/profile" element={<Profile currentUser={currentUser}/>} />
+        <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
+        <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
+        <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
+        <Route path="/addartist" element={<AddArtist currentUser={currentUser}/>}/>
+        <Route path="/addalbum" element={<AddAlbum currentUser={currentUser}/>}/>
+        <Route path="/searchresults" element={<SearchResults currentUser={currentUser}/>} />
+      </Routes>
+    </>
+    
   );
 }
 

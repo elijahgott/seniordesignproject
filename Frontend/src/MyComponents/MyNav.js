@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
 
-function MyNav( {currentUser} ){
+function MyNav( {currentUser, handleSignOut} ){
 
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
@@ -56,8 +56,7 @@ function MyNav( {currentUser} ){
                           <NavDropdown.Item><Link to="/lists" className="navlink">My Lists</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/friends" className="navlink">Friends</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/settings" className="navlink">Settings</Link></NavDropdown.Item>
-                          <NavDropdown.Item disabled>Sign Out</NavDropdown.Item>
-                          <NavDropdown.Item disabled>(Refresh to Sign Out)</NavDropdown.Item>
+                          <NavDropdown.Item onClick={handleSignOut} >Sign Out</NavDropdown.Item>
                         </>
                       ) : <>
                             <NavDropdown.Item><Link to="/signin" className="navlink">Sign In</Link></NavDropdown.Item>

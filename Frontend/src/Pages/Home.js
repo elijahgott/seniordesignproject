@@ -19,17 +19,23 @@ import SignIn from "./SignIn";
 import MyFooter from "../MyComponents/MyFooter";
 
 function Home( {currentUser} ){
+    const [uid, setUid] = useState(null)
+
     useEffect(() => {
         document.title ="Music Tracker - Home"
+
+        if(currentUser){
+          setUid(currentUser.id);
+        }
     }, []);
 
-    var uid;
-    if(! currentUser){
-        uid = null;
-    }
-    else{
-        uid = currentUser.uid;
-    }
+    // var uid
+    // if(!currentUser){
+    //     uid = null;
+    // }
+    // else{
+    //     uid = currentUser.id;
+    // }
 
     //get posts for currently logged in user
     const [posts, setPosts] = useState([]);
@@ -37,7 +43,7 @@ function Home( {currentUser} ){
     useEffect(() => {
         async function fetchPosts() {
         try {
-            const response = await fetch(`http://localhost:8081/posts/${uid}`);
+            const response = await fetch(`http://localhost:8081/posts/${uid}`); // replace with postsService getAll()
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -54,7 +60,6 @@ function Home( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container className="main-body">
                     <Row>

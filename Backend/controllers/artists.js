@@ -5,7 +5,7 @@ const Artist = require('../models/artist')
 artistsRouter.get('/', async (req, res)=> {
   const artists = await Artist.find({})
 
-  res.json(albums)
+  res.json(artists)
 })
 
 // get specific artist by id

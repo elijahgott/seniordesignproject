@@ -5,7 +5,7 @@ const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 const morgan = require('morgan')
 
-// const cors = require('cors')
+const cors = require('cors')
 
 const app = express();
 require('dotenv').config()
@@ -27,7 +27,7 @@ mongoose.connect(config.MONGODB_URI)
     logger.error('error connecting to MongoDB:', error.message)
   })
 
-// app.use(cors())
+app.use(cors())
 
 app.use(express.json())
 app.use(express.static('dist'))

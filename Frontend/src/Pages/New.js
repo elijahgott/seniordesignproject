@@ -32,7 +32,6 @@ function New( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container className="containerCard shadow">
                         <Row>

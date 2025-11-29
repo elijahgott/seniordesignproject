@@ -18,7 +18,6 @@ function SearchResults( {currentUser} ) {
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{marginTop:5, marginBottom: 15}}>
                     <Card style={{minHeight: "100vh", width: "81rem"}}>

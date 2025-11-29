@@ -53,7 +53,6 @@ function AddAlbum( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
             <header className="App-header">
                 <Container style={{height: "100vh", marginTop: 15}}>
                     <Card className="shadow">
