@@ -54,11 +54,12 @@ function App() {
       fetchUser()
     }, [])
 
-  return (
+  return !currentUser ? (<SignIn onSignIn={handleSignIn} />)
+    :
+  (
     <>
       <MyNav currentUser={currentUser} handleSignOut={handleSignOut} />
       <Routes>
-        <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
         <Route path="/" element={<Home currentUser={currentUser}/>} />
         <Route path="/new" element={<New currentUser={currentUser} />} />
         <Route path="/albums" element={<Albums currentUser={currentUser} />} />
@@ -68,7 +69,6 @@ function App() {
         <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
         <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
         <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
-        <Route path="/signup" element={<SignUp />} />
         <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
         <Route path="/addartist" element={<AddArtist currentUser={currentUser}/>}/>
         <Route path="/addalbum" element={<AddAlbum currentUser={currentUser}/>}/>

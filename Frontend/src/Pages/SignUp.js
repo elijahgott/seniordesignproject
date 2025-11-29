@@ -1,28 +1,26 @@
-import React from 'react';
-import { useState, useEffect} from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from 'react-router-dom';
-import { useNavigate } from "react-router-dom";
+import React from 'react'
+import { useState, useEffect} from 'react'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom"
 
-function SignUp(){
+function SignUp({ setSignUp }){
   useEffect(() => {
         document.title ="Music Tracker - Sign Up"
-    }, []);
+    }, [])
 
-    const currentDate = new Date();
-    const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
-    const navigate = useNavigate();
+    const currentDate = new Date()
+    const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate()
+    const navigate = useNavigate()
 
-    const [uid, setUid] = useState('');
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const dateJoined = curDate;
-    //console.log(dateJoined);
-    
+    const [uid, setUid] = useState('')
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const dateJoined = curDate
 
     const handleSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault()
     
         fetch('http://localhost:8081/signup', {
           method: 'POST',
@@ -33,29 +31,34 @@ function SignUp(){
         })
           .then(response => {
             if (!response.ok) {
-              throw new Error('Network response was not ok');
+              throw new Error('Network response was not ok')
             }
-            return response.text();
+            return response.text()
           })
           .then(data => {
-            console.log(data);
-            alert('Successfully Created User');
-            navigate('/');
+            console.log(data)
+            alert('Successfully Created User')
+            navigate('/')
             // Handle success message
           })
           .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-            alert('Error Creating User');
+            console.error('There was a problem with the fetch operation:', error)
+            alert('Error Creating User')
             // Handle error message
-          });
-      }; 
+          })
+      } 
 
       useEffect(()=>{
         fetch('http://localhost:8081/signupuser')
         .then(res => res.json())
         .then(uid => setUid(uid))
-        .catch(err => console.log(err));
+        .catch(err => console.log(err))
     }, [])
+
+    const toSignIn = () => {
+      console.log('clicked me so good')
+      setSignUp(false)
+    }
 
     return(
         <div className='App-header login template d-flex justify-content-center align-items-center 100-w vh-100'>
@@ -77,10 +80,10 @@ function SignUp(){
                     <div style={{marginTop: 15}}className='d-grid'>
                         <button className='btn btn-primary' type='submit'>Create Account</button>
                     </div>
-                    <p style={{fontSize: 15, marginTop: 15}} className='text-center'>
-                        Already Registered? <Link to='/signin'>Sign In</Link>
-                    </p>
                 </form>
+                <p style={{fontSize: 15, marginTop: 15}} className='text-center'>
+                        Already Registered? <Link onClick={toSignIn}>Sign In</Link>
+                </p>
             </div>
         </div>
     )

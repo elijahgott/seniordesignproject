@@ -1,9 +1,11 @@
-import React from 'react';
-import { useState, useEffect} from 'react';
-import './App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Link} from 'react-router-dom';
-import {useNavigate} from "react-router-dom";
+import React from 'react'
+import { useState, useEffect} from 'react'
+import './App.css'
+import 'bootstrap/dist/css/bootstrap.min.css'
+import {Link} from 'react-router-dom'
+import {useNavigate} from "react-router-dom"
+
+import SignUp from './SignUp'
 
 import loginService from '../services/login'
 import userService from '../services/users'
@@ -11,15 +13,17 @@ import userService from '../services/users'
 function SignIn( {onSignIn} ){
   useEffect(() => {
           document.title ="Music Tracker - Sign In"
-      }, []);
+      }, [])
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [message, setMessage] = useState('');
-    const navigate = useNavigate();
+    const [signUp, setSignUp] = useState(false)
+
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [message, setMessage] = useState('')
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
+        event.preventDefault()
     
         try {
           const loggedInUser = await loginService.login({ username, password })
@@ -39,15 +43,15 @@ function SignIn( {onSignIn} ){
             setMessage('Could not find user.')
           }
 
-          //console.log(data.user.username, data.user.uid);
-
         } catch (error) {
-          console.error('There was a problem with the fetch operation:', error);
-          setMessage('Error signing in');
+          console.error('There was a problem with the fetch operation:', error)
+          setMessage('Error signing in')
         }
-      };
+      }
 
-    return(
+    return signUp ? (<SignUp setSignUp={setSignUp} />)
+    :
+    (
         <div>
             <div className='App-header login template d-flex justify-content-center align-items-center 100-w vh-100'>
                 <div className='form_container p-5 rounded bg-white shadow'>
@@ -68,15 +72,15 @@ function SignIn( {onSignIn} ){
                         <div className='d-grid'>
                             <button className='btn btn-primary' type='submit'>Sign In</button>
                         </div>
-                        <p className='text-center'>
-                            <Link to='#forgot' style={{fontSize: 15, textDecoration: "underline"}} className='m-2'>Forgot Password?</Link>           
-                            <Link to='/signup' style={{fontSize: 15, textDecoration: "underline"}}>Sign Up</Link>    
-                        </p>
                     </form>
+                    <p className='text-center'>
+                        <Link to='#forgot' style={{fontSize: 15, textDecoration: "underline"}} className='m-2'>Forgot Password?</Link>           
+                        <Link onClick={() => setSignUp(true)} style={{fontSize: 15, marginTop: 15}}>Sign Up</Link>    
+                    </p>
                     <p className='text-center'>{message}</p>
                 </div>
             </div>
         </div>
     )
 }
-export default SignIn;
+export default SignIn
