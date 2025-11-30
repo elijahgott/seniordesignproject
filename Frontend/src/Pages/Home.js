@@ -76,7 +76,7 @@ function Home( {currentUser} ){
                                     <p className="smallText"><Link to="/SignIn">Sign in</Link> to see posts.</p>
                                 </>}   
                                 
-                                {posts.map((post) => (
+                                {posts.length === 0 ? <div style={{ fontSize: 20, textAlign: 'center', color: 'gray', marginBottom: 16 }}>Nothing to see here...</div> : posts.map((post) => (
                                     <Card style={{width: "65rem", marginTop: 10, marginBottom: 10, alignSelf: "center"}} border="secondary">
                                         <Card.Body>
                                             {/*<Card.Img variant="top" src={(`./../MusicImages/${d.photo}`)} style={{maxWidth: 500}}></Card.Img> havent implemented post photos*/} 
