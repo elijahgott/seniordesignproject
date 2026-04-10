@@ -36,11 +36,15 @@ function About( {currentUser} ){
                                     <div>
                                         <h1>Design</h1>
                                         <p style={{textIndent: 24, fontSize: 24}}>This app was designed using React and React Bootstrap, so many of the smaller aesthetic choices, like the rounded corners on buttons, for example, were predetermined by the bootstrap. I wanted the overall look to feel somewhat professional, but not boring, which led me to choose dark blue and light gray as the main colors, with black text and a white background on the main content for readability. In a few places, I left buttons disabled to show that I have plans for further functionality, but I may have run out of time, not quite figured out how to implement the functionality, or felt that it was more important to add functionality elsewhere before coming back to implement this at a later time.</p>
+
+                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}><strong>EDIT</strong>: Many aesthetic changes have been made since originally writing the above text.</p>
                                     </div>
 
                                     <div>
                                         <h1>Technical Details</h1>
                                         <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}>This project uses <a href="https://react.dev/">React</a> for the Frontend, <a href="https://www.javascript.com/">Javascript</a> for the Backend, and <a href="https://react-bootstrap.netlify.app/">React Bootstrap</a> and CSS for the styling. The SQL database was created using <a href="https://www.mysql.com/">MySQL</a>, and <a href="https://www.apachefriends.org/">XAMPP</a> is used to run a local Apache server and a local MySQL server. To run the local server to view/debug the webpages, <a href="https://www.npmjs.com/">NPM</a> is used.</p>
+
+                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}><strong>EDIT</strong>: The backend no longer uses a SQL database, but now uses MongoDB, due to it's ease of use when hosting websites.</p>
                                     </div>
                                 </Col>
                             </Col>

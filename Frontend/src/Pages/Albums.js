@@ -26,25 +26,35 @@ function Albums( {currentUser} ){
     const [data, setData] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/albums')
+        fetch('/api/albums')
         .then(res => res.json())
         .then(data => setData(data))
         .catch(err => console.log(err));
   }, [])
 
-  const [topThreeAlbums, setTopThreeAlbums] = useState([])
+// FETCH TOP THREE ALBUMS
+//   const [topThreeAlbums, setTopThreeAlbums] = useState([])
 
-  useEffect(()=>{
-      fetch('http://localhost:8081/topthreealbums')
-      .then(res => res.json())
-      .then(topThreeAlbums => setTopThreeAlbums(topThreeAlbums))
-      .catch(err => console.log(err));
-}, [])
+//   useEffect(()=>{
+//       fetch('/api/topthreealbums')
+//       .then(res => res.json())
+//       .then(topThreeAlbums => setTopThreeAlbums(topThreeAlbums))
+//       .catch(err => console.log(err));
+// }, [])
 
-let hasFetched = false;
-if(topThreeAlbums.length > 0){
-    hasFetched = true;
-}
+// RENDER TOP THREE ALBUMS
+// topThreeAlbums.map((albums, i) => (    
+//                 <Card style={{maxWidth:"26rem"}}>
+//                     <Card.Body>
+//                         <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
+//                         <Card.Link>{albums.name}</Card.Link>
+//                         <Card.Title>{albums.artist}</Card.Title>
+//                         <Card.Subtitle>#{i+1} Album</Card.Subtitle>
+//                         <Card.Subtitle style={{marginTop: 3}}>Average Rating: {albums.average_rating}</Card.Subtitle>
+//                         <Card.Text style={{fontSize: 20}}>{albums.description}</Card.Text>
+//                     </Card.Body>
+//                 </Card>
+// ))
 
 //for rating modal
 const [showRating, setShowRating] = useState(false);
@@ -84,7 +94,7 @@ const handleRatingChange = (e) => {
 const handleSubmitRating = (event) => {
     event.preventDefault();
 
-      fetch('http://localhost:8081/submitlist', {
+      fetch('/submitlist', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -121,50 +131,35 @@ const handleSubmitRating = (event) => {
                         </Col>
                     </Row>
                     <Row className="cardRow">
-                        {hasFetched ?
-                        topThreeAlbums.map((albums, i) => (    
-                                        <Card style={{maxWidth:"26rem"}}>
-                                            <Card.Body>
-                                                <Card.Img variant="top" src={require(`./../MusicImages/${albums.photo}`)} style={{maxWidth: 500}}></Card.Img>
-                                                <Card.Link>{albums.name}</Card.Link>
-                                                <Card.Title>{albums.artist}</Card.Title>
-                                                <Card.Subtitle>#{i+1} Album</Card.Subtitle>
-                                                <Card.Subtitle style={{marginTop: 3}}>Average Rating: {albums.average_rating}</Card.Subtitle>
-                                                <Card.Text style={{fontSize: 20}}>{albums.description}</Card.Text>
-                                            </Card.Body>
-                                        </Card>
-                        )) :
-                        <>
-                            <Card style={{maxWidth:"26rem"}}>
-                                <Card.Body>
-                                    <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Dirt.jpg`)} style={{maxWidth: 500}}></Card.Img>
-                                    <Card.Link>Dirt</Card.Link>
-                                    <Card.Title>Alice In Chains</Card.Title>
-                                    <Card.Subtitle>Release Date: September 29, 1992</Card.Subtitle>
-                                    <Card.Text style={{fontSize: 20}}>Alice in Chains' second studio album.</Card.Text>
-                                </Card.Body>
-                            </Card>
-                            <Card style={{maxWidth:"26rem"}}>
-                                <Card.Body>
-                                    <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Facelift.jpg`)} style={{maxWidth: 500}}></Card.Img>
-                                    <Card.Link>Facelift</Card.Link>
-                                    <Card.Title>Alice In Chains</Card.Title>
-                                    <Card.Subtitle>Release Date: August 21, 1990</Card.Subtitle>
-                                    <Card.Text style={{fontSize: 20}}>Alice in Chains' debut studio album.</Card.Text>
-                                </Card.Body>
-                            </Card>
-                            <Card style={{maxWidth:"26rem"}}>
-                                <Card.Body>
-                                    <Card.Img variant="top" src={require(`./../MusicImages/Nirvana_Bleach.jpg`)} style={{maxWidth: 500}}></Card.Img>
-                                    <Card.Link>Bleach</Card.Link>
-                                    <Card.Title>Nirvana</Card.Title>
-                                    <Card.Subtitle>Release Date: June 15, 1989</Card.Subtitle>
-                                    <Card.Text style={{fontSize: 20}}>Nirvana's debut studio album.</Card.Text>
-                                </Card.Body>
-                            </Card>
-                        </>
-                    }
+                        <Card style={{maxWidth:"26rem"}}>
+                            <Card.Body>
+                                <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Dirt.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                <Card.Link>Dirt</Card.Link>
+                                <Card.Title>Alice In Chains</Card.Title>
+                                <Card.Subtitle>Release Date: September 29, 1992</Card.Subtitle>
+                                <Card.Text style={{fontSize: 20}}>Alice in Chains' second studio album.</Card.Text>
+                            </Card.Body>
+                        </Card>
+                        <Card style={{maxWidth:"26rem"}}>
+                            <Card.Body>
+                                <Card.Img variant="top" src={require(`./../MusicImages/AliceInChains_Facelift.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                <Card.Link>Facelift</Card.Link>
+                                <Card.Title>Alice In Chains</Card.Title>
+                                <Card.Subtitle>Release Date: August 21, 1990</Card.Subtitle>
+                                <Card.Text style={{fontSize: 20}}>Alice in Chains' debut studio album.</Card.Text>
+                            </Card.Body>
+                        </Card>
+                        <Card style={{maxWidth:"26rem"}}>
+                            <Card.Body>
+                                <Card.Img variant="top" src={require(`./../MusicImages/Nirvana_Bleach.jpg`)} style={{maxWidth: 500}}></Card.Img>
+                                <Card.Link>Bleach</Card.Link>
+                                <Card.Title>Nirvana</Card.Title>
+                                <Card.Subtitle>Release Date: June 15, 1989</Card.Subtitle>
+                                <Card.Text style={{fontSize: 20}}>Nirvana's debut studio album.</Card.Text>
+                            </Card.Body>
+                        </Card>
                     </Row>
+
                     <Row style={{marginTop: 30}}>
                         <Col>
                         {currentUser ? (
@@ -200,50 +195,53 @@ const handleSubmitRating = (event) => {
                                 </Modal.Footer>
                         </Form>
                     </Modal>
-                    {currentUser ? (<Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {hasFetched ? 
-                            data.map((d, i) => (    
-                                        <Card className="shadow" style={{maxWidth:"26rem"}}>
+                    {currentUser ?
+                    (
+                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
+                            {data.length > 0 ? 
+                                data.map((d, i) => (    
+                                            <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
+                                                <Card.Body>
+                                                    <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
+                                                    <Card.Link>{d.name}</Card.Link>
+                                                    <Card.Title>{d.artist.name}</Card.Title>
+                                                    <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
+                                                </Card.Body>
+                                                <Card.Footer>
+                                                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                                        <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
+                                                    </div>
+                                                </Card.Footer>
+                                            </Card>
+                            ))
+                            :
+                            <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                                <p className="smallText notLoaded">Nothing to see here...</p>
+                            </Row>
+                            }
+                        </Row>
+                    ) :
+                    (
+                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
+                            {data.length > 0 ? 
+                                data.map((d, i) => (    
+                                        <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
-                                                <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
+                                                <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
                                                 <Card.Link>{d.name}</Card.Link>
-                                                <Card.Title>{d.artist}</Card.Title>
+                                                <Card.Title>{d.artist.name}</Card.Title>
                                                 <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
                                             </Card.Body>
-                                            <Card.Footer>
-                                                <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                                    <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
-                                                </div>
-                                            </Card.Footer>
                                         </Card>
-                        ))
-                        :
-                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                            <p className="smallText notLoaded">Nothing to see here...</p>
+                                ))
+                            :
+                            (<Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                                <p className="smallText notLoaded">Nothing to see here...</p>
+                            </Row>)
+                            }
                         </Row>
-                        }
-                        
-                    </Row>) :
-                    <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                        {hasFetched ? 
-                            data.map((d, i) => (    
-                                    <Card className="shadow" style={{maxWidth:"26rem"}}>
-                                        <Card.Body>
-                                            <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
-                                            <Card.Link>{d.name}</Card.Link>
-                                            <Card.Title>{d.artist}</Card.Title>
-                                            <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
-                                        </Card.Body>
-                                    </Card>
-                            ))
-                        :
-                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                            <p className="smallText notLoaded">Nothing to see here...</p>
-                        </Row>
-                        }
-                    
-                </Row>
-                    }
+                    )
+                }
                 </Container>
             </header>
             <MyFooter />

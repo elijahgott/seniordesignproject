@@ -5,7 +5,7 @@ const Artist = require('../models/artist')
 artistsRouter.get('/', async (req, res)=> {
   const artists = await Artist.find({})
 
-  res.json(albums)
+  res.json(artists || '')
 })
 
 // get specific artist by id
@@ -17,6 +17,13 @@ artistsRouter.get('/:id', async (req, res) => {
     res.json(artist) :
     res.status(404).send({ error: `Could not find artist with ID: ${id}.`})
 })
+
+// get top 3 rated artists
+// artistsRouter.get('/topthree', async (req, res) => {
+//   const artists = []
+
+
+// })
 
 // // handles the insertion of a new artist into the database
 // artistsRouter.post('/', (req, res)=> {

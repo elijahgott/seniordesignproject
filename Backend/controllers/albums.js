@@ -5,7 +5,7 @@ const Album = require('../models/album')
 albumsRouter.get('/', async (req, res)=> {
     const albums = await Album.find({}).populate('artist')
 
-    res.json(albums)
+    res.json(albums || '')
 })
 
 // get specific album by id
