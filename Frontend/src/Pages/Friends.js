@@ -17,7 +17,7 @@ import Form from 'react-bootstrap/Form';
 import MyNav from "../MyComponents/MyNav";
 import ListGroupItem from "react-bootstrap/esm/ListGroupItem";
 
-function Friends( {currentUser} ){
+function Friends( {currentUser, onSignOut} ){
     var uid;
     if(! currentUser){
         uid = null;
@@ -132,7 +132,7 @@ function Friends( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>

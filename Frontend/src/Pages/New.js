@@ -11,7 +11,7 @@ import Button from "react-bootstrap/Button";
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function New( {currentUser} ){
+function New( {currentUser, onSignOut} ){
     useEffect(() => {
             document.title ="Music Tracker - New"
         }, []);
@@ -32,7 +32,7 @@ function New( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container className="containerCard shadow">
                         <Row>

@@ -12,7 +12,7 @@ import Col from 'react-bootstrap/Col';
 import MyNav from '../MyComponents/MyNav.js';
 
 
-function CreatePost({currentUser}){
+function CreatePost({currentUser, onSignOut}){
     const currentDate = new Date();
     const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
     const curTime = currentDate.getHours() + ':' + currentDate.getMinutes() + ":00";
@@ -56,7 +56,7 @@ function CreatePost({currentUser}){
     return(
         
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container style={{height: "100vh", marginTop: 15}}>
                     <Card className="shadow">

@@ -19,7 +19,7 @@ function SignIn( {onSignIn} ){
         event.preventDefault();
     
         try {
-          const response = await fetch('http://localhost:8081/signin', {
+          const response = await fetch('/api/login', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -32,12 +32,12 @@ function SignIn( {onSignIn} ){
           }
     
           const data = await response.json();
-          setMessage(data.message);
+
           if(data.token){
             onSignIn(data.token, data.user);
+            window.localStorage.setItem('musicTrackerUser', JSON.stringify(data.user))
             navigate('/');
           }
-          //console.log(data.user.username, data.user.uid);
 
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error);

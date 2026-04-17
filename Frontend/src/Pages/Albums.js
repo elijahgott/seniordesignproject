@@ -17,7 +17,7 @@ import Form from "react-bootstrap/Form";
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Albums( {currentUser} ){
+function Albums( {currentUser, onSignOut} ){
     useEffect(() => {
         document.title ="Music Tracker - Albums"
     }, []);
@@ -120,7 +120,7 @@ const handleSubmitRating = (event) => {
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container className="containerCard shadow">
                     <Row>
@@ -202,7 +202,7 @@ const handleSubmitRating = (event) => {
                                 data.map((d, i) => (    
                                             <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
                                                 <Card.Body>
-                                                    <Card.Img variant="top" src={require(`./../MusicImages/${d.photo}`)} style={{width: 358, height: 358}}></Card.Img>
+                                                    <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
                                                     <Card.Link>{d.name}</Card.Link>
                                                     <Card.Title>{d.artist.name}</Card.Title>
                                                     <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>

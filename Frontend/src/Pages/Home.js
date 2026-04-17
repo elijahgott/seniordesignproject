@@ -18,7 +18,7 @@ import HomeCarousel from "../MyComponents/HomeCarousel";
 import SignIn from "./SignIn";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Home( {currentUser} ){
+function Home( {currentUser, onSignOut} ){
     useEffect(() => {
         document.title ="Music Tracker - Home"
     }, []);
@@ -54,7 +54,7 @@ function Home( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container className="main-body">
                     <Row>

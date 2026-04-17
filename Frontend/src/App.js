@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -24,12 +24,24 @@ function App() {
     const [token, setToken] = useState('');
     const [currentUser, setCurrentUser] = useState(null);
 
+    useEffect(() => {
+      const fetchUser = async () => {
+        const loggedInUserJSON = window.localStorage.getItem('musicTrackerUser')
+        if(loggedInUserJSON){
+          setCurrentUser(JSON.parse(loggedInUserJSON))
+        }
+      }
+      fetchUser()
+    }, [])
+
     const handleSignIn = (newToken, user) => {
       setToken(newToken);
       setCurrentUser(user);
+      // window.localStorage.setItem('musicTrackerUser', JSON.stringify(user))
     }
 
-    const handleSignOut = () => { 
+    const handleSignOut = () => {
+      window.localStorage.removeItem('musicTrackerUser')
       setToken(null);
       setCurrentUser(null);
     }
@@ -37,20 +49,20 @@ function App() {
   return (
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
-      <Route path="/" element={<Home currentUser={currentUser}/>} />
-      <Route path="/new" element={<New currentUser={currentUser} />} />
-      <Route path="/albums" element={<Albums currentUser={currentUser} />} />
-      <Route path="/artists" element={<Artists currentUser={currentUser}/>} />
-      <Route path="/about" element={<About currentUser={currentUser}/>} />
-      <Route path="/profile" element={<Profile currentUser={currentUser}/>} />
-      <Route path="/lists" element={<UserLists currentUser={currentUser}/>} />
-      <Route path="/friends" element={<Friends currentUser={currentUser}/>} />
-      <Route path="/settings" element={<Settings currentUser={currentUser}/>} />
+      <Route path="/" element={<Home currentUser={currentUser}  onSignOut={handleSignOut}/>} />
+      <Route path="/new" element={<New currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/artists" element={<Artists currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/about" element={<About currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/profile" element={<Profile currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/lists" element={<UserLists currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/friends" element={<Friends currentUser={currentUser} onSignOut={handleSignOut}/>} />
+      <Route path="/settings" element={<Settings currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/signup" element={<SignUp />} />
-      <Route path="/createpost" element={<CreatePost currentUser={currentUser}/>}/>
-      <Route path="/addartist" element={<AddArtist currentUser={currentUser}/>}/>
-      <Route path="/addalbum" element={<AddAlbum currentUser={currentUser}/>}/>
-      <Route path="/searchresults" element={<SearchResults currentUser={currentUser}/>} />
+      <Route path="/createpost" element={<CreatePost currentUser={currentUser} onSignOut={handleSignOut}/>}/>
+      <Route path="/addartist" element={<AddArtist currentUser={currentUser} onSignOut={handleSignOut}/>}/>
+      <Route path="/addalbum" element={<AddAlbum currentUser={currentUser} onSignOut={handleSignOut}/>}/>
+      <Route path="/searchresults" element={<SearchResults currentUser={currentUser} onSignOut={handleSignOut}/>} />
     </Routes>
   );
 }

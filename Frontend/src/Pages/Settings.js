@@ -12,7 +12,7 @@ import Form from 'react-bootstrap/Form';
 
 import MyNav from "../MyComponents/MyNav";
 
-function Settings( {currentUser} ){
+function Settings( {currentUser, onSignOut} ){
     const navigate = useNavigate();
 
     var uid;
@@ -58,7 +58,7 @@ function Settings( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>

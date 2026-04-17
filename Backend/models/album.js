@@ -17,7 +17,8 @@ const albumSchema = new mongoose.Schema({
     maxLength: 255
   },
   photoURL: String,
-  releaseDate: Date
+  releaseDate: Date,
+  averageRating: Number,
 })
 
 albumSchema.set('toJSON', {

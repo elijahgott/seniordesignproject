@@ -18,7 +18,7 @@ import MyNav from "../MyComponents/MyNav";
 
 /* app crashes when user not signed in and tries to access profile page */
 
-function Profile({currentUser}){
+function Profile({currentUser, onSignOut}){
     useEffect(() => {
             document.title ="Music Tracker - Profile"
         }, []);
@@ -330,7 +330,7 @@ function Profile({currentUser}){
 
     return(
         <div>
-            <MyNav currentUser={currentUser} />
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>

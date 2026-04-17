@@ -14,7 +14,7 @@ import {Link} from 'react-router-dom'
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Artists( {currentUser} ){
+function Artists( {currentUser, onSignOut} ){
     useEffect(() => {
             document.title ="Music Tracker - Artists"
         }, []);
@@ -54,7 +54,7 @@ function Artists( {currentUser} ){
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
             <Container className="containerCard shadow">
                     <Row>
@@ -111,9 +111,9 @@ function Artists( {currentUser} ){
                     
                     {data.length > 0 ?
                     (
-                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                        <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
                             {data.map((d, i) => (    
-                                <Card key={i} style={{maxWidth:"26rem"}} border="none">
+                                <Card key={i} className="shadow" style={{maxWidth:"26rem"}} border="none">
                                     <Card.Body>
                                         <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
                                         <Card.Link>{d.name}</Card.Link>

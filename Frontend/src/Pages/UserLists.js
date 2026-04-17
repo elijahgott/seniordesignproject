@@ -18,7 +18,7 @@ import { useNavigate } from "react-router-dom";
 
 import MyNav from "../MyComponents/MyNav";
 
-function UserLists({currentUser}){
+function UserLists({currentUser, onSignOut}){
     const currentDate = new Date();
     const navigate = useNavigate();
     
@@ -447,7 +447,7 @@ function UserLists({currentUser}){
 
     return(
         <div>
-            <MyNav currentUser={currentUser} />
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>

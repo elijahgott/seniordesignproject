@@ -12,14 +12,14 @@ import {Link} from 'react-router-dom';
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function About( {currentUser} ){
+function About( {currentUser, onSignOut} ){
     useEffect(() => {
             document.title ="Music Tracker - About"
         }, []);
 
     return(
         <div>
-            <MyNav currentUser={currentUser}/>
+            <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container className="containerCard shadow">
                     <Row>

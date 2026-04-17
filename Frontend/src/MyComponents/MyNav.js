@@ -11,7 +11,7 @@ import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from "react-router-dom";
 
-function MyNav( {currentUser} ){
+function MyNav( {currentUser, onSignOut} ){
 
   const [search, setSearch] = useState('');
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ function MyNav( {currentUser} ){
     catch (error) {
       console.error('There was a problem with the fetch operation:', error);
     }
-  }; 
+  };
 
     return(
         <Navbar className="navbar" expand="lg" style={{paddingTop: 20, paddingBottom: 20}}>
@@ -56,8 +56,7 @@ function MyNav( {currentUser} ){
                           <NavDropdown.Item><Link to="/lists" className="navlink">My Lists</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/friends" className="navlink">Friends</Link></NavDropdown.Item>
                           <NavDropdown.Item><Link to="/settings" className="navlink">Settings</Link></NavDropdown.Item>
-                          <NavDropdown.Item disabled>Sign Out</NavDropdown.Item>
-                          <NavDropdown.Item disabled>(Refresh to Sign Out)</NavDropdown.Item>
+                          <NavDropdown.Item onClick={onSignOut} className="navlink" style={{fontWeight: 'bold'}}>Sign Out</NavDropdown.Item>
                         </>
                       ) : <>
                             <NavDropdown.Item><Link to="/signin" className="navlink">Sign In</Link></NavDropdown.Item>

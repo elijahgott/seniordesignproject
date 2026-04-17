@@ -12,7 +12,8 @@ const artistSchema = new mongoose.Schema({
     required: false,
     maxLength: 255
   },
-  photoURL: String
+  photoURL: String,
+  averageRating: Number,
 })
 
 artistSchema.set('toJSON', {
