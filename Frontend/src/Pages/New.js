@@ -88,9 +88,7 @@ function New( {currentUser, onSignOut} ){
                         </Row>
                     </Container>
 
-                    <Button className="smallText newFeaturesButton" href="#newFeatures">New Features v</Button>
-
-                    <Container className="containerCard shadow" id="newFeatures">
+                    <Container className="containerCard shadow" id="newFeatures" style={{marginTop: 12}}>
                         <Row>
                             <Col>
                                 <Card className="headerCard">

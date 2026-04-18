@@ -37,7 +37,7 @@ function Home( {currentUser, onSignOut} ){
     useEffect(() => {
         async function fetchPosts() {
         try {
-            const response = await fetch(`http://localhost:8081/posts/${uid}`);
+            const response = await fetch(`/posts/${uid}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
@@ -63,6 +63,8 @@ function Home( {currentUser, onSignOut} ){
                                 {currentUser ? (
                                     <h1 className="title">Welcome, {currentUser.username}</h1>
                                 ) : <h1 className="title">Welcome, Guest</h1>}
+
+                                <p style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "gray"}}>*** Since completely redoing the backend and migrating to MongoDB, many features have been broken. Among these broken features are posting, rating albums, accessing profiles, and more. I intend on fixing most of these issues in time, but seeing as this is my senior design project from 2024, it may take some time due to this project not being of utmost importance to me anymore, or some original features may be cut.</p>
                                 
                                 <HomeCarousel />
 

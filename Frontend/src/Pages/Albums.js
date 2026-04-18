@@ -180,9 +180,9 @@ const handleSubmitRating = (event) => {
                                 <Modal.Title>Rate Album</Modal.Title>
                             </Modal.Header>
                                 <Modal.Body>
-                                    <Row>
-                                        <Form.Label style={{fontWeight: "bold"}}>Album Rating:</Form.Label>
-                                            <Form.Control type="number" min={1} max={10} value={rating} onChange={handleRatingChange}></Form.Control>
+                                    <Row style={{margin: "0 auto", width: "75%"}}>
+                                        <Form.Label style={{fontWeight: "bold", marginLeft: -8}}>Album Rating:</Form.Label>
+                                        <Form.Control type="number" min={1} max={10} value={rating} onChange={handleRatingChange}></Form.Control>
                                     </Row>
                                 </Modal.Body>
                                 <Modal.Footer>
@@ -207,7 +207,7 @@ const handleSubmitRating = (event) => {
                                                     <Card.Title>{d.artist.name}</Card.Title>
                                                     <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
                                                 </Card.Body>
-                                                <Card.Footer>
+                                                <Card.Footer style={{background: 'none'}}>
                                                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                                                         <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
                                                     </div>

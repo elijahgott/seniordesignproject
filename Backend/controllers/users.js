@@ -3,18 +3,14 @@ const bcrypt = require('bcrypt')
 const usersRouter = require('express').Router()
 const User = require('../models/user')
 
-const getCurrentDate = () => {
-  // Source - https://stackoverflow.com/a
-  // Posted by Samuel Meddows, modified by community. See post 'Timeline' for change history
-  // Retrieved 2025-11-27, License - CC BY-SA 4.0
+const getTodaysDate = () => {
+  const dateObj = new Date()
+  const month = dateObj.getMonth() + 1
+  const day = dateObj.getDate()
+  const year = dateObj.getFullYear()
 
-  var today = new Date();
-  var dd = String(today.getDate()).padStart(2, '0');
-  var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-  var yyyy = today.getFullYear();
-
-  today = mm + '-' + dd + '-' + yyyy;
-  return today
+  console.log(`${month}-${day}-${year}`)
+  return `${month}-${day}-${year}`
 }
 
 // gets all users in database
@@ -48,7 +44,7 @@ usersRouter.post('/', async (req, res) => {
   const user = new User({
     username,
     passwordHash,
-    dateJoined: getCurrentDate(),
+    dateJoined: getTodaysDate().toString(),
     bio: '',
     posts: [],
     following: [],

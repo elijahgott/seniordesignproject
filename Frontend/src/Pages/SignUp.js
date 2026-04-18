@@ -5,31 +5,26 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 
-function SignUp(){
+function SignUp({ setCurrentUser }){
   useEffect(() => {
         document.title ="Music Tracker - Sign Up"
     }, []);
 
-    const currentDate = new Date();
-    const curDate = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
     const navigate = useNavigate();
 
     const [uid, setUid] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const dateJoined = curDate;
-    //console.log(dateJoined);
     
-
     const handleSubmit = (event) => {
         event.preventDefault();
     
-        fetch('http://localhost:8081/signup', {
+        fetch('/api/users', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ uid, username, password, dateJoined }),
+          body: JSON.stringify({ username, password }),
         })
           .then(response => {
             if (!response.ok) {
@@ -38,8 +33,8 @@ function SignUp(){
             return response.text();
           })
           .then(data => {
-            console.log(data);
-            alert('Successfully Created User');
+            window.localStorage.setItem('musicTrackerUser', data)
+            setCurrentUser(data)
             navigate('/');
             // Handle success message
           })
@@ -49,13 +44,6 @@ function SignUp(){
             // Handle error message
           });
       }; 
-
-      useEffect(()=>{
-        fetch('http://localhost:8081/signupuser')
-        .then(res => res.json())
-        .then(uid => setUid(uid))
-        .catch(err => console.log(err));
-    }, [])
 
     return(
         <div className='App-header login template d-flex justify-content-center align-items-center 100-w vh-100'>
