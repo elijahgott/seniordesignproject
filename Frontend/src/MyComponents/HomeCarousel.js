@@ -12,30 +12,34 @@ function HomeCarousel(){
         setIndex(selectedIndex);
   };
 
+  const captionStyle = {
+    backdropFilter: 'blur(4px)'
+  }
+
   return (
     <Container style={{maxWidth: 1025, letterSpacing: "8px"}}>
       <Carousel activeIndex={index} onSelect={handleSelect} className="rounded border" >
         <Carousel.Item>
           <Image className="carouselImg" src ={require("./../MiscImages/carousel-typing.jpg")} rounded/>
-          <Carousel.Caption>
+          <Carousel.Caption style={captionStyle}>
             <h3 style={{textDecorationColor: "blue"}}>Add New Music!</h3>
-            <p>Users can add new Artists and Albums!</p>
+            <p style={{fontSize: 20}}>Users can add new Artists and Albums!</p>
           </Carousel.Caption>
         </Carousel.Item>
 
         <Carousel.Item>
           <Image className="carouselImg" src ={require("./../MiscImages/carousel-people.jpg")} rounded/>
-          <Carousel.Caption>
+          <Carousel.Caption style={captionStyle}>
             <h3>Add New Friends!</h3>
-            <p>Users can interact with friends via posts!</p>
+            <p style={{fontSize: 20}}>Users can interact with friends via posts!</p>
           </Carousel.Caption>
         </Carousel.Item>
 
         <Carousel.Item>
           <Image className="carouselImg" src ={require("./../MiscImages/stock-beach.jpg")} rounded/>
-          <Carousel.Caption>
+          <Carousel.Caption style={captionStyle}>
             <h3>Track Your Albums!</h3>
-            <p>Users can track and rate albums they have listened to!</p>
+            <p style={{fontSize: 20}}>Users can track and rate albums they have listened to!</p>
           </Carousel.Caption>
         </Carousel.Item>
     </Carousel>

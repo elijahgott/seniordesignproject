@@ -12,7 +12,6 @@ function SignUp({ setCurrentUser }){
 
     const navigate = useNavigate();
 
-    const [uid, setUid] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     

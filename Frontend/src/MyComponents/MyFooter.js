@@ -12,11 +12,11 @@ function MyFooter(){
                     </tr>
                     <tr>
                         <td className="left">LinkedIn:</td>
-                        <td className="right"><a href="https://www.linkedin.com/in/elijah-gott/" target="_blank">elijah-gott</a></td>
+                        <td className="right"><a href="https://www.linkedin.com/in/elijah-gott/" target="_blank" rel="noopener noreferrer">elijah-gott</a></td>
                     </tr>
                     <tr>
                         <td className="left">GitHub:</td>
-                        <td className="right"><a href="https://github.com/elijahgott" target="_blank">elijahgott</a></td>
+                        <td className="right"><a href="https://github.com/elijahgott" target="_blank" rel="noopener noreferrer">elijahgott</a></td>
                     </tr>
                 </tbody>
             </table>

@@ -40,14 +40,14 @@ function MyNav( {currentUser, onSignOut} ){
     return(
         <Navbar className="navbar" expand="lg" style={{paddingTop: 20, paddingBottom: 20}}>
           <Container>
-                <Navbar.Brand style={{width: "auto", fontWeight: "bold"}}><Link to="/" className="navlink navbrand">💿 Music Tracker</Link></Navbar.Brand>
+                <Navbar.Brand id="brand" style={{width: "auto", fontWeight: "bold"}}><Link to="/" className="navlink navbrand"><span role="img" aria-labelledby="brand">💿</span>Music Tracker</Link></Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/new" className="navlink">New</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/artists" className="navlink">Artists</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/albums" className="navlink">Albums</Link></Nav.Link>
-                    <Nav.Link style={{ color: "lightgray"}}><Link to="/about" className="navlink">About</Link></Nav.Link>
+                    <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/new">New</Nav.Link>
+                    <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/artists">Artists</Nav.Link>
+                    <Nav.Link className="navLink" style={{ color: "lightgray"}} href="albums">Albums</Nav.Link>
+                    <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/about">About</Nav.Link>
               
                     <NavDropdown title="Profile" className="navlink">
                       {currentUser ? (

@@ -16,15 +16,13 @@ import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
 import AddArtist from "./Pages/AddArtist";
 import AddAlbum from "./Pages/AddAlbum";
-import CreatePost from "./Pages/CreatePost";
 import SearchResults from "./Pages/SearchResults";
 
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import {Routes, Route} from "react-router-dom";
 
 function App() {
     const navigate = useNavigate()
 
-    const [token, setToken] = useState('');
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
@@ -35,18 +33,16 @@ function App() {
         }
       }
       fetchUser()
-    }, [currentUser])
+    }, [])
 
     const handleSignIn = (newToken, user) => {
-      setToken(newToken);
       setCurrentUser(user);
     }
 
     const handleSignOut = () => {
       window.localStorage.removeItem('musicTrackerUser')
-      setToken(null);
       setCurrentUser(null);
-      navigate('/')
+      navigate('/signin')
     }
 
   return (
@@ -62,7 +58,6 @@ function App() {
       <Route path="/friends" element={<Friends currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/settings" element={<Settings currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
-      <Route path="/createpost" element={<CreatePost currentUser={currentUser} onSignOut={handleSignOut}/>}/>
       <Route path="/addartist" element={<AddArtist currentUser={currentUser} onSignOut={handleSignOut}/>}/>
       <Route path="/addalbum" element={<AddAlbum currentUser={currentUser} onSignOut={handleSignOut}/>}/>
       <Route path="/searchresults" element={<SearchResults currentUser={currentUser} onSignOut={handleSignOut}/>} />

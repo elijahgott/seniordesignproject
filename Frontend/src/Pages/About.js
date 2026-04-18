@@ -1,9 +1,8 @@
 import React from "react";
-import { useState, useEffect} from 'react';
+import {useEffect} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Container from 'react-bootstrap/Container';
-import Image from 'react-bootstrap/Image';
 import Card from 'react-bootstrap/Card';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';

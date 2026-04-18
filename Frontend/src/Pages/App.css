@@ -82,10 +82,16 @@
 .btn-primary{
   background-color: black !important;
   border: 2px solid black !important;
+
+  transition: all 0.2s;
 }
 
 .btn-primary:hover{
-  border: 2px solid black !important;
+  scale: 1.02;
+}
+
+.btn-primary:active{
+  scale: 0.98;
 }
 
 .form_container{

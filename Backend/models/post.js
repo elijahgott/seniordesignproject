@@ -7,7 +7,6 @@ const postSchema = new mongoose.Schema({
     unique: false,
     maxLength: 255
   },
-  photoURL: String,
   album: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Album'
