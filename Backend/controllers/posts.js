@@ -47,7 +47,7 @@ postsRouter.post('/', async (req, res)=> {
     const post = new Post({
       content: postText,
       album: album._id,
-      datePosted: getTodaysDate(),
+      datePosted: getTodaysDate().toString(),
       user: user._id
     })
 

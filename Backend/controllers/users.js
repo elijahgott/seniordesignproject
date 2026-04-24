@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt')
 
 const usersRouter = require('express').Router()
 const User = require('../models/user')
+const Album = require('../models/album')
 
 const getTodaysDate = () => {
   const dateObj = new Date()
@@ -24,7 +25,7 @@ usersRouter.get('/', async (req, res)=> {
 usersRouter.get('/:id', async (req, res) => {
   const id = req.params.id
 
-  const user = User.findById({ _id: id })
+  const user = await User.findById({ _id: id })
   user ? 
     res.json(user) :
     res.status(404).send({ error: `Could not find user with ID: ${id}.`})
@@ -48,7 +49,7 @@ usersRouter.post('/', async (req, res) => {
     bio: '',
     posts: [],
     following: [],
-    followers: []
+    ratings: []
   })
 
   const savedUser = await user.save()
@@ -94,6 +95,39 @@ usersRouter.delete('/:id', (req, res) => {
       console.log('Error deleting user: ', e)
       res.status(404).send({ error: `Error deleting user: ${e}` })
     })
+})
+
+// create rating
+usersRouter.post('/:id/ratings', async (req, res) => {
+  const userId = req.params.id
+  const user = await User.findById({ _id: userId })
+
+  if( !user ){
+    res.status(404).send({ error: `Cannot find user with ID: ${userId}!`})
+  }
+
+  const albumId = req.body.album
+
+  if( user.ratings.find(r => r.album.equals(albumId)) ){
+    console.log('Already rated this album!')
+  }
+
+  const album = await Album.findById({ _id: albumId })
+
+  if( !album ){
+    res.status(404).send({ error: `Cannot find album with ID: ${albumId}!`})
+  }
+
+  const rating = req.body.rating
+  const ratingObj = {
+      album: album,
+      rating: rating
+    }
+
+  user.ratings = user.ratings.concat(ratingObj)
+
+  const savedUser = await user.save()
+  res.status(201).json(savedUser)
 })
 
 // // handle fetching list of listened to albums based on user ID

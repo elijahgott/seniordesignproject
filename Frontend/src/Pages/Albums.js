@@ -62,22 +62,21 @@ const handleShowRating = () => setShowRating(true);
 
 //values sent to database
 var uid;
-    if(! currentUser){
-        uid = null;
-    }
-    else{
-        uid = currentUser.uid;
-    }
+if(! currentUser){
+    uid = null;
+}
+else{
+    uid = currentUser.id;
+}
+
 const [album, setAlbum] = useState('');
-const [artist, setArtist] = useState('');
 const dateAdded = currentDate.getFullYear() + '-' + (currentDate.getMonth()+1) + '-' + currentDate.getDate();
 const [rating, setRating] = useState('');
 
 //handle starting rating - pass album and artist data from data.map
-const handleStartRating = (albumPar, artistPar) => {
+const handleStartRating = (albumId) => {
     handleShowRating();
-    setAlbum(albumPar);
-    setArtist(artistPar);
+    setAlbum(albumId);
 }
 
 //handle rating change
@@ -93,12 +92,12 @@ const handleRatingChange = (e) => {
 const handleSubmitRating = (event) => {
     event.preventDefault();
 
-      fetch('/submitlist', {
+      fetch(`/api/users/${uid}/ratings`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ uid, album, artist, dateAdded, rating }),
+          body: JSON.stringify({ album, rating }),
         })
           .then(response => {
             if (!response.ok) {
@@ -107,9 +106,7 @@ const handleSubmitRating = (event) => {
             return response.text();
           })
           .then(data => {
-            console.log(data);
             handleCloseRating();
-            alert('Successfully Rated Album');
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
@@ -208,7 +205,9 @@ const handleSubmitRating = (event) => {
                                                 </Card.Body>
                                                 <Card.Footer style={{background: 'none'}}>
                                                     <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                                        <Button onClick={() => handleStartRating(d.name, d.artist)}>Rate Album</Button>
+                                                        {currentUser.ratings.includes(r => r.album.equals(d._id)) ?
+                                                        <Button>Update Rating</Button> :
+                                                        <Button onClick={() => handleStartRating(d.id)}>Rate Album</Button>}
                                                     </div>
                                                 </Card.Footer>
                                             </Card>
