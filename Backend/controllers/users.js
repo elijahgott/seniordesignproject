@@ -130,6 +130,28 @@ usersRouter.post('/:id/ratings', async (req, res) => {
   res.status(201).json(savedUser)
 })
 
+// create rating
+usersRouter.put('/:id/ratings', async (req, res) => {
+  const userId = req.params.id
+  const user = await User.findById({ _id: userId })
+
+  if( !user ){
+    res.status(404).send({ error: `Cannot find user with ID: ${userId}!`})
+  }
+
+  const albumId = req.body.album
+  const rating = user.ratings.find(r => r.album.equals(albumId))
+
+  if( !rating ){
+    res.status(404).json({ error: 'Cannot find that rating!'})
+  }
+
+  rating.rating = req.body.rating
+
+  const savedUser = await user.save()
+  res.status(201).json(savedUser)
+})
+
 // // handle fetching list of listened to albums based on user ID
 // usersRouter.get('/:uid/listenedto', (req, res) => {
 //   const userId = req.params.uid;

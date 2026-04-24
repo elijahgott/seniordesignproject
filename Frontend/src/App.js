@@ -25,8 +25,7 @@ function App() {
 
     const [currentUser, setCurrentUser] = useState(null);
 
-    useEffect(() => {
-      const fetchUser = async () => {
+    const fetchUser = async () => {
         const loggedInUserJSON = window.localStorage.getItem('musicTrackerUser')
         const parsedUser = JSON.parse(loggedInUserJSON)
         if(parsedUser){
@@ -36,6 +35,7 @@ function App() {
           .catch(err => console.log(err));
         }
       }
+    useEffect(() => {
       fetchUser()
     }, [])
 
@@ -54,7 +54,7 @@ function App() {
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
       <Route path="/" element={<Home currentUser={currentUser}  onSignOut={handleSignOut}/>} />
       <Route path="/new" element={<New currentUser={currentUser} onSignOut={handleSignOut} />} />
-      <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} fetchUser={fetchUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/about" element={<About currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/profile" element={<Profile currentUser={currentUser} onSignOut={handleSignOut} />} />

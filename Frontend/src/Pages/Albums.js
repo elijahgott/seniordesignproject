@@ -16,7 +16,7 @@ import Form from "react-bootstrap/Form";
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Albums( {currentUser, onSignOut} ){
+function Albums( {currentUser, onSignOut, fetchUser} ){
     useEffect(() => {
         document.title ="Music Tracker - Albums"
     }, []);
@@ -107,10 +107,49 @@ const handleSubmitRating = (event) => {
           })
           .then(data => {
             handleCloseRating();
+            fetchUser()
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
             alert('Error Rating Album')
+          });
+  }; 
+
+  // EDIT RATING
+const [showEditRating, setShowEditRating] = useState(false);
+const handleCloseEditRating = () => setShowEditRating(false);
+const handleShowEditRating = () => setShowEditRating(true);
+
+  //handle starting edit rating
+const handleStartEditRating = (albumId) => {
+    handleShowEditRating();
+    setAlbum(albumId);
+}
+
+//handle submission of album and rating to listened list
+const handleSubmitEditRating = (event) => {
+    event.preventDefault();
+
+      fetch(`/api/users/${uid}/ratings`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ album, rating }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('Network response was not ok');
+            }
+            return response.text();
+          })
+          .then(data => {
+            handleCloseEditRating();
+            fetchUser()
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            alert('Error editing album rating!')
           });
   }; 
 
@@ -191,32 +230,61 @@ const handleSubmitRating = (event) => {
                                 </Modal.Footer>
                         </Form>
                     </Modal>
+                    <Modal show={showEditRating} onHide={handleCloseEditRating} backdrop="static">
+                        <Form>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Update Rating</Modal.Title>
+                            </Modal.Header>
+                                <Modal.Body>
+                                    <Row style={{margin: "0 auto", width: "75%"}}>
+                                        <Form.Label style={{fontWeight: "bold", marginLeft: -8}}>Album Rating:</Form.Label>
+                                        <Form.Control type="number" min={1} max={10} value={rating} onChange={handleRatingChange}></Form.Control>
+                                    </Row>
+                                </Modal.Body>
+                                <Modal.Footer>
+                                    <Button variant="secondary" onClick={handleCloseEditRating}>
+                                        Close
+                                    </Button>
+                                    <Button variant="primary" onClick={handleSubmitEditRating}>
+                                        Submit
+                                    </Button>
+                                </Modal.Footer>
+                        </Form>
+                    </Modal>
                     {currentUser ?
                     (
                         <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
                             {data.length > 0 ? 
-                                data.map((d, i) => (    
-                                            <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
-                                                <Card.Body>
-                                                    <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
-                                                    <Card.Link>{d.name}</Card.Link>
-                                                    <Card.Title>{d.artist.name}</Card.Title>
-                                                    <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
-                                                </Card.Body>
-                                                <Card.Footer style={{background: 'none'}}>
-                                                    <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
-                                                        {currentUser.ratings.includes(r => r.album.equals(d._id)) ?
-                                                        <Button>Update Rating</Button> :
-                                                        <Button onClick={() => handleStartRating(d.id)}>Rate Album</Button>}
-                                                    </div>
-                                                </Card.Footer>
-                                            </Card>
-                            ))
-                            :
-                            <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
-                                <p className="smallText notLoaded">Nothing to see here...</p>
-                            </Row>
-                            }
+                                data.map((d, i) => {
+                                    const ratingObj = currentUser?.ratings?.find(r => r.album === d.id)
+                                    
+                                    return (  
+                                                <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
+                                                    <Card.Body>
+                                                        <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
+                                                        <Card.Link>{d.name}</Card.Link>
+                                                        <Card.Title>{d.artist.name}</Card.Title>
+                                                        <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
+                                                    </Card.Body>
+                                                    <Card.Footer style={{background: 'none'}}>
+                                                        <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
+                                                            {ratingObj ?
+                                                            (
+                                                                <div>
+                                                                    <p className="smallText" style={{margin: 0}}>Your Rating: {ratingObj.rating}</p>
+                                                                    <Button onClick={() => {handleStartEditRating(d.id); setRating(ratingObj.rating)}}>Update Rating</Button>
+                                                                </div>
+                                                            ) :
+                                                            <Button onClick={() => {handleStartRating(d.id); setRating(1)}}>Rate Album</Button>}
+                                                        </div>
+                                                    </Card.Footer>
+                                                </Card>
+                                )})
+                                :
+                                <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem"}}>
+                                    <p className="smallText notLoaded">Nothing to see here...</p>
+                                </Row>
+                                }
                         </Row>
                     ) :
                     (
