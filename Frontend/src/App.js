@@ -28,8 +28,12 @@ function App() {
     useEffect(() => {
       const fetchUser = async () => {
         const loggedInUserJSON = window.localStorage.getItem('musicTrackerUser')
-        if(loggedInUserJSON){
-          setCurrentUser(JSON.parse(loggedInUserJSON))
+        const parsedUser = JSON.parse(loggedInUserJSON)
+        if(parsedUser){
+          fetch(`/api/users/${parsedUser.id}`)
+          .then(res => res.json())
+          .then(user => {console.log(user); setCurrentUser(user)})
+          .catch(err => console.log(err));
         }
       }
       fetchUser()

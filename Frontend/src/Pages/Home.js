@@ -36,7 +36,6 @@ function Home( {currentUser, onSignOut} ){
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            console.log(data)
             setPosts(data);
         } 
         catch (error) {
