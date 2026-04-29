@@ -74,6 +74,13 @@
   align-items: center;
 }
 
+.profileList{
+  border: 2px solid rgb(240, 240, 240);
+  border-radius: 16px;
+  box-shadow: 4px 4px 4px rgb(240, 240, 240);
+  padding: 24px;
+}
+
 .searchButton{
   height: 20px;
   width: 20px;

@@ -57,7 +57,7 @@ function App() {
       <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} fetchUser={fetchUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/about" element={<About currentUser={currentUser} onSignOut={handleSignOut} />} />
-      <Route path="/profile" element={<Profile currentUser={currentUser} onSignOut={handleSignOut} />} />
+      <Route path="/profile" element={<Profile currentUser={currentUser} onSignOut={handleSignOut} fetchUser={fetchUser} />} />
       <Route path="/lists" element={<UserLists currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/friends" element={<Friends currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/settings" element={<Settings currentUser={currentUser} onSignOut={handleSignOut}/>} />

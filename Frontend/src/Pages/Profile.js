@@ -18,7 +18,7 @@ import MyNav from "../MyComponents/MyNav";
 
 /* app crashes when user not signed in and tries to access profile page */
 
-function Profile({currentUser, onSignOut}){
+function Profile({ currentUser, onSignOut, fetchUser }){
     useEffect(() => {
             document.title ="Music Tracker - Profile"
         }, []);
@@ -35,7 +35,7 @@ function Profile({currentUser, onSignOut}){
     const [albums, setAlbums] = useState([])
 
     useEffect(()=>{
-        fetch('http://localhost:8081/albums')
+        fetch('http://localhost:8081/api/albums')
         .then(res => res.json())
         .then(albums => setAlbums(albums))
         .catch(err => console.log(err));
@@ -45,7 +45,7 @@ function Profile({currentUser, onSignOut}){
   const [artists, setArtists] = useState([])
 
   useEffect(()=>{
-      fetch('http://localhost:8081/artists')
+      fetch('http://localhost:8081/api/artists')
       .then(res => res.json())
       .then(artists => setArtists(artists))
       .catch(err => console.log(err));
@@ -334,160 +334,172 @@ function Profile({currentUser, onSignOut}){
             <header className="App-header">
                 <Container style={{marginBottom: 15}}>
                     <Row>
-                        <Card className="profile shadow" style={{marginBottom: 10}}>
-                            {/*<Card.Img variant="top" src={require('./../MiscImages/stock-beach.jpg')}/> //would like to add banner to profiles */}
-                            <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}}roundedCircle/>
-                            <h1>{currentUser.username}'s Profile</h1>
+                        <Card className="profile shadow" style={{marginBottom: 10, minHeight: '100dvh'}}>
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: 16, marginBottom: 8 }}>
+                                <Image src={require('./../MiscImages/default-profile-photo.jpg')} style={{height: 200, width: 200, marginTop: 10}} roundedCircle/>
+                                <h1>{currentUser.username}'s Profile</h1>
+                            </div>
+                            
+                            <div style={{ display: 'flex',
+                                width: '60%', padding: 16, backgroundColor: 'rgb(245, 245, 245)', 
+                                border: '2px solid rgb(200, 200, 200)', borderRadius: 16,
+                                marginBottom: 32 }}>
+                                {currentUser.bio.length > 0 ?
+                                    <p style={{margin: '0 auto', fontSize: 20}}>{currentUser.bio}</p> :
+                                    <p style={{margin: '0 auto', fontSize: 20, color: 'gray'}}>No bio yet!</p>
+                                }
+                            </div>
+
+                            <div style={{ display: 'flex', justifyContent: 'space-around', width: '90%' }}>
+                                    <div className="profileList">
+                                        <h2>Top 5 Artists <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowArtists}>Add</Button><Button variant="secondary" onClick={handleShowUpdateArtists}>Edit</Button></ButtonGroup></h2>
+                                        
+                                        <ListGroup>
+                                            {userArtistList.length > 0 ? 
+                                            userArtistList.map((artist) => (
+                                                <ListGroup.Item key={artist.position} variant="secondary">{artist.position}. {artist.name}</ListGroup.Item>
+                                            ))
+                                            :
+                                            <ListGroup.Item>No list created!</ListGroup.Item>
+                                            }
+                                        </ListGroup>
+                                    </div>
+                                    <div className="profileList">
+                                        <h2>Top 5 Albums <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowAlbums}>Add</Button><Button variant="secondary" onClick={handleShowUpdateAlbums}>Edit</Button></ButtonGroup></h2>
+                                        
+                                        <ListGroup>
+                                            {userAlbumList.length > 0 ?
+                                            userAlbumList.map((album) => (
+                                                <ListGroup.Item key={album.position} variant="secondary">{album.position}. {album.name} - {album.artistName}</ListGroup.Item>
+                                            ))
+                                            :
+                                            <ListGroup.Item>No list created!</ListGroup.Item>
+                                            }
+                                        </ListGroup>
+                                    </div>
+                                </div>
                         </Card>
                     </Row>
 
-                    <Row>
-                        <Card className="headerCard shadow">
-                            <Card.Body>
+                    {/* ADD ARTISTS TO TOP 5 MODAL*/}
+                    <Modal show={showArtists} onHide={handleCloseArtists} backdrop="static">
+                        <Form>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Add to Top Five Artists</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
                                 <Row>
-                                <h1>Bio:</h1>
-                                    {profile.map((profile) => (
-                                        <p>{profile.bio}</p>
-                                    ))}
+                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                        <Form.Control type="number" min={1} max={5} value={artistPosition} onChange={handleArtistPositionChange}></Form.Control>
+                                    <Form.Label style={{fontWeight: "bold"}}>Artist:</Form.Label>
+                                        <select value={artistSelection} onChange={handleArtistSelectionChange}>
+                                            <option value={''}>Select an Artist</option>
+                                            {artists.map((artist) => (
+                                                <option value={artist.name}>{artist.name}</option>
+                                            ))}
+                                        </select>
                                 </Row>
-                                
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseArtists}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleSubmitArtists}>
+                                    Submit
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
+
+                    {/* UPDATE POSITION ON TOP 5 ARTISTS MODAL*/}
+                    <Modal show={showUpdateArtists} onHide={handleCloseUpdateArtists} backdrop="static">
+                        <Form>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Edit Top Five Artists</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
                                 <Row>
-                                    <Col>
-                                    <h2>{currentUser.username}'s Top 5 Artists <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowArtists}>Add</Button><Button variant="secondary" onClick={handleShowUpdateArtists}>Edit</Button></ButtonGroup></h2>
-                                    {/* ADD ARTISTS TO TOP 5 MODAL*/}
-                                    <Modal show={showArtists} onHide={handleCloseArtists} backdrop="static">
-                                        <Form>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Add to Top Five Artists</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Row>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
-                                                        <Form.Control type="number" min={1} max={5} value={artistPosition} onChange={handleArtistPositionChange}></Form.Control>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Artist:</Form.Label>
-                                                        <select value={artistSelection} onChange={handleArtistSelectionChange}>
-                                                            <option value={''}>Select an Artist</option>
-                                                            {artists.map((artist) => (
-                                                                <option value={artist.name}>{artist.name}</option>
-                                                            ))}
-                                                        </select>
-                                                </Row>
-                                            </Modal.Body>
-                                            <Modal.Footer>
-                                                <Button variant="secondary" onClick={handleCloseArtists}>
-                                                    Close
-                                                </Button>
-                                                <Button variant="primary" onClick={handleSubmitArtists}>
-                                                    Submit
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Form>
-                                    </Modal>
-                                    {/* UPDATE POSITION ON TOP 5 ARTISTS MODAL*/}
-                                    <Modal show={showUpdateArtists} onHide={handleCloseUpdateArtists} backdrop="static">
-                                        <Form>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Edit Top Five Artists</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Row>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
-                                                        <Form.Control type="number" min={1} max={5} value={artistUpdatePosition} onChange={handleArtistUpdatePositionChange}></Form.Control>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Artist:</Form.Label>
-                                                        <select value={artistUpdateSelection} onChange={handleArtistUpdateSelectionChange}>
-                                                            <option value={''}>Select an Artist</option>
-                                                            {artists.map((artist) => (
-                                                                <option value={artist.name}>{artist.name}</option>
-                                                            ))}
-                                                        </select>
-                                                </Row>
-                                            </Modal.Body>
-                                            <Modal.Footer>
-                                                <Button variant="secondary" onClick={handleCloseArtists}>
-                                                    Close
-                                                </Button>
-                                                <Button variant="primary" onClick={handleSubmitUpdateArtists}>
-                                                    Submit
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Form>
-                                    </Modal>
-                                    <ListGroup>
-                                        {userArtistList.map((artist) => (
-                                            <ListGroup.Item key={artist.position} variant="secondary">{artist.position}. {artist.name}</ListGroup.Item>
-                                        ))}
-                                    </ListGroup>
-                                    </Col>
-                                    <Col>
-                                    <h2>{currentUser.username}'s Top 5 Albums <ButtonGroup style={{marginBottom: 5}}><Button onClick={handleShowAlbums}>Add</Button><Button variant="secondary" onClick={handleShowUpdateAlbums}>Edit</Button></ButtonGroup></h2>
-                                    {/* ADD ALBUMS TO TOP 5 MODAL*/}
-                                    <Modal show={showAlbums} onHide={handleCloseAlbums} backdrop="static">
-                                        <Form>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Add to Top Five Albums</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Row>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
-                                                        <Form.Control type="number" min={1} max={5} value={albumPosition} onChange={handleAlbumPositionChange}></Form.Control>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Album:</Form.Label>
-                                                        <select value={albumSelection} onChange={handleAlbumSelectionChange}>
-                                                            <option value={''}>Select an Album</option>
-                                                            {albums.map((album) => (
-                                                                <option value={album.name + '-' + album.artist}>{album.name} - {album.artist}</option>
-                                                            ))}
-                                                        </select>
-                                                </Row>
-                                            </Modal.Body>
-                                            <Modal.Footer>
-                                                <Button variant="secondary" onClick={handleCloseAlbums}>
-                                                    Close
-                                                </Button>
-                                                <Button variant="primary" onClick={handleSubmitAlbums}>
-                                                    Submit
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Form>
-                                    </Modal>
-                                    {/* UPDATE POSITION ON TOP 5 ALBUMS MODAL*/}
-                                    <Modal show={showUpdateAlbums} onHide={handleCloseUpdateAlbums} backdrop="static">
-                                        <Form>
-                                            <Modal.Header closeButton>
-                                                <Modal.Title>Edit Top Five Albums</Modal.Title>
-                                            </Modal.Header>
-                                            <Modal.Body>
-                                                <Row>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
-                                                        <Form.Control type="number" min={1} max={5} value={albumUpdatePosition} onChange={handleAlbumUpdatePositionChange}></Form.Control>
-                                                    <Form.Label style={{fontWeight: "bold"}}>Album:</Form.Label>
-                                                        <select value={albumUpdateSelection} onChange={handleAlbumUpdateSelectionChange}>
-                                                            <option value={''}>Select an Album</option>
-                                                            {albums.map((album) => (
-                                                                <option value={album.name + '-' + album.artist}>{album.name} - {album.artist}</option>
-                                                            ))}
-                                                        </select>
-                                                </Row>
-                                            </Modal.Body>
-                                            <Modal.Footer>
-                                                <Button variant="secondary" onClick={handleCloseUpdateAlbums}>
-                                                    Close
-                                                </Button>
-                                                <Button variant="primary" onClick={handleUpdateAlbums}>
-                                                    Submit
-                                                </Button>
-                                            </Modal.Footer>
-                                        </Form>
-                                    </Modal>
-                                    <ListGroup>
-                                        {userAlbumList.map((album) => (
-                                            <ListGroup.Item key={album.position} variant="secondary">{album.position}. {album.name} - {album.artistName}</ListGroup.Item>
-                                        ))}
-                                    </ListGroup>
-                                    </Col>
-                                </Row>                         
-                            </Card.Body>
-                        </Card>
-                    </Row>
+                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                        <Form.Control type="number" min={1} max={5} value={artistUpdatePosition} onChange={handleArtistUpdatePositionChange}></Form.Control>
+                                    <Form.Label style={{fontWeight: "bold"}}>Artist:</Form.Label>
+                                        <select value={artistUpdateSelection} onChange={handleArtistUpdateSelectionChange}>
+                                            <option value={''}>Select an Artist</option>
+                                            {artists.map((artist) => (
+                                                <option value={artist.name}>{artist.name}</option>
+                                            ))}
+                                        </select>
+                                </Row>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseArtists}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleSubmitUpdateArtists}>
+                                    Submit
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
+
+                    {/* ADD ALBUMS TO TOP 5 MODAL*/}
+                    <Modal show={showAlbums} onHide={handleCloseAlbums} backdrop="static">
+                        <Form>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Add to Top Five Albums</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Row>
+                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                        <Form.Control type="number" min={1} max={5} value={albumPosition} onChange={handleAlbumPositionChange}></Form.Control>
+                                    <Form.Label style={{fontWeight: "bold"}}>Album:</Form.Label>
+                                        <select value={albumSelection} onChange={handleAlbumSelectionChange}>
+                                            <option value={''}>Select an Album</option>
+                                            {albums.map((album) => (
+                                                <option value={album.name + '-' + album.artist}>{album.name} - {album.artist}</option>
+                                            ))}
+                                        </select>
+                                </Row>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseAlbums}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleSubmitAlbums}>
+                                    Submit
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
+                    
+                    {/* UPDATE POSITION ON TOP 5 ALBUMS MODAL*/}
+                    <Modal show={showUpdateAlbums} onHide={handleCloseUpdateAlbums} backdrop="static">
+                        <Form>
+                            <Modal.Header closeButton>
+                                <Modal.Title>Edit Top Five Albums</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <Row>
+                                    <Form.Label style={{fontWeight: "bold"}}>Position Number:</Form.Label>
+                                        <Form.Control type="number" min={1} max={5} value={albumUpdatePosition} onChange={handleAlbumUpdatePositionChange}></Form.Control>
+                                    <Form.Label style={{fontWeight: "bold"}}>Album:</Form.Label>
+                                        <select value={albumUpdateSelection} onChange={handleAlbumUpdateSelectionChange}>
+                                            <option value={''}>Select an Album</option>
+                                            {albums.map((album) => (
+                                                <option value={album.name + '-' + album.artist}>{album.name} - {album.artist}</option>
+                                            ))}
+                                        </select>
+                                </Row>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseUpdateAlbums}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleUpdateAlbums}>
+                                    Submit
+                                </Button>
+                            </Modal.Footer>
+                        </Form>
+                    </Modal>
                 </Container>
             </header>
         </div>

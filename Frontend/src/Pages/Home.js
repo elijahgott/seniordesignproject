@@ -98,6 +98,12 @@ function Home( {currentUser, onSignOut} ){
 
                                 <div className="shadow" style={{maxWidth: '75%', margin: '0 auto', border: '2px solid red', background: 'rgba(255, 0, 0, 0.2)', borderRadius: 8, padding: 8, paddingTop: 16, marginBottom: 8}}>
                                     <p style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "black"}}>*** Since completely redoing the backend and migrating to MongoDB, many features have been broken. Among these broken features are posting, rating albums, accessing profiles, and more. I intend on fixing most of these issues in time, but seeing as this is my senior design project from 2024, it may take some time due to this project not being of utmost importance to me anymore, or some original features may be cut.</p>
+                                    <h3 style={{ margin: '0 auto', width: '60%'}}>TODO:</h3>
+                                    <ul style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "black"}}>
+                                        <li>Add add artist modal</li>
+                                        <li>Add add album modal</li>
+                                        <li>Reimplement lists</li>
+                                    </ul>
                                 </div>
                                 
                                 <HomeCarousel />
