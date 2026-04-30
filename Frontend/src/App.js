@@ -14,7 +14,6 @@ import New from "./Pages/New";
 import Settings from "./Pages/Settings";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
-import AddArtist from "./Pages/AddArtist";
 import AddAlbum from "./Pages/AddAlbum";
 import SearchResults from "./Pages/SearchResults";
 
@@ -31,7 +30,7 @@ function App() {
         if(parsedUser){
           fetch(`/api/users/${parsedUser.id}`)
           .then(res => res.json())
-          .then(user => {console.log(user); setCurrentUser(user)})
+          .then(user => setCurrentUser(user))
           .catch(err => console.log(err));
         }
       }
@@ -62,7 +61,6 @@ function App() {
       <Route path="/friends" element={<Friends currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/settings" element={<Settings currentUser={currentUser} onSignOut={handleSignOut}/>} />
       <Route path="/signup" element={<SignUp setCurrentUser={setCurrentUser} />} />
-      <Route path="/addartist" element={<AddArtist currentUser={currentUser} onSignOut={handleSignOut}/>}/>
       <Route path="/addalbum" element={<AddAlbum currentUser={currentUser} onSignOut={handleSignOut}/>}/>
       <Route path="/searchresults" element={<SearchResults currentUser={currentUser} onSignOut={handleSignOut}/>} />
     </Routes>

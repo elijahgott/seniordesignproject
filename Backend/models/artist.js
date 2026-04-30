@@ -12,6 +12,12 @@ const artistSchema = new mongoose.Schema({
     required: false,
     maxLength: 255
   },
+  albums: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Album'
+    }
+  ],
   photoURL: String,
   averageRating: Number,
 })
