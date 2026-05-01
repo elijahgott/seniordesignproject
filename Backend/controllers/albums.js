@@ -1,5 +1,6 @@
 const albumsRouter = require('express').Router()
 const Album = require('../models/album')
+const Artist = require('../models/artist')
 
 // get all albums in database
 albumsRouter.get('/', async (req, res)=> {
@@ -16,6 +17,36 @@ albumsRouter.get('/:id', async (req, res) => {
   album ? 
     res.json(album) :
     res.status(404).send({ error: `Could not find album with ID: ${id}.`})
+})
+
+// create new album
+albumsRouter.post('/', async (req, res) => {
+  const {albumName, albumArtistName, albumDescription, albumGenres, albumReleaseDate, albumPhotoUrl} = req.body
+  
+  const artist = await Artist.findOne({ name: albumArtistName })
+
+  if(!artist){
+    return res.status(400).send({ error: 'Could not find artist with name: ' + albumName })
+  }
+
+  const existingAlbum = await Album.findOne({ name: albumName, artist: artist._id })
+
+  if(existingAlbum){
+    return res.status(400).send({ error: 'Album ' + albumName + ' by ' + albumArtistName + ' already exists!'})
+  }
+
+  const album = new Album({
+    name: albumName,
+    artist: artist._id,
+    description: albumDescription,
+    genres: albumGenres.split(',').map(g => g.trim()),
+    photoURL: albumPhotoUrl || 'https://www.usab.com/imgproxy/ziarB3UvXnVI_LC7nZ-bQGhvzCd55ihxL9jx7PNKzt4/rs:fit:3000:0:0/g:ce/q:90/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3VzYWItY29tLXByb2QvdXBsb2FkLzIwMjQvMDcvMDkvZGJkOTVjZWUtNDBlOS00MjBlLWEzZjAtMGI2M2Q3MDczMTk3LmpwZw.png',
+    releaseDate: albumReleaseDate
+  })
+
+  const savedAlbum = await album.save()
+
+  res.status(201).json(savedAlbum)
 })
 
 // // create new album

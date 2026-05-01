@@ -182,43 +182,43 @@ function Artists( {currentUser, onSignOut} ){
             </Container>
 
             <Modal show={showModal} onHide={handleCloseModal} backdrop="static">
-                        <Form>
-                            <Modal.Header closeButton>
-                                <Modal.Title>Add Artist</Modal.Title>
-                            </Modal.Header>
-                                <Modal.Body>
-                                    <Row>
-                                        <Col>
-                                            <Form.Group>
-                                                <Form.Label>Name</Form.Label>
-                                                <Form.Control type="textarea" name="artist_name" value={artistName} onChange={(e) => setArtistName(e.target.value)}></Form.Control>
-                                            </Form.Group>
-                                            
-                                        </Col>
-                                    </Row>
-                                    <Row>
-                                        <Form.Group>
-                                            <Form.Label>Bio</Form.Label>
-                                            <Form.Control type="textarea" rows={3} name="artist_bio" value={artistBio} onChange={(e) => setArtistBio(e.target.value)}></Form.Control>
-                                        </Form.Group>
-                                    </Row>
-                                    <Row>
-                                        <Form.Group>
-                                            <Form.Label>Photo URL</Form.Label>
-                                            <Form.Control type="textarea" name="artist_photo_url" value={artistPhotoUrl} onChange={(e) => setArtistPhotoUrl(e.target.value)}></Form.Control>
-                                        </Form.Group>
-                                    </Row>
-                                </Modal.Body>
-                                <Modal.Footer>
-                                    <Button variant="secondary" onClick={handleCloseModal}>
-                                        Close
-                                    </Button>
-                                    <Button variant="primary" onClick={handleSubmitArtist}>
-                                        Submit
-                                    </Button>
-                                </Modal.Footer>
-                        </Form>
-                    </Modal>
+                <Form>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Add Artist</Modal.Title>
+                    </Modal.Header>
+                        <Modal.Body>
+                            <Row>
+                                <Col>
+                                    <Form.Group>
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="textarea" name="artist_name" value={artistName} onChange={(e) => setArtistName(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                    
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Form.Group>
+                                    <Form.Label>Bio</Form.Label>
+                                    <Form.Control type="textarea" rows={3} name="artist_bio" value={artistBio} onChange={(e) => setArtistBio(e.target.value)}></Form.Control>
+                                </Form.Group>
+                            </Row>
+                            <Row>
+                                <Form.Group>
+                                    <Form.Label>Photo URL</Form.Label>
+                                    <Form.Control type="textarea" name="artist_photo_url" value={artistPhotoUrl} onChange={(e) => setArtistPhotoUrl(e.target.value)}></Form.Control>
+                                </Form.Group>
+                            </Row>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={handleCloseModal}>
+                                Close
+                            </Button>
+                            <Button variant="primary" onClick={handleSubmitArtist}>
+                                Submit
+                            </Button>
+                        </Modal.Footer>
+                </Form>
+            </Modal>
 
             </header>
             <MyFooter />

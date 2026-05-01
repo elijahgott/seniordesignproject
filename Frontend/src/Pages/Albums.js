@@ -22,12 +22,12 @@ function Albums( {currentUser, onSignOut, fetchUser} ){
     }, []);
 
     const currentDate = new Date();
-    const [data, setData] = useState([])
+    const [albums, setAlbums] = useState([])
 
     useEffect(()=>{
         fetch('/api/albums')
         .then(res => res.json())
-        .then(data => setData(data))
+        .then(data => setAlbums(data))
         .catch(err => console.log(err));
   }, [])
 
@@ -153,6 +153,59 @@ const handleSubmitEditRating = (event) => {
           });
   }; 
 
+  // ADD ALBUM MODAL
+  const [showModal, setShowModal] = useState(false)
+
+  const handleOpenModal = () => {
+    setShowModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setShowModal(false)
+  }
+
+  const [albumName, setAlbumName] = useState('')
+  const [albumArtistName, setAlbumArtistName] = useState('')
+  const [albumDescription, setAlbumDescription] = useState('')
+  const [albumGenres, setAlbumGenres] = useState('')
+  const [albumReleaseDate, setAlbumReleaseDate] = useState('')
+  const [albumPhotoUrl, setAlbumPhotoUrl] = useState('')
+
+  const handleSubmitAlbum = (event) => {
+    event.preventDefault()
+
+    fetch('/api/albums', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ albumName, albumArtistName, albumDescription, albumGenres, albumReleaseDate, albumPhotoUrl }),
+        })
+          .then(response => {
+            if (!response.ok) {
+              return response.json().then(err => {
+                throw new Error(err.error)
+              })
+            }
+            return response.json();
+          })
+          .then(data => {
+            setAlbums(albums.concat(data))
+            setAlbumArtistName('')
+            setAlbumDescription('')
+            setAlbumGenres('')
+            setAlbumReleaseDate('')
+            setAlbumPhotoUrl('')
+
+            handleCloseModal()
+            // Handle success message
+          })
+          .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+            // Handle error message
+          });
+  }
+
     return(
         <div>
             <MyNav currentUser={currentUser} onSignOut={onSignOut} />
@@ -199,7 +252,7 @@ const handleSubmitEditRating = (event) => {
                         <Col>
                         {currentUser ? (
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Link to="/AddAlbum"><Button style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></Link></h1>
+                                <h1 style={{textAlign: "center", marginTop: 15, marginBottom: 15}}>All Albums <Button onClick={handleOpenModal} style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                             </Card>
                         ) :
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
@@ -254,8 +307,8 @@ const handleSubmitEditRating = (event) => {
                     {currentUser ?
                     (
                         <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
-                            {data.length > 0 ? 
-                                data.map((d, i) => {
+                            {albums.length > 0 ? 
+                                albums.map((d, i) => {
                                     const ratingObj = currentUser?.ratings?.find(r => r.album === d.id)
                                     
                                     return (  
@@ -289,8 +342,8 @@ const handleSubmitEditRating = (event) => {
                     ) :
                     (
                         <Row style={{display: "flex", gap: 24, marginLeft: 0, marginTop: 10, maxWidth:"81rem", marginBottom: 16}}>
-                            {data.length > 0 ? 
-                                data.map((d, i) => (    
+                            {albums.length > 0 ? 
+                                albums.map((d, i) => (    
                                         <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
                                             <Card.Body>
                                                 <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
@@ -309,6 +362,64 @@ const handleSubmitEditRating = (event) => {
                     )
                 }
                 </Container>
+
+                <Modal show={showModal} onHide={handleCloseModal} backdrop="static">
+                    <Form>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Add Album</Modal.Title>
+                        </Modal.Header>
+                            <Modal.Body>
+                                <Row>
+                                    <Col>
+                                        <Form.Group>
+                                            <Form.Label>Name</Form.Label>
+                                            <Form.Control type="textarea" name="artist_name" value={albumName} onChange={(e) => setAlbumName(e.target.value)}></Form.Control>
+                                        </Form.Group>
+                                        
+                                    </Col>
+                                </Row>
+                                <Row>
+                                    <Form.Group>
+                                        <Form.Label>Artist</Form.Label>
+                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumArtistName} onChange={(e) => setAlbumArtistName(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                </Row>
+                                <Row>
+                                    <Form.Group>
+                                        <Form.Label>Description</Form.Label>
+                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumDescription} onChange={(e) => setAlbumDescription(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                </Row>
+                                <Row>
+                                    <Form.Group>
+                                        <Form.Label>Genres</Form.Label>
+                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumGenres} onChange={(e) => setAlbumGenres(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                </Row>
+                                <Row>
+                                    <Form.Group>
+                                        <Form.Label>Release Date</Form.Label>
+                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumReleaseDate} onChange={(e) => setAlbumReleaseDate(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                </Row>
+                                <Row>
+                                    <Form.Group>
+                                        <Form.Label>Photo URL</Form.Label>
+                                        <Form.Control type="textarea" name="artist_photo_url" value={albumPhotoUrl} onChange={(e) => setAlbumPhotoUrl(e.target.value)}></Form.Control>
+                                    </Form.Group>
+                                </Row>
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button variant="secondary" onClick={handleCloseModal}>
+                                    Close
+                                </Button>
+                                <Button variant="primary" onClick={handleSubmitAlbum}>
+                                    Submit
+                                </Button>
+                            </Modal.Footer>
+                    </Form>
+                </Modal>
+
             </header>
             <MyFooter />
     </div>
