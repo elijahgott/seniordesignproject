@@ -31,6 +31,15 @@ function Albums( {currentUser, onSignOut, fetchUser} ){
         .catch(err => console.log(err));
   }, [])
 
+  const formatDate = (date) => {
+    const d = new Date(date);
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    const yyyy = d.getFullYear();
+
+    return `${mm}/${dd}/${yyyy}`
+  }
+
 // FETCH TOP THREE ALBUMS
 //   const [topThreeAlbums, setTopThreeAlbums] = useState([])
 
@@ -333,11 +342,14 @@ const handleSubmitEditRating = (event) => {
                                     
                                     return (  
                                                 <Card key={i} className="shadow" style={{maxWidth:"26rem"}}>
-                                                    <Card.Body>
+                                                    <Card.Body style={{ display: 'flex', flexDirection: 'column', height: '100%'}}>
                                                         <Card.Img variant="top" src={d.photoURL} style={{width: 358, height: 358}}></Card.Img>
                                                         <Card.Link>{d.name}</Card.Link>
                                                         <Card.Title>{d.artist.name}</Card.Title>
-                                                        <Card.Text style={{fontSize: 20}}>{d.description}</Card.Text>
+                                                        <Card.Text style={{fontSize: 20, margin: 0}}>{d.description}</Card.Text>
+                                                        <div style={{ marginTop: 'auto'}}>
+                                                            <p className="smallText" style={{ textAlign: 'center', marginBottom: 0}}>Released: {formatDate(d.releaseDate)}</p>
+                                                        </div>
                                                     </Card.Body>
                                                     <Card.Footer style={{background: 'none'}}>
                                                         <div style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
@@ -405,6 +417,7 @@ const handleSubmitEditRating = (event) => {
                                             }}
                                             onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
                                             placeholder="Search artist..."
+                                            autoComplete="off"
                                             required
                                             />
 
@@ -445,13 +458,13 @@ const handleSubmitEditRating = (event) => {
                                 <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Release Date</Form.Label>
-                                        <Form.Control type="text" name="artist_bio" value={albumReleaseDate} onChange={(e) => setAlbumReleaseDate(e.target.value)}></Form.Control>
+                                        <Form.Control type="date" name="album_release_date" value={albumReleaseDate} onChange={(e) => setAlbumReleaseDate(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
                                 <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Photo URL</Form.Label>
-                                        <Form.Control type="text" name="artist_photo_url" value={albumPhotoUrl} onChange={(e) => setAlbumPhotoUrl(e.target.value)}></Form.Control>
+                                        <Form.Control type="text" name="album_photo_url" value={albumPhotoUrl} onChange={(e) => setAlbumPhotoUrl(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
                             </Modal.Body>

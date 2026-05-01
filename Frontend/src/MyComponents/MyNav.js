@@ -44,7 +44,6 @@ function MyNav( {currentUser, onSignOut} ){
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="me-auto">
-                    <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/new">New</Nav.Link>
                     <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/artists">Artists</Nav.Link>
                     <Nav.Link className="navLink" style={{ color: "lightgray"}} href="albums">Albums</Nav.Link>
                     <Nav.Link className="navLink" style={{ color: "lightgray"}} href="/about">About</Nav.Link>

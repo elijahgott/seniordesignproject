@@ -10,7 +10,6 @@ import Artists from "./Pages/Artists";
 import Profile from "./Pages/Profile";
 import UserLists from "./Pages/UserLists";
 import Friends from "./Pages/Friends";
-import New from "./Pages/New";
 import Settings from "./Pages/Settings";
 import SignUp from "./Pages/SignUp";
 import SignIn from "./Pages/SignIn";
@@ -52,7 +51,6 @@ function App() {
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
       <Route path="/" element={<Home currentUser={currentUser}  onSignOut={handleSignOut}/>} />
-      <Route path="/new" element={<New currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} fetchUser={fetchUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/about" element={<About currentUser={currentUser} onSignOut={handleSignOut} />} />

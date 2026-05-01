@@ -41,10 +41,13 @@ albumsRouter.post('/', async (req, res) => {
     description: albumDescription,
     genres: albumGenres.split(',').map(g => g.trim()),
     photoURL: albumPhotoUrl || 'https://www.usab.com/imgproxy/ziarB3UvXnVI_LC7nZ-bQGhvzCd55ihxL9jx7PNKzt4/rs:fit:3000:0:0/g:ce/q:90/aHR0cHM6Ly9zdG9yYWdlLmdvb2dsZWFwaXMuY29tL3VzYWItY29tLXByb2QvdXBsb2FkLzIwMjQvMDcvMDkvZGJkOTVjZWUtNDBlOS00MjBlLWEzZjAtMGI2M2Q3MDczMTk3LmpwZw.png',
-    releaseDate: albumReleaseDate
+    releaseDate: new Date(albumReleaseDate)
   })
 
   const savedAlbum = await album.save()
+
+  artist.albums = artist.albums.concat(savedAlbum._id)
+  await artist.save()
 
   res.status(201).json(savedAlbum)
 })
