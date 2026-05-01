@@ -8,11 +8,24 @@ artistsRouter.get('/', async (req, res)=> {
   res.json(artists || '')
 })
 
+// search for artist
+artistsRouter.get('/search', async (req, res) => {
+  const q = req.query.q;
+
+  if(!q){
+    return res.json([])
+  }
+
+  const artists = await Artist.find({ name: {$regex: q, $options: 'i'} }).limit(10)
+
+  res.json(artists)
+})
+
 // get specific artist by id
 artistsRouter.get('/:id', async (req, res) => {
   const id = req.params.id
 
-  const artist = Artist.findById({ _id: id })
+  const artist = await Artist.findById({ _id: id })
   artist ? 
     res.json(artist) :
     res.status(404).send({ error: `Could not find artist with ID: ${id}.`})

@@ -165,7 +165,27 @@ const handleSubmitEditRating = (event) => {
   }
 
   const [albumName, setAlbumName] = useState('')
+
   const [albumArtistName, setAlbumArtistName] = useState('')
+  const [artistSuggestions, setArtistSuggestions] = useState([])
+  const [showSuggestions, setShowSuggestions] = useState(false)
+
+  useEffect(() => {
+    if(!albumArtistName){
+        setArtistSuggestions([])
+        return
+    }
+
+    const timeout = setTimeout(() => {
+        fetch(`/api/artists/search?q=${albumArtistName}`)
+            .then(res => res.json())
+            .then(data => setArtistSuggestions(data))
+            .catch(console.error)
+    }, 300)
+
+    return () => clearTimeout(timeout)
+  }, [albumArtistName])
+
   const [albumDescription, setAlbumDescription] = useState('')
   const [albumGenres, setAlbumGenres] = useState('')
   const [albumReleaseDate, setAlbumReleaseDate] = useState('')
@@ -368,44 +388,70 @@ const handleSubmitEditRating = (event) => {
                         <Modal.Header closeButton>
                             <Modal.Title>Add Album</Modal.Title>
                         </Modal.Header>
-                            <Modal.Body>
-                                <Row>
-                                    <Col>
-                                        <Form.Group>
-                                            <Form.Label>Name</Form.Label>
-                                            <Form.Control type="textarea" name="artist_name" value={albumName} onChange={(e) => setAlbumName(e.target.value)}></Form.Control>
-                                        </Form.Group>
-                                        
-                                    </Col>
+                            <Modal.Body style={{ display: 'flex', flexDirection: 'column' }}>
+                                <Row className="modalRow">
+                                    <Form.Group>
+                                        <Form.Label>Name</Form.Label>
+                                        <Form.Control type="text" name="album_name" value={albumName} onChange={(e) => setAlbumName(e.target.value)} required ></Form.Control>
+                                    </Form.Group>
                                 </Row>
-                                <Row>
+                                <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Artist</Form.Label>
-                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumArtistName} onChange={(e) => setAlbumArtistName(e.target.value)}></Form.Control>
+                                        <div style={{ display: 'relative' }}>
+                                            <Form.Control type="text" name="album_artist" value={albumArtistName} onChange={(e) => {
+                                                setAlbumArtistName(e.target.value)
+                                                setShowSuggestions(true)
+                                            }}
+                                            onBlur={() => setTimeout(() => setShowSuggestions(false), 100)}
+                                            placeholder="Search artist..."
+                                            required
+                                            />
+
+                                            {showSuggestions && artistSuggestions.length > 0 && (
+                                                <div style={{ position: 'absolute', width: '93%', zIndex: 10, backgroundColor: 'white', border: '2px solid rgb(220, 220, 220)', borderRadius: '0px 0px 16px 16px'}}>
+                                                    {artistSuggestions.map((artist) => {
+                                                        return (
+                                                            <div key={artist._id} style={{ padding: 8, cursor: 'pointer' }}
+                                                            onClick={() => {
+                                                                setAlbumArtistName(artist.name)
+                                                                setShowSuggestions(false)
+                                                            }}>
+                                                                {artist.name}
+                                                            </div>
+                                                        )
+                                                    })}
+                                                </div>
+                                            )}
+                                        </div>
+                                        
                                     </Form.Group>
                                 </Row>
-                                <Row>
+                                <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Description</Form.Label>
-                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumDescription} onChange={(e) => setAlbumDescription(e.target.value)}></Form.Control>
+                                        <Form.Control as="textarea" rows={3} name="album_desc" value={albumDescription} onChange={(e) => setAlbumDescription(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
-                                <Row>
+                                <Row className="modalRow">
                                     <Form.Group>
-                                        <Form.Label>Genres</Form.Label>
-                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumGenres} onChange={(e) => setAlbumGenres(e.target.value)}></Form.Control>
+                                        <div style={{ display: 'flex', alignItems: 'baseline' }}>
+                                            <Form.Label>Genres</Form.Label>
+                                            <p style={{ fontSize: 12, color: 'rgb(128, 128, 128)', marginLeft: 4}}>(separate with ',')</p>
+                                        </div>
+                                        <Form.Control type="text" name="album_genres" value={albumGenres} onChange={(e) => setAlbumGenres(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
-                                <Row>
+                                <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Release Date</Form.Label>
-                                        <Form.Control type="textarea" rows={3} name="artist_bio" value={albumReleaseDate} onChange={(e) => setAlbumReleaseDate(e.target.value)}></Form.Control>
+                                        <Form.Control type="text" name="artist_bio" value={albumReleaseDate} onChange={(e) => setAlbumReleaseDate(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
-                                <Row>
+                                <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Photo URL</Form.Label>
-                                        <Form.Control type="textarea" name="artist_photo_url" value={albumPhotoUrl} onChange={(e) => setAlbumPhotoUrl(e.target.value)}></Form.Control>
+                                        <Form.Control type="text" name="artist_photo_url" value={albumPhotoUrl} onChange={(e) => setAlbumPhotoUrl(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
                             </Modal.Body>
