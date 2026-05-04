@@ -443,7 +443,7 @@ const handleSubmitEditRating = (event) => {
                                 <Row className="modalRow">
                                     <Form.Group>
                                         <Form.Label>Description</Form.Label>
-                                        <Form.Control as="textarea" rows={3} name="album_desc" value={albumDescription} onChange={(e) => setAlbumDescription(e.target.value)}></Form.Control>
+                                        <Form.Control as="textarea" rows={3} name="album_desc" value={albumDescription} maxLength={255} onChange={(e) => setAlbumDescription(e.target.value)}></Form.Control>
                                     </Form.Group>
                                 </Row>
                                 <Row className="modalRow">

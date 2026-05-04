@@ -23,6 +23,15 @@ function Home( {currentUser, onSignOut} ){
         document.title ="Music Tracker - Home"
     }, []);
 
+    const formatDate = (date) => {
+        const d = new Date(date);
+        const mm = String(d.getMonth() + 1).padStart(2, '0');
+        const dd = String(d.getDate()).padStart(2, '0');
+        const yyyy = d.getFullYear();
+
+        return `${mm}/${dd}/${yyyy}`
+    }
+
     //get posts for currently logged in user
     const [posts, setPosts] = useState([]);
 
@@ -97,17 +106,13 @@ function Home( {currentUser, onSignOut} ){
                                 ) : <h1 className="title">Welcome, Guest</h1>}
 
                                 <div className="shadow" style={{maxWidth: '75%', margin: '0 auto', border: '2px solid red', background: 'rgba(255, 0, 0, 0.2)', borderRadius: 8, padding: 8, paddingTop: 16, marginBottom: 8}}>
-                                    <p style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "black"}}>*** Since completely redoing the backend and migrating to MongoDB, many features have been broken. Among these broken features are posting, rating albums, accessing profiles, and more. I intend on fixing most of these issues in time, but seeing as this is my senior design project from 2024, it may take some time due to this project not being of utmost importance to me anymore, or some original features may be cut.</p>
+                                    <p style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "black"}}>* Since completely redoing the backend and migrating to MongoDB, many features have been broken. I intend on fixing most of these issues in time, but this is my senior design project from 2024, so this project is not of utmost importance to me anymore. Some features that were present may not be fully reimplemented yet, or they may have been cut. Below are some of the features I have yet to (re)implement.</p>
                                     <h3 style={{ margin: '0 auto', width: '60%'}}>TODO:</h3>
                                     <ul style={{margin: '0 auto', marginBottom: 12, width: '60%', fontSize: 20, color: "black"}}>
-                                        <li>Improve album modal</li>
-                                        <ul>
-                                            <li>Make description textbox big</li>
-                                            <li>Search for artists in DB, select name</li>
-                                            <li>date picker for release date</li>
-                                            <li>Maybe show preview of album card on side?</li>
-                                        </ul>
-                                        <li>Reimplement lists</li>
+                                        <li>Add user lists</li>
+                                        <li>Add notifications</li>
+                                        <li>Fetch and display top 3 rated albums</li>
+                                        <li>Fetch and display top 3 rated artists(?)</li>
                                     </ul>
                                 </div>
                                 
@@ -134,11 +139,8 @@ function Home( {currentUser, onSignOut} ){
                                                     <Card.Text style={{fontSize: 20}}>{post.content}</Card.Text>
                                                 </div>
                                             </div>
-                                            
-
-                                            
                                         </Card.Body>
-                                        <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{post.datePosted}</Card.Footer>
+                                        <Card.Footer style={{fontSize: 15, textAlign: "center"}}>{formatDate(post.datePosted)}</Card.Footer>
                                 </Card>
                                 ))
                             :

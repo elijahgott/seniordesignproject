@@ -199,7 +199,7 @@ function Artists( {currentUser, onSignOut} ){
                             <Row>
                                 <Form.Group>
                                     <Form.Label>Bio</Form.Label>
-                                    <Form.Control type="textarea" rows={3} name="artist_bio" value={artistBio} onChange={(e) => setArtistBio(e.target.value)}></Form.Control>
+                                    <Form.Control type="textarea" rows={3} name="artist_bio" value={artistBio} maxLength={255} onChange={(e) => setArtistBio(e.target.value)}></Form.Control>
                                 </Form.Group>
                             </Row>
                             <Row>

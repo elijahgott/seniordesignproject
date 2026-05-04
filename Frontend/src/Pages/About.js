@@ -41,9 +41,9 @@ function About( {currentUser, onSignOut} ){
 
                                     <div>
                                         <h1>Technical Details</h1>
-                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}>This project uses <a href="https://react.dev/">React</a> for the Frontend, <a href="https://www.javascript.com/">Javascript</a> for the Backend, and <a href="https://react-bootstrap.netlify.app/">React Bootstrap</a> and CSS for the styling. The SQL database was created using <a href="https://www.mysql.com/">MySQL</a>, and <a href="https://www.apachefriends.org/">XAMPP</a> is used to run a local Apache server and a local MySQL server. To run the local server to view/debug the webpages, <a href="https://www.npmjs.com/">NPM</a> is used.</p>
+                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}>This project uses <a href="https://react.dev/">React</a> for the Frontend, <a href="https://www.javascript.com/">Javascript</a> for the Backend, and <a href="https://react-bootstrap.netlify.app/">React Bootstrap</a> and CSS for the styling. The SQL database was created using <a href="https://www.mysql.com/">MySQL</a>, and <a href="https://www.apachefriends.org/">XAMPP</a> is used to run a local Apache server and a local MySQL server.</p>
 
-                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}><strong>EDIT</strong>: The backend no longer uses a SQL database, but now uses MongoDB, due to it's ease of use when hosting websites.</p>
+                                        <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}><strong>EDIT</strong>: The backend no longer uses a SQL database, but now uses <a href="https://www.mongodb.com/">MongoDB</a>.</p>
                                     </div>
                                 </Col>
                             </Col>
