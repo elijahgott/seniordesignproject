@@ -50,7 +50,7 @@ function App() {
   return (
     <Routes>
       <Route path="/signin" element={<SignIn onSignIn={handleSignIn}/>} />
-      <Route path="/" element={<Home currentUser={currentUser}  onSignOut={handleSignOut}/>} />
+      <Route path="/" element={<Home currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/albums" element={<Albums currentUser={currentUser} onSignOut={handleSignOut} fetchUser={fetchUser} />} />
       <Route path="/artists" element={<Artists currentUser={currentUser} onSignOut={handleSignOut} />} />
       <Route path="/about" element={<About currentUser={currentUser} onSignOut={handleSignOut} />} />
