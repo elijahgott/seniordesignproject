@@ -22,10 +22,9 @@ function About( {currentUser, onSignOut} ){
             <header className="App-header">
                 <Container className="containerCard shadow">
                     <Row>
-                        <Card className="mainBody no-border">
-                            <Col>
+                        <Card className="main-body no-border" style={{ minHeight: '100dvh', paddingLeft: '12%', paddingRight: '12%'}}>
+                            <Col style={{padding: 12}}>
                                 <h1 className="title" style={{paddingTop: 12, paddingBottom: 12}}>About <Link to="/">Music Tracker</Link></h1>
-                                <Col className="featuresGrid" style={{width: "90%", maxWidth: "70rem", paddingLeft: 40, paddingRight: 40, alignSelf: "center"}}>
                                     <div>
                                         <h1 style={{marginTop: 10}}>General</h1>
                                         <p style={{textIndent: 24, fontSize: 24}}>This is my unnamed senior design project, hence the "Music App" title. It is inspired by <a href="https://letterboxd.com/">Letterboxd</a>, which I have found useful for tracking the movies I want to watch and have already watched, and rating them. In a previous course, a partner and I made a similar, yet very simple, application for video games, so it felt natural for my Senior Design Project to be in the same vein, but expanded upon.</p>
@@ -45,7 +44,6 @@ function About( {currentUser, onSignOut} ){
 
                                         <p style={{textIndent: 24, fontSize: 24, paddingBottom: 12}}><strong>EDIT</strong>: The backend no longer uses a SQL database, but now uses <a href="https://www.mongodb.com/">MongoDB</a>.</p>
                                     </div>
-                                </Col>
                             </Col>
                         </Card>
                     </Row>
