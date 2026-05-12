@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "./static/css/main.9cf99870.chunk.css",
+    "main.js": "./static/js/main.1d812bf2.chunk.js",
+    "main.js.map": "./static/js/main.1d812bf2.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.5461e45e.js",
+    "runtime-main.js.map": "./static/js/runtime-main.5461e45e.js.map",
+    "static/css/2.cc82f8aa.chunk.css": "./static/css/2.cc82f8aa.chunk.css",
+    "static/js/2.1cc0f4b5.chunk.js": "./static/js/2.1cc0f4b5.chunk.js",
+    "static/js/2.1cc0f4b5.chunk.js.map": "./static/js/2.1cc0f4b5.chunk.js.map",
+    "static/js/3.b8a986fe.chunk.js": "./static/js/3.b8a986fe.chunk.js",
+    "static/js/3.b8a986fe.chunk.js.map": "./static/js/3.b8a986fe.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.fe6323ec4d34c68f2fb1b4789fd771dd.js": "./precache-manifest.fe6323ec4d34c68f2fb1b4789fd771dd.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.cc82f8aa.chunk.css.map": "./static/css/2.cc82f8aa.chunk.css.map",
+    "static/css/main.9cf99870.chunk.css.map": "./static/css/main.9cf99870.chunk.css.map",
+    "static/js/2.1cc0f4b5.chunk.js.LICENSE.txt": "./static/js/2.1cc0f4b5.chunk.js.LICENSE.txt",
+    "static/media/AliceInChains_Dirt.jpg": "./static/media/AliceInChains_Dirt.2ed3538d.jpg",
+    "static/media/AliceInChains_Facelift.jpg": "./static/media/AliceInChains_Facelift.c88fd801.jpg",
+    "static/media/Nirvana_Bleach.jpg": "./static/media/Nirvana_Bleach.0081b204.jpg",
+    "static/media/aliceinchains.jpg": "./static/media/aliceinchains.aa72ab65.jpg",
+    "static/media/carousel-people.jpg": "./static/media/carousel-people.e887f94f.jpg",
+    "static/media/carousel-typing.jpg": "./static/media/carousel-typing.36becfd0.jpg",
+    "static/media/dannybrown.jpg": "./static/media/dannybrown.a5aa8fa7.jpg",
+    "static/media/default-profile-photo.jpg": "./static/media/default-profile-photo.0ab83015.jpg",
+    "static/media/nirvana.jpg": "./static/media/nirvana.075ffeb3.jpg",
+    "static/media/stock-beach.jpg": "./static/media/stock-beach.45cd17fa.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5461e45e.js",
+    "static/css/2.cc82f8aa.chunk.css",
+    "static/js/2.1cc0f4b5.chunk.js",
+    "static/css/main.9cf99870.chunk.css",
+    "static/js/main.1d812bf2.chunk.js"
+  ]
+}
