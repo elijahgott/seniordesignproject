@@ -15,10 +15,9 @@ import {Link} from 'react-router-dom';
 
 import MyNav from "../MyComponents/MyNav";
 import HomeCarousel from "../MyComponents/HomeCarousel";
-import Notification from "../MyComponents/Notification";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Home( {currentUser, onSignOut } ){
+function Home( {currentUser, onSignOut, setNotification } ){
     useEffect(() => {
         document.title ="Music Tracker - Home"
     }, []);
@@ -32,11 +31,6 @@ function Home( {currentUser, onSignOut } ){
         return `${mm}/${dd}/${yyyy}`
     }
 
-    // notifications
-    const [notificationVisible, setNotifictionVisible] = useState(true)
-    const [notificationMessage, setNotificationMessage] = useState('too good and cool!')
-    const [notificationType, setNotificationType] = useState('success')
-
     //get posts for currently logged in user
     const [posts, setPosts] = useState([]);
 
@@ -44,17 +38,18 @@ function Home( {currentUser, onSignOut } ){
         if(!currentUser) return
 
         async function fetchPosts() {
-        try {
-            const response = await fetch(`/api/posts/user/${currentUser.id}`);
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
+            try {
+                const response = await fetch(`/api/posts/user/${currentUser.id}`);
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                const data = await response.json();
+                setPosts(data);
+            } 
+            catch (error) {
+                console.error('There was a problem with the fetch operation:', error);
+                setNotification('Could not fetch posts.', 'error')
             }
-            const data = await response.json();
-            setPosts(data);
-        } 
-        catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-        }
         }
 
         fetchPosts();
@@ -90,11 +85,11 @@ function Home( {currentUser, onSignOut } ){
           .then(data => {
             setPosts(posts.concat(data))
             handleClosePostModal()
-            // Handle success message
+            setNotification('Created post!', 'success')
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            // Handle error message
+            setNotification('Could not create post.', 'error')
           });
       }; 
 
@@ -103,7 +98,6 @@ function Home( {currentUser, onSignOut } ){
             <MyNav currentUser={currentUser} onSignOut={onSignOut} />
             <header className="App-header">
                 <Container className="main-body">
-                    <Notification visible={notificationVisible} message={notificationMessage} type={notificationType} />
                     <Row>
                         <Col>
                             <Card className="headerCard no-border shadow" style={{maxWidth:"81rem", minHeight: '100dvh'}}>

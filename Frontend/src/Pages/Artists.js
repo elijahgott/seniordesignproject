@@ -16,7 +16,7 @@ import Form from 'react-bootstrap/Form';
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Artists( {currentUser, onSignOut} ){
+function Artists( {currentUser, onSignOut, setNotification} ){
     useEffect(() => {
             document.title ="Music Tracker - Artists"
         }, []);
@@ -27,7 +27,7 @@ function Artists( {currentUser, onSignOut} ){
         fetch('/api/artists')
         .then(res => res.json())
         .then(data => setArtists(data))
-        .catch(err => console.log(err));
+        .catch(err => setNotification('Could not fetch artists.', 'error'));
   }, [])
 
     // FETCH TOP THREE ARTISTS
@@ -57,7 +57,7 @@ function Artists( {currentUser, onSignOut} ){
     // ADD ARTIST MODAL
     const [showModal, setShowModal] = useState(false)
 
-    const handleOopenModal = () => {
+    const handleOpenModal = () => {
         setShowModal(true)
     }
 
@@ -72,6 +72,7 @@ function Artists( {currentUser, onSignOut} ){
     const handleSubmitArtist = (event) => {
         event.preventDefault()
 
+        if(artistName, artistBio, artistPhotoUrl){
         fetch('/api/artists', {
           method: 'POST',
           headers: {
@@ -91,12 +92,15 @@ function Artists( {currentUser, onSignOut} ){
             setArtistBio('')
             setArtistPhotoUrl('')
             handleCloseModal()
-            // Handle success message
+            setNotification('Created new artist!', 'success')
           })
           .catch(error => {
-            console.error('There was a problem with the fetch operation:', error);
-            // Handle error message
+            setNotification('Could not create artist!', 'error')
           });
+        }
+        else{
+            setNotification('All fields must be filled.', 'error')
+        }
     }
 
 
@@ -146,7 +150,7 @@ function Artists( {currentUser, onSignOut} ){
                         <Col>
                         {currentUser ? (
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>
-                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Button onClick={handleOopenModal} style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
+                                <h1 style={{textAlign: "center", marginBottom:"15px", marginTop:"15px"}}>All Artists <Button onClick={handleOpenModal} style={{marginBottom: 7}}><Image src={require('./../MiscImages/plus-icon-sm.png')}/></Button></h1>
                             </Card>
                         ) : 
                             <Card className="headerCard" style={{maxWidth:"81rem"}}>

@@ -16,7 +16,7 @@ import Form from "react-bootstrap/Form";
 import MyNav from "../MyComponents/MyNav";
 import MyFooter from "../MyComponents/MyFooter";
 
-function Albums( {currentUser, onSignOut, fetchUser} ){
+function Albums( {currentUser, onSignOut, fetchUser, setNotification} ){
     useEffect(() => {
         document.title ="Music Tracker - Albums"
     }, []);
@@ -28,7 +28,7 @@ function Albums( {currentUser, onSignOut, fetchUser} ){
         fetch('/api/albums')
         .then(res => res.json())
         .then(data => setAlbums(data))
-        .catch(err => console.log(err));
+        .catch(err => setNotification('Albums could not be fetched', 'error'));
   }, [])
 
   const formatDate = (date) => {
@@ -116,11 +116,12 @@ const handleSubmitRating = (event) => {
           })
           .then(data => {
             handleCloseRating();
+            setNotification('Rated album!', 'success')
             fetchUser()
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('Error Rating Album')
+            setNotification('Problem rating album.', 'error')
           });
   }; 
 
@@ -154,11 +155,12 @@ const handleSubmitEditRating = (event) => {
           })
           .then(data => {
             handleCloseEditRating();
+            setNotification('Updated rating!', 'success')
             fetchUser()
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            alert('Error editing album rating!')
+            setNotification('Could not update rating.', 'error')
           });
   }; 
 
@@ -203,7 +205,8 @@ const handleSubmitEditRating = (event) => {
   const handleSubmitAlbum = (event) => {
     event.preventDefault()
 
-    fetch('/api/albums', {
+    if(albumName, albumArtistName, albumDescription, albumReleaseDate, albumPhotoUrl, albumGenres){
+        fetch('/api/albums', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -227,12 +230,16 @@ const handleSubmitEditRating = (event) => {
             setAlbumPhotoUrl('')
 
             handleCloseModal()
-            // Handle success message
+            setNotification('Created album!', 'success')
           })
           .catch(error => {
             console.error('There was a problem with the fetch operation:', error);
-            // Handle error message
+            setNotification('Could not create album.', 'error')
           });
+    }
+    else{
+        setNotification('All fields must be filled.', 'error')
+    }
   }
 
     return(

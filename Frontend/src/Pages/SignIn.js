@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import {Link} from 'react-router-dom';
 import {useNavigate} from "react-router-dom";
 
-function SignIn( {onSignIn} ){
+function SignIn( {onSignIn, setNotification} ){
   useEffect(() => {
           document.title ="Music Tracker - Sign In"
       }, []);
@@ -41,7 +41,7 @@ function SignIn( {onSignIn} ){
 
         } catch (error) {
           console.error('There was a problem with the fetch operation:', error);
-          setMessage('Error signing in');
+          setNotification('Invalid credentials.', 'error')
         }
       };
 

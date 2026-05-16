@@ -11,7 +11,7 @@ import Form from 'react-bootstrap/Form';
 
 import MyNav from "../MyComponents/MyNav";
 
-function Settings( {currentUser, onSignOut} ){
+function Settings( {currentUser, onSignOut, setNotification} ){
     const navigate = useNavigate();
 
     var uid;
@@ -46,11 +46,10 @@ function Settings( {currentUser, onSignOut} ){
           if (!response.ok) {
             throw new Error('Network response was not ok');
           }
-          alert("Succesfully Updated Profile!");
+          setNotification('Updated profile!.', 'success')
           navigate('/profile');
         } catch (error) {
-          console.error('There was a problem updating the bio:', error);
-          alert('Error Updating Profile');
+          setNotification('There was a problem updating profile.', 'error')
         }
       };
 

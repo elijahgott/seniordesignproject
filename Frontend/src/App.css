@@ -18,8 +18,16 @@
 }
 
 .notificationContainer{
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin-bottom: 4px;
+  margin-left: auto;
+  margin-right: auto;
+  z-index: 10;
   width: fit-content;
-  margin: 8px auto;
   padding: 12px;
   padding-left: 16px;
   padding-right: 16px;
@@ -30,4 +38,5 @@
 
 .notificationContainer > p{
   margin: 0;
+  font-size: 24px;
 }
